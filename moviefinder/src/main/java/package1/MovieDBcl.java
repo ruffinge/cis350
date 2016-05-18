@@ -30,12 +30,13 @@ public class MovieDBcl {
 		
 		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
 		
-		int theMovieId = searchIt.getResults().get(0).getId();
+		//int theMovieId = searchIt.getResults().get(0).getId();
 		
-		MovieDb theMovie = movies.getMovie(theMovieId, "en");
-	System.out.println(theMovie.getOverview());
+		//MovieDb theMovie = movies.getMovie(theMovieId, "en");
+	//System.out.println(theMovie.getOverview());
 	//cant get cast? list
-	System.out.println(theMovie.getPopularity());
+	
+	//System.out.println(theMovie.getPopularity());
 	
 		return searchIt.getResults();	
 		
@@ -46,8 +47,8 @@ public class MovieDBcl {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbTV shows = tmdbApi.getTvSeries();
 		TvResultsPage searchIt = search.searchTv(str, null, 0);
-		int theShowId = searchIt.getResults().get(0).getId();
-		TvSeries theShow = shows.getSeries(theShowId, "en");
+		//int theShowId = searchIt.getResults().get(0).getId();
+		//TvSeries theShow = shows.getSeries(theShowId, "en");
 		
 		return searchIt.getResults();
 	}

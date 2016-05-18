@@ -10,8 +10,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -47,11 +45,13 @@
                      </HBox.margin>
                   </TextField>
                   <Button mnemonicParsing="false" onAction="#btnSearch" text="Search" />
-                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                  <MenuButton fx:id="myMenuButton" mnemonicParsing="false" text="Movies">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                      <MenuItem fx:id="myMenuItem" mnemonicParsing="false" onAction="#btnMenuChange" text="Shows" />
                     </items>
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
                   </MenuButton>
                </children>
                <padding>
@@ -67,18 +67,11 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label text="Something" />
+            <Label fx:id="myMessage" text=" " />
          </children>
       </HBox>
    </bottom>
-   <right>
-      <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </right>
    <left>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../../Desktop/movie_night.jpg" />
-         </image>
-      </ImageView>
+      <ListView fx:id="myListView" prefHeight="325.0" prefWidth="276.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>
