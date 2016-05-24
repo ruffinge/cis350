@@ -12,6 +12,8 @@ import static info.movito.themoviedbapi.TmdbMovies.TMDB_METHOD_MOVIE;
 import static info.movito.themoviedbapi.TmdbTV.TMDB_METHOD_TV;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -102,7 +104,11 @@ public class Controller {
 		
 		if(myMenuButton.getText().equals("Movies" )) {
 			selectedMovie = (MovieDb) myListView.getSelectionModel().getSelectedItem();
+			
 			selectedMovie.getOverview();
+			Object[] SimilarList = selectedMovie.getSimilarMovies().toArray();
+			myTextArea.setText(SimilarList.toString());
+			
 			
 			myTextArea.setText(selectedMovie.getOverview());
 		}
@@ -112,6 +118,10 @@ public class Controller {
 		}	
 	}
 
+	public void convertFormId(int id) {
+		//take id and convert to movie/show that can call getTitle for list, 
+		//getImage, getTrailer, etc.. for right side
+	}
 	public String getCast() {
 		//may have to be asking for a list?
 		//send selectedMovie/Show
