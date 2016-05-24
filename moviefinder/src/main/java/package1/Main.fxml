@@ -39,7 +39,7 @@
             </MenuBar>
             <HBox>
                <children>
-                  <TextField fx:id="myTextField">
+                  <TextField fx:id="myTextField" onKeyPressed="#btnSearch">
                      <HBox.margin>
                         <Insets right="4.0" />
                      </HBox.margin>
@@ -72,6 +72,6 @@
       </HBox>
    </bottom>
    <left>
-      <ListView fx:id="myListView" prefHeight="325.0" prefWidth="276.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="myListView" onMouseClicked="#getSelection" prefHeight="325.0" prefWidth="276.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

@@ -23,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,7 +49,7 @@ public class Controller {
 	private String showsList;
 
 	public void btnMenuChange() {
-		
+
 		if(myMenuButton.getText().equals("Movies")) {
 			myMenuButton.setText("Shows");
 			myMenuItem.setText("Movies");
@@ -59,10 +60,11 @@ public class Controller {
 			myMenuItem.setText("Shows");
 		}
 	}
-	
+
 	public void btnSearch() {
-		
+
 		userInput1 = myTextField.getText();
+		//change userinput check to before method call
 		if (!userInput1.equals("")){
 			myMessage.setText("Search results for " + userInput1);
 			if(myMenuButton.getText().equals("Movies")){
@@ -87,17 +89,39 @@ public class Controller {
 					myMessage.setText("No Show results");
 				}
 			}
-			myTextArea.setText(moviesList + showsList);
 		}
 		else {
 			myMessage.setText("Invalid Input");
 		}
 	}
+
+	public void getSelection() {
+		MovieDb selectedMovie = null;
+		TvSeries selectedShow = null;
+		//myTextArea.setText(myListView.getSelectionModel().getSelectedItem().toString());
+		
+		if(myMenuButton.getText().equals("Movies" )) {
+			selectedMovie = (MovieDb) myListView.getSelectionModel().getSelectedItem();
+			selectedMovie.getOverview();
+			
+			myTextArea.setText(selectedMovie.getOverview());
+		}
+		else {
+			selectedShow = (TvSeries) myListView.getSelectionModel().getSelectedItem();
+			myTextArea.setText(selectedShow.getOverview());
+		}	
+	}
+
+	public String getCast() {
+		//may have to be asking for a list?
+		//send selectedMovie/Show
+		return null;
+	}
 	
 	public void addFavorites() {
 
 	}
-	
+
 	public void rateIt() {
 
 	}
