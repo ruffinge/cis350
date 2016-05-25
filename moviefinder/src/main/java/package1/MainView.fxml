@@ -17,6 +17,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="package1.Controller">
    <top>
@@ -81,6 +83,14 @@
                         <HBox prefHeight="246.0" prefWidth="687.0">
                            <children>
                               <ImageView fx:id="imageView" fitHeight="243.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="theTitle" strokeType="OUTSIDE" strokeWidth="0.0" text=" " translateX="50.0" wrappingWidth="374.13671875">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
                            </children>
                         </HBox>
                      </children>

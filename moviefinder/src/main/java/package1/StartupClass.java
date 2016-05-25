@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 
 public class StartupClass extends Application{
 
-	//private String userInput;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("package1/MainView.fxml"));

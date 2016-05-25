@@ -14,32 +14,21 @@ public class MovieDBcl {
 	private final String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
 	private TmdbApi tmdbApi = new TmdbApi(apiKey);
 	private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
-	
-	public List<MovieDb> SearchingMovies(String str) {
 
+	public List<MovieDb> SearchingMovies(String str) {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbMovies movies = tmdbApi.getMovies();
 		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
 		return searchIt.getResults();	
-		
 	}
-	
-	public List<TvSeries> SearchingShows(String str) {
 
+	public List<TvSeries> SearchingShows(String str) {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbTV shows = tmdbApi.getTvSeries();
 		TvResultsPage searchIt = search.searchTv(str, null, 0);
 		//int theShowId = searchIt.getResults().get(0).getId();
 		//TvSeries theShow = shows.getSeries(theShowId, "en");
-		
 		return searchIt.getResults();
-	}
-	
-	
-	public List<Multi> Search(String query) {
-		TmdbSearch search = tmdbApi.getSearch();
-		MultiListResultsPage results = search.searchMulti(query, null, 2);
-		return results.getResults();
 	}
 
 	public Image getImage(Multi query) {
@@ -53,6 +42,16 @@ public class MovieDBcl {
 		default :	return null;
 		}
 	}
+	public String getTitle(Multi selectedItem) {
+		switch (selectedItem.getMediaType()) {
+		case MOVIE:
+			return ((MovieDb) selectedItem).getTitle();
+		case TV_SERIES:
+			return ((TvSeries) selectedItem).getName();
+		default: 	return null;
+		}
+	}
+
 
 	public Image getMovieImage(MovieDb query) {
 		TmdbMovies movies = tmdbApi.getMovies();
@@ -61,9 +60,9 @@ public class MovieDBcl {
 		String imageFilePath = posters.get(0).getFilePath();
 		Image image = null;
 		if(imageFilePath != null){
-			 String path = dbImagePath + imageFilePath ;
-			 System.out.println(path);
-			 image = new Image(path);
+			String path = dbImagePath + imageFilePath ;
+			System.out.println(path);
+			image = new Image(path);
 		}
 		return image;
 	}
@@ -74,22 +73,22 @@ public class MovieDBcl {
 		String imageFilePath = result.getPosterPath();
 		Image image = null;
 		if(imageFilePath != null){
-			 String path = dbImagePath + imageFilePath ;
-			 System.out.println(path);
-			 image = new Image(path);
-			 }
+			String path = dbImagePath + imageFilePath ;
+			System.out.println(path);
+			image = new Image(path);
+		}
 		return image;
 	}
-	
+
 	public Image getPersonImage(Person query){
 		TmdbPeople people = tmdbApi.getPeople();
 		List<Artwork> profiles = people.getPersonImages(query.getId());
 		String imageFilePath = profiles.get(0).getFilePath();
 		Image image = null;
 		if(imageFilePath != null){
-			 String path = dbImagePath + imageFilePath ;
-			 System.out.println(path);
-			 image = new Image(path);
+			String path = dbImagePath + imageFilePath ;
+			System.out.println(path);
+			image = new Image(path);
 		}
 		return image;
 	}
