@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,12 +20,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="package1.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="package1.Controller">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar id="menuBar" opacity="0.33">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -38,40 +46,55 @@
               </menus>
             </MenuBar>
             <HBox>
-               <children>
-                  <TextField fx:id="myTextField" onKeyPressed="#btnSearch">
-                     <HBox.margin>
-                        <Insets right="4.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" onAction="#btnSearch" text="Search" />
-                  <MenuButton fx:id="myMenuButton" mnemonicParsing="false" text="Movies">
-                    <items>
-                      <MenuItem fx:id="myMenuItem" mnemonicParsing="false" onAction="#btnMenuChange" text="Shows" />
-                    </items>
-                     <HBox.margin>
-                        <Insets left="4.0" />
-                     </HBox.margin>
-                  </MenuButton>
-               </children>
                <padding>
                   <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
                </padding>
+               <children>
+                  <TextField id="searchField" fx:id="searchField" onAction="#search" onKeyReleased="#search" onKeyTyped="#search" prefHeight="27.0" prefWidth="272.0" />
+                  <MenuButton id="filter" fx:id="myMenuButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Filter">
+                    <items>
+                      <MenuItem fx:id="myMenuItem" mnemonicParsing="false" onAction="#btnMenuChange" text="Shows" />
+                    </items>
+                  </MenuButton>
+               </children>
             </HBox>
          </children>
       </VBox>
    </top>
    <center>
-      <TextArea fx:id="myTextArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
+      <GridPane prefHeight="500.0" prefWidth="1005.0" vgap="5.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="229.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="732.0" minWidth="10.0" prefWidth="646.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+          <RowConstraints maxHeight="331.0" minHeight="10.0" prefHeight="297.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="myMessage" text=" " />
+            <ListView id="listView" fx:id="listView" maxHeight="400.0" maxWidth="272.0" onMouseClicked="#getSelection" prefHeight="160.0" prefWidth="272.0" GridPane.rowSpan="2" />
+            <ScrollPane id="scrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
+              <content>
+                <AnchorPane id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="339.0" prefWidth="694.0">
+                     <children>
+                        <HBox prefHeight="246.0" prefWidth="687.0">
+                           <children>
+                              <ImageView fx:id="imageView" fitHeight="243.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
-      </HBox>
-   </bottom>
-   <left>
-      <ListView fx:id="myListView" onMouseClicked="#getSelection" prefHeight="325.0" prefWidth="276.0" BorderPane.alignment="CENTER" />
-   </left>
+         <padding>
+            <Insets bottom="20.0" left="5.0" right="3.0" />
+         </padding>
+      </GridPane>
+   </center>
+   <stylesheets>
+   	  <URL value="@mainViewStyle.css" />
+   </stylesheets>
 </BorderPane>

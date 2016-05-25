@@ -1,27 +1,20 @@
 package package1;
-import java.lang.reflect.Array;
 
-import java.util.ArrayList;
 import java.util.List;
 import info.movito.themoviedbapi.*;
+import info.movito.themoviedbapi.TmdbSearch.MultiListResultsPage;
+import info.movito.themoviedbapi.TmdbTV.TvMethod;
 import info.movito.themoviedbapi.model.*;
-import info.movito.themoviedbapi.model.keywords.Keyword;
+import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
-import info.movito.themoviedbapi.tools.ApiUrl;
+import javafx.scene.image.Image;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
-import info.movito.themoviedbapi.model.core.ResultsPage;
-import static info.movito.themoviedbapi.TmdbCollections.TMDB_METHOD_COLLECTION;
-import static info.movito.themoviedbapi.TmdbLists.TMDB_METHOD_LIST;
-import static info.movito.themoviedbapi.TmdbMovies.TMDB_METHOD_MOVIE;
-import static info.movito.themoviedbapi.TmdbTV.TMDB_METHOD_TV;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import info.movito.themoviedbapi.model.core.IdElement;
 
 public class MovieDBcl {
 	private final String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
 	private TmdbApi tmdbApi = new TmdbApi(apiKey);
-	//private String userInput;
+	private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
+	
 
 	public List<MovieDb> SearchingMovies(String str) {
 
@@ -29,15 +22,6 @@ public class MovieDBcl {
 		TmdbMovies movies = tmdbApi.getMovies();
 		
 		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
-		
-		//int theMovieId = searchIt.getResults().get(0).getId();
-		
-		//MovieDb theMovie = movies.getMovie(theMovieId, "en");
-	//System.out.println(theMovie.getOverview());
-	//cant get cast? list
-	
-	//System.out.println(theMovie.getPopularity());
-	
 		return searchIt.getResults();	
 		
 	}
@@ -52,4 +36,64 @@ public class MovieDBcl {
 		
 		return searchIt.getResults();
 	}
+	
+	
+	public List<Multi> Search(String query) {
+		TmdbSearch search = tmdbApi.getSearch();
+		MultiListResultsPage results = search.searchMulti(query, null, 2);
+		return results.getResults();
+	}
+
+	public Image getImage(Multi query) {
+		switch (query.getMediaType()) {
+		case MOVIE:
+			return getMovieImage((MovieDb) query);
+		case TV_SERIES:
+			return getSeriesImage((TvSeries) query);
+		case PERSON:
+			return getPersonImage((Person) query);
+		default :	return null;
+		}
+	}
+
+	public Image getMovieImage(MovieDb query) {
+		TmdbMovies movies = tmdbApi.getMovies();
+		MovieImages artworks = movies.getImages(query.getId(), null);
+		List<Artwork> posters = artworks.getPosters();
+		String imageFilePath = posters.get(0).getFilePath();
+		Image image = null;
+		if(imageFilePath != null){
+			 String path = dbImagePath + imageFilePath ;
+			 System.out.println(path);
+			 image = new Image(path);
+		}
+		return image;
+	}
+
+	public Image getSeriesImage(TvSeries query) {
+		TmdbTV series = tmdbApi.getTvSeries();
+		TvSeries result = series.getSeries(query.getId(), null, TvMethod.images);
+		String imageFilePath = result.getPosterPath();
+		Image image = null;
+		if(imageFilePath != null){
+			 String path = dbImagePath + imageFilePath ;
+			 System.out.println(path);
+			 image = new Image(path);
+			 }
+		return image;
+	}
+	
+	public Image getPersonImage(Person query){
+		TmdbPeople people = tmdbApi.getPeople();
+		List<Artwork> profiles = people.getPersonImages(query.getId());
+		String imageFilePath = profiles.get(0).getFilePath();
+		Image image = null;
+		if(imageFilePath != null){
+			 String path = dbImagePath + imageFilePath ;
+			 System.out.println(path);
+			 image = new Image(path);
+		}
+		return image;
+	}
+
 }

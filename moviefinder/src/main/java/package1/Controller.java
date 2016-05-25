@@ -29,22 +29,27 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Controller {
 
 	MovieDBcl cl = new MovieDBcl();
 	@FXML
-	private TextField myTextField;
+	private TextField searchField;
 	@FXML
 	private Labeled myMessage;
 	@FXML
 	private TextArea myTextArea;
 	@FXML 
-	private ListView myListView;
+	private ListView<Multi> listView;
 	@FXML
 	private MenuButton myMenuButton;
 	@FXML 
 	private MenuItem myMenuItem;
+	
+	@FXML
+	private ImageView imageView;
 
 	private String userInput1;
 	private String moviesList;
@@ -63,59 +68,28 @@ public class Controller {
 		}
 	}
 
-	public void btnSearch() {
-
-		userInput1 = myTextField.getText();
-		//change userinput check to before method call
-		if (!userInput1.equals("")){
-			myMessage.setText("Search results for " + userInput1);
-			if(myMenuButton.getText().equals("Movies")){
-				moviesList = cl.SearchingMovies(userInput1).toString();
-				ObservableList<MovieDb> movies = FXCollections.observableArrayList
-						(cl.SearchingMovies(userInput1));
-				if(movies.size()> 0){
-					myListView.setItems(movies);
-				}
-				else {
-					myMessage.setText("No Movie results");
-				}
+	@FXML
+	public void search() {
+		String query = searchField.getText();
+		if (query.equals("")) {
+			listView.getItems().clear();
+		} else {
+			ObservableList<Multi> results = FXCollections.observableArrayList(cl.Search(query));
+			if (results.size() > 0) {
+			listView.setItems(results);
 			}
-			else {
-				showsList = cl.SearchingShows(userInput1).toString();
-				ObservableList<TvSeries> shows = FXCollections.observableArrayList
-						(cl.SearchingShows(userInput1));
-				if(shows.size()>0) {
-					myListView.setItems(shows);
-				}
-				else {
-					myMessage.setText("No Show results");
-				}
-			}
-		}
-		else {
-			myMessage.setText("Invalid Input");
 		}
 	}
 
 	public void getSelection() {
-		MovieDb selectedMovie = null;
-		TvSeries selectedShow = null;
-		//myTextArea.setText(myListView.getSelectionModel().getSelectedItem().toString());
 		
-		if(myMenuButton.getText().equals("Movies" )) {
-			selectedMovie = (MovieDb) myListView.getSelectionModel().getSelectedItem();
-			
-			selectedMovie.getOverview();
-			Object[] SimilarList = selectedMovie.getSimilarMovies().toArray();
-			myTextArea.setText(SimilarList.toString());
-			
-			
-			myTextArea.setText(selectedMovie.getOverview());
-		}
-		else {
-			selectedShow = (TvSeries) myListView.getSelectionModel().getSelectedItem();
-			myTextArea.setText(selectedShow.getOverview());
-		}	
+		Multi selectedItem = (Multi) listView.getSelectionModel().getSelectedItem();
+		Image image = null;
+		if(selectedItem != null)
+			 image = cl.getImage(selectedItem);
+		if(image != null)
+			imageView.setImage(image);
+		//@TODO set wanted info here: title, description,...  
 	}
 
 	public void convertFormId(int id) {
