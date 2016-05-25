@@ -1,13 +1,24 @@
 package moviefinder;
 
-import java.util.List;
-import info.movito.themoviedbapi.*;
-import info.movito.themoviedbapi.TmdbSearch.MultiListResultsPage;
-import info.movito.themoviedbapi.TmdbTV.TvMethod;
-import info.movito.themoviedbapi.model.*;
+
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
+import java.util.List;
+
+
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbMovies;
+import info.movito.themoviedbapi.TmdbPeople;
+import info.movito.themoviedbapi.TmdbSearch;
+import info.movito.themoviedbapi.TmdbTV;
+import info.movito.themoviedbapi.TmdbTV.TvMethod;
+import info.movito.themoviedbapi.TvResultsPage;
+import info.movito.themoviedbapi.TmdbSearch.MultiListResultsPage;
+import info.movito.themoviedbapi.model.Artwork;
+import info.movito.themoviedbapi.model.MovieDb;
+import info.movito.themoviedbapi.model.MovieImages;
+import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 
 public class MovieDBcl {
@@ -15,6 +26,12 @@ public class MovieDBcl {
 	private TmdbApi tmdbApi = new TmdbApi(apiKey);
 	private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
 
+	public List<Multi> Search(String query) {
+		TmdbSearch search = tmdbApi.getSearch();
+		MultiListResultsPage results = search.searchMulti(query, null, 2);
+		return results.getResults();
+	}
+	
 	public List<MovieDb> SearchingMovies(String str) {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbMovies movies = tmdbApi.getMovies();
