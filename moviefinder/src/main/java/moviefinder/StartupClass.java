@@ -1,4 +1,4 @@
-package package1;
+package moviefinder;
 
 
 import javafx.application.Application;

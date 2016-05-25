@@ -1,4 +1,4 @@
-package package1;
+package moviefinder;
 
 import info.movito.themoviedbapi.model.*;
 import info.movito.themoviedbapi.model.tv.TvSeries;

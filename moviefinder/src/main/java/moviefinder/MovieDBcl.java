@@ -1,4 +1,4 @@
-package package1;
+package moviefinder;
 
 import java.util.List;
 import info.movito.themoviedbapi.*;
