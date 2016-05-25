@@ -1,32 +1,13 @@
 package package1;
-import info.movito.themoviedbapi.*;
-import info.movito.themoviedbapi.model.*;
-import info.movito.themoviedbapi.model.keywords.Keyword;
-import info.movito.themoviedbapi.model.tv.TvSeries;
-import info.movito.themoviedbapi.tools.ApiUrl;
-import info.movito.themoviedbapi.model.core.MovieResultsPage;
-import info.movito.themoviedbapi.model.core.ResultsPage;
-import static info.movito.themoviedbapi.TmdbCollections.TMDB_METHOD_COLLECTION;
-import static info.movito.themoviedbapi.TmdbLists.TMDB_METHOD_LIST;
-import static info.movito.themoviedbapi.TmdbMovies.TMDB_METHOD_MOVIE;
-import static info.movito.themoviedbapi.TmdbTV.TMDB_METHOD_TV;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import info.movito.themoviedbapi.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,13 +19,13 @@ public class Controller {
 	@FXML
 	private TextField searchField;
 	@FXML
-	private Labeled myMessage;
+	private Labeled messageLabel;
 	@FXML
 	private TextArea myTextArea;
 	@FXML 
 	private ListView<Multi> listView;
 	@FXML
-	private MenuButton myMenuButton;
+	private MenuButton menuButton;
 	@FXML 
 	private MenuItem myMenuItem;
 	
@@ -57,13 +38,13 @@ public class Controller {
 
 	public void btnMenuChange() {
 
-		if(myMenuButton.getText().equals("Movies")) {
-			myMenuButton.setText("Shows");
+		if(menuButton.getText().equals("Movies")) {
+			menuButton.setText("Shows");
 			myMenuItem.setText("Movies");
 		}
 		else
 		{
-			myMenuButton.setText("Movies");
+			menuButton.setText("Movies");
 			myMenuItem.setText("Shows");
 		}
 	}
