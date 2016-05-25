@@ -83,7 +83,7 @@
                         <HBox prefHeight="246.0" prefWidth="687.0">
                            <children>
                               <ImageView fx:id="imageView" fitHeight="243.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="theTitle" strokeType="OUTSIDE" strokeWidth="0.0" text=" " translateX="50.0" wrappingWidth="374.13671875">
+                              <Text fx:id="theTitle" strokeType="OUTSIDE" strokeWidth="0.0" text=" " translateX="40.0" wrappingWidth="247.13671875">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -91,6 +91,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Text>
+                              <Text fx:id="theDescription" strokeType="OUTSIDE" strokeWidth="0.0" translateX="-200.0" translateY="40.0" wrappingWidth="190.0" />
                            </children>
                         </HBox>
                      </children>

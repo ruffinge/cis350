@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class Controller {
 
@@ -35,6 +36,8 @@ public class Controller {
 	private ImageView imageView;
 	@FXML
 	private Text theTitle;
+	@FXML
+	private Text theDescription;
 	
 	private String userInput1;
 	private String moviesList;
@@ -79,10 +82,13 @@ public class Controller {
 		Multi selectedItem = (Multi) listView.getSelectionModel().getSelectedItem();
 		Image image = null;
 		String title = null;
+		String description = null;
 		if(selectedItem != null)
 			image = cl.getImage(selectedItem);
 			title = cl.getTitle(selectedItem);
 			theTitle.setText(title);
+			description = cl.getDescription(selectedItem);
+			theDescription.setText(description);
 		if(image != null)
 			imageView.setImage(image);
 			

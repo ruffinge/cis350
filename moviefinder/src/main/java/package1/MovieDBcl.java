@@ -19,15 +19,13 @@ public class MovieDBcl {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbMovies movies = tmdbApi.getMovies();
 		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
-		return searchIt.getResults();	
+		return searchIt.getResults();		
 	}
 
 	public List<TvSeries> SearchingShows(String str) {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbTV shows = tmdbApi.getTvSeries();
 		TvResultsPage searchIt = search.searchTv(str, null, 0);
-		//int theShowId = searchIt.getResults().get(0).getId();
-		//TvSeries theShow = shows.getSeries(theShowId, "en");
 		return searchIt.getResults();
 	}
 
@@ -42,6 +40,7 @@ public class MovieDBcl {
 		default :	return null;
 		}
 	}
+	
 	public String getTitle(Multi selectedItem) {
 		switch (selectedItem.getMediaType()) {
 		case MOVIE:
@@ -51,7 +50,16 @@ public class MovieDBcl {
 		default: 	return null;
 		}
 	}
+	public String getDescription(Multi selectedItem) {
 
+		switch (selectedItem.getMediaType()) {
+		case MOVIE:
+			return ((MovieDb) selectedItem).getOverview();
+		case TV_SERIES:
+			return ((TvSeries) selectedItem).getOverview();
+		default: 	return null;
+		}
+	}
 
 	public Image getMovieImage(MovieDb query) {
 		TmdbMovies movies = tmdbApi.getMovies();
