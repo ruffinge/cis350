@@ -30,7 +30,7 @@ public class MovieDBrun extends Application{
 	//private String userInput;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("package1/Main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("package1/MainView.fxml"));
 		primaryStage.setTitle("Movie DB");
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
