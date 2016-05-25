@@ -2,8 +2,13 @@ package moviefinder;
 
 import info.movito.themoviedbapi.model.*;
 import info.movito.themoviedbapi.model.tv.TvSeries;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
@@ -14,7 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
 
 public class Controller {
 
@@ -39,6 +47,15 @@ public class Controller {
 	@FXML
 	private Text theDescription;
 	
+
+	@FXML
+	private AnchorPane growingPane;
+	@FXML
+	private AnchorPane growingTabs;
+
+	private Rectangle clipRect;
+	private Rectangle clipRect2;
+
 	private String userInput1;
 	private String moviesList;
 	private String showsList;
@@ -47,13 +64,12 @@ public class Controller {
 
 	public void btnMenuChange() {
 
-		if(menuButton.getText().equals("Movies")) {
+		if (menuButton.getText().equals("Movies")) {
 			menuButton.setText("Shows");
 			myMenuItem.setText("Movies");
 			isMovies = false;
 		}
-		else
-		{
+		else {
 			menuButton.setText("Movies");
 			myMenuItem.setText("Shows");
 			isMovies = true;
@@ -61,7 +77,12 @@ public class Controller {
 	}
 	public void searching() {
 		userInput1 = searchField.getText();
-		if (!userInput1.equals("")){
+		if(userInput1.equals("")){
+			clipRect.setWidth(growingPane.getWidth());
+			if (clipRect.heightProperty().get() != 0) 
+				up();
+		}
+		else {
 			if(menuButton.getText().equals("Movies")){
 				moviesList = cl.SearchingMovies(userInput1).toString();
 				ObservableList<MovieDb> movies = FXCollections.observableArrayList
@@ -73,7 +94,11 @@ public class Controller {
 				ObservableList<TvSeries> shows = FXCollections.observableArrayList
 						(cl.SearchingShows(userInput1));	
 				listView.setItems(shows);
-
+			}
+		}
+		
+	}
+		
 	@FXML
 	public void search() {
 		String query = searchField.getText();
@@ -90,36 +115,25 @@ public class Controller {
 	}
 
 	public void getSelection() {
-
+		
 		Multi selectedItem = (Multi) listView.getSelectionModel().getSelectedItem();
 		Image image = null;
 		String title = null;
 		String description = null;
-		if(selectedItem != null)
+		if(selectedItem != null){
 			image = cl.getImage(selectedItem);
 			title = cl.getTitle(selectedItem);
 			theTitle.setText(title);
 			description = cl.getDescription(selectedItem);
 			theDescription.setText(description);
-		if(image != null)
-			imageView.setImage(image);
-			
-			
-			
-		//@TODO set wanted info here: title, description,...  
-		Multi selectedItem = (Multi) listView.getSelectionModel().getSelectedItem();
-		Image image = null;
-		if (selectedItem != null){
-			image = cl.getImage(selectedItem);
 		}
-		if (image != null) {
+		if(image != null){
 			imageView.setImage(image);
 			clipRect.setWidth(growingPane.getWidth());
 			if (clipRect.heightProperty().get() == 0) 
-	                  down();
-			
+				down();
 		}
-		// @TODO set wanted info here: title, description,...
+		//@TODO set wanted info here: title, description,...  
 	}
 
 	public void convertFormId(int id) {
@@ -142,19 +156,6 @@ public class Controller {
 	}
 
 	/* Testing new feature */
-
-
-	
-	public void translator() {
-
-		clipRect.setWidth(growingPane.getWidth());
-		if (clipRect.heightProperty().get() != 0) {
-                  up();
-		} else {
-           down();
-		}
-
-	}
     
 	public void up(){
 		Timeline timelineUp = new Timeline();
