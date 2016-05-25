@@ -15,12 +15,10 @@ public class MovieDBcl {
 	private TmdbApi tmdbApi = new TmdbApi(apiKey);
 	private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
 	
-
 	public List<MovieDb> SearchingMovies(String str) {
 
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbMovies movies = tmdbApi.getMovies();
-		
 		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
 		return searchIt.getResults();	
 		

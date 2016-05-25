@@ -15,7 +15,7 @@ public class StartupClass extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("package1/MainView.fxml"));
 		primaryStage.setTitle("Movie DB");
-		primaryStage.getIcons().add(new Image("bird.png"));
+	//	primaryStage.getIcons().add(new Image("bird.png"));
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 	}

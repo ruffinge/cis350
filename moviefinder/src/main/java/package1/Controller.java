@@ -1,6 +1,7 @@
 package package1;
 
 import info.movito.themoviedbapi.model.*;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Controller {
+	
 
 	MovieDBcl cl = new MovieDBcl();
 	@FXML
@@ -23,12 +25,11 @@ public class Controller {
 	@FXML
 	private TextArea myTextArea;
 	@FXML 
-	private ListView<Multi> listView;
+	private ListView listView;
 	@FXML
 	private MenuButton menuButton;
 	@FXML 
 	private MenuItem myMenuItem;
-	
 	@FXML
 	private ImageView imageView;
 
@@ -48,19 +49,25 @@ public class Controller {
 			myMenuItem.setText("Shows");
 		}
 	}
-
-	@FXML
-	public void search() {
-		String query = searchField.getText();
-		if (query.equals("")) {
-			listView.getItems().clear();
-		} else {
-			ObservableList<Multi> results = FXCollections.observableArrayList(cl.Search(query));
-			if (results.size() > 0) {
-			listView.setItems(results);
-			}
-		}
-	}
+	      public void searching() {
+		  
+		          userInput1 = searchField.getText();
+		        //change userinput check to before method call
+		          if (!userInput1.equals("")){
+		             if(menuButton.getText().equals("Movies")){
+		                 moviesList = cl.SearchingMovies(userInput1).toString();
+		                 ObservableList<MovieDb> movies = FXCollections.observableArrayList
+		                         (cl.SearchingMovies(userInput1));
+		                 listView.setItems(movies);
+		             }
+		             else {
+		                 showsList = cl.SearchingShows(userInput1).toString();
+		                 ObservableList<TvSeries> shows = FXCollections.observableArrayList
+		                         (cl.SearchingShows(userInput1));	
+		                 listView.setItems(shows);
+		             }
+		          }
+	      }
 
 	public void getSelection() {
 		
