@@ -12,7 +12,7 @@ public class MovieFinder extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("package1/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/MainView.fxml"));
         primaryStage.setTitle("Movie DB");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
