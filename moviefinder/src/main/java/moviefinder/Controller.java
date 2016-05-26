@@ -63,7 +63,9 @@ public class Controller {
 	public boolean isMovies;
 
 	public void btnMenuChange() {
-
+		if(!userInput1.equals("")){
+			searching();
+		}
 		if (menuButton.getText().equals("Movies")) {
 			menuButton.setText("Shows");
 			myMenuItem.setText("Movies");
