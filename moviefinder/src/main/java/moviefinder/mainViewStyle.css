@@ -49,6 +49,12 @@ root {
 	-fx-background-color: transparent;
 }
 
+#theDescription{
+ 	-fx-fill: white;
+ }
 
+#theTitle{
+	-fix-fill: white;
+}
 
 
