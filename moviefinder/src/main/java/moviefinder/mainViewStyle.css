@@ -54,7 +54,7 @@ root {
  }
 
 #theTitle{
-	-fix-fill: white;
+	-fx-fill: white;
 }
 
 
