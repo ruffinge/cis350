@@ -28,7 +28,7 @@ public class MovieDBcl {
 
 	public List<Multi> Search(String query) {
 		TmdbSearch search = tmdbApi.getSearch();
-		MultiListResultsPage results = search.searchMulti(query, null, 2);
+		MultiListResultsPage results = search.searchMulti(query, null, 0);
 		return results.getResults();
 	}
 	

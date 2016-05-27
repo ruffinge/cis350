@@ -105,9 +105,9 @@ public class Controller {
 	public void search() {
 		String query = searchField.getText();
 		if (query.equals("")) {
-			listView.getItems().clear();
-			clipRect.setWidth(growingPane.getWidth());
-			up();
+			//listView.getItems().clear();
+			//clipRect.setWidth(growingPane.getWidth());
+			//up();
 		} else {
 			ObservableList<Multi> results = FXCollections.observableArrayList(cl.Search(query));
 			if (results.size() > 0) {
@@ -131,9 +131,9 @@ public class Controller {
 		}
 		if(image != null){
 			imageView.setImage(image);
-			clipRect.setWidth(growingPane.getWidth());
-			if (clipRect.heightProperty().get() == 0) 
-				down();
+			//clipRect.setWidth(growingPane.getWidth());
+			//if (clipRect.heightProperty().get() == 0) 
+			//	down();
 		}
 		//@TODO set wanted info here: title, description,...  
 	}
@@ -215,12 +215,12 @@ public class Controller {
 		clipRect.setWidth(widthInitial);
 		clipRect.setHeight(0);
 		clipRect.translateYProperty().set(heightInitial);
-		growingPane.setClip(clipRect);
-		growingPane.translateYProperty().set(-heightInitial);
-		growingPane.prefHeightProperty().set(0);
+		//growingPane.setClip(clipRect);
+		//growingPane.translateYProperty().set(-heightInitial);
+		//growingPane.prefHeightProperty().set(0);
 		
-		growingTabs.translateYProperty().set(-heightInitial);
-		System.out.println("Initialization");
+		//growingTabs.translateYProperty().set(-heightInitial);
+		//System.out.println("Initialization");
 	}
 
 }
