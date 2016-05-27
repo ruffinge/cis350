@@ -1,5 +1,7 @@
 package moviefinder;
 
+import com.google.common.primitives.Booleans;
+
 import info.movito.themoviedbapi.model.*;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
@@ -20,12 +22,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-
 public class Controller {
-
 
 	MovieDBcl cl = new MovieDBcl();
 	@FXML
@@ -34,11 +35,11 @@ public class Controller {
 	private Labeled messageLabel;
 	@FXML
 	private TextArea myTextArea;
-	@FXML 
+	@FXML
 	private ListView listView;
 	@FXML
 	public MenuButton menuButton;
-	@FXML 
+	@FXML
 	private MenuItem myMenuItem;
 	@FXML
 	private ImageView imageView;
@@ -46,12 +47,17 @@ public class Controller {
 	private Text theTitle;
 	@FXML
 	private Text theDescription;
-	
 
 	@FXML
 	private AnchorPane growingPane;
 	@FXML
 	private AnchorPane growingTabs;
+	@FXML
+	private AnchorPane sideBar;
+	@FXML
+	private AnchorPane midlePane;
+	@FXML
+	private BorderPane rightPane;
 
 	private Rectangle clipRect;
 	private Rectangle clipRect2;
@@ -59,55 +65,55 @@ public class Controller {
 	private String userInput1;
 	private String moviesList;
 	private String showsList;
-	
+
+	private double widthInitial = 252;
+	private double heightInitial = 300;
+	private Boolean leftRigth;
+
 	public boolean isMovies;
 
 	public void btnMenuChange() {
-		if(!userInput1.equals("")){
+		if (!userInput1.equals("")) {
 			searching();
 		}
 		if (menuButton.getText().equals("Movies")) {
 			menuButton.setText("Shows");
 			myMenuItem.setText("Movies");
 			isMovies = false;
-		}
-		else {
+		} else {
 			menuButton.setText("Movies");
 			myMenuItem.setText("Shows");
 			isMovies = true;
 		}
 	}
+
 	public void searching() {
 		userInput1 = searchField.getText();
-		if(userInput1.equals("")){
+		if (userInput1.equals("")) {
 			clipRect.setWidth(growingPane.getWidth());
-			if (clipRect.heightProperty().get() != 0) 
+			if (clipRect.heightProperty().get() != 0)
 				up();
-		}
-		else {
-			if(menuButton.getText().equals("Movies")){
+		} else {
+			if (menuButton.getText().equals("Movies")) {
 				moviesList = cl.SearchingMovies(userInput1).toString();
-				ObservableList<MovieDb> movies = FXCollections.observableArrayList
-						(cl.SearchingMovies(userInput1));
+				ObservableList<MovieDb> movies = FXCollections.observableArrayList(cl.SearchingMovies(userInput1));
 				listView.setItems(movies);
-			}
-			else {
+			} else {
 				showsList = cl.SearchingShows(userInput1).toString();
-				ObservableList<TvSeries> shows = FXCollections.observableArrayList
-						(cl.SearchingShows(userInput1));	
+				ObservableList<TvSeries> shows = FXCollections.observableArrayList(cl.SearchingShows(userInput1));
 				listView.setItems(shows);
 			}
 		}
-		
+
 	}
-		
+
 	@FXML
 	public void search() {
 		String query = searchField.getText();
 		if (query.equals("")) {
-			//listView.getItems().clear();
-			//clipRect.setWidth(growingPane.getWidth());
-			//up();
+			listView.getItems().clear();
+			clipRect.setWidth(growingPane.getWidth());
+			up();
 		} else {
 			ObservableList<Multi> results = FXCollections.observableArrayList(cl.Search(query));
 			if (results.size() > 0) {
@@ -117,25 +123,25 @@ public class Controller {
 	}
 
 	public void getSelection() {
-		
+
 		Multi selectedItem = (Multi) listView.getSelectionModel().getSelectedItem();
 		Image image = null;
 		String title = null;
 		String description = null;
-		if(selectedItem != null){
+		if (selectedItem != null) {
 			image = cl.getImage(selectedItem);
 			title = cl.getTitle(selectedItem);
 			theTitle.setText(title);
 			description = cl.getDescription(selectedItem);
 			theDescription.setText(description);
 		}
-		if(image != null){
+		if (image != null) {
 			imageView.setImage(image);
-			//clipRect.setWidth(growingPane.getWidth());
-			//if (clipRect.heightProperty().get() == 0) 
-			//	down();
+			clipRect.setWidth(growingPane.getWidth());
+			if (clipRect.heightProperty().get() == 0)
+				down();
 		}
-		//@TODO set wanted info here: title, description,...  
+		// @TODO set wanted info here: title, description,...
 	}
 
 	public void convertFormId(int id) {
@@ -158,35 +164,87 @@ public class Controller {
 	}
 
 	/* Testing new feature */
-    
-	public void up(){
+
+	public void up() {
 		Timeline timelineUp = new Timeline();
 		final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
 		final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), growingPane.getHeight());
+		final KeyValue kvUp3 = new KeyValue(growingPane.translateYProperty(), -growingPane.getHeight());
 		final KeyValue kvUp4 = new KeyValue(growingPane.prefHeightProperty(), 0);
-		final KeyValue kvUp3 = new KeyValue(growingPane.translateYProperty(),-growingPane.getHeight());
-		final KeyValue kvUp7 = new KeyValue(growingTabs.prefHeightProperty(), 0);
-		final KeyValue kvUp8 = new KeyValue(growingTabs.translateYProperty(),-growingTabs.getHeight());
-		final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2, kvUp3, kvUp4,kvUp7,kvUp8);
+		final KeyValue kvUp5 = new KeyValue(growingTabs.prefHeightProperty(), 0);
+		final KeyValue kvUp6 = new KeyValue(growingTabs.translateYProperty(), -growingPane.getHeight());
+		final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2, kvUp3, kvUp4, kvUp5, kvUp6);
 		timelineUp.getKeyFrames().add(kfUp);
 		timelineUp.play();
 	}
-	
-	public void down(){
+
+	public void down() {
+
+		Timeline timelineDown = new Timeline();
+		final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), growingPane.getHeight());
+		final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
+		final KeyValue kvDwn3 = new KeyValue(growingPane.translateYProperty(), 0);
+		final KeyValue kvDwn4 = new KeyValue(growingPane.prefHeightProperty(), growingPane.getHeight());
+		final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(), 0);
+		final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(), 0);
+		final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), createBouncingEffect(growingPane.getHeight()),
+				kvDwn1, kvDwn2, kvDwn3, kvDwn4, kvDwn7, kvDwn8);
+		timelineDown.getKeyFrames().add(kfDwn);
+		timelineDown.play();
+	}
+
+	public void right() {
+		Timeline timelineDown = new Timeline();
+		final KeyValue kvright1 = new KeyValue(clipRect.widthProperty(), widthInitial);
+		final KeyValue kvright2 = new KeyValue(clipRect.translateXProperty(), 0);
+
+		final KeyValue kvright3 = new KeyValue(rightPane.translateXProperty(), 0);
+		final KeyValue kvright4 = new KeyValue(rightPane.prefWidthProperty(), widthInitial);
+
+		final KeyValue kvright5 = new KeyValue(midlePane.prefWidthProperty(), 0);
+		final KeyValue kvright6 = new KeyValue(midlePane.translateXProperty(), 0);
+
+		final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
+		final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
+		final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1, kvright2, kvright3, kvright4, kvright5,
+				kvright6, kvright7, kvright8);
+		timelineDown.getKeyFrames().add(kfDwn);
+		timelineDown.play();
+	}
+
+	public void left() {
+		Timeline timelineDown = new Timeline();
 		
-					Timeline timelineDown = new Timeline();
-					final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), growingPane.getHeight());
-					final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
-					final KeyValue kvDwn4 = new KeyValue(growingPane.prefHeightProperty(),growingPane.getHeight());
-					final KeyValue kvDwn3 = new KeyValue(growingPane.translateYProperty(), 0);
-					final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(), 0);
-					final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(),0);
-					final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000),
-							createBouncingEffect(growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3, kvDwn4,kvDwn7,kvDwn8);
-					timelineDown.getKeyFrames().add(kfDwn);
-					timelineDown.play();
+		final KeyValue kvleft1 = new KeyValue(clipRect.widthProperty(), widthInitial);
+		final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
+
+		
+		
+		final KeyValue kvleft3 = new KeyValue(midlePane.prefWidthProperty(), 0);
+		final KeyValue kvleft4 = new KeyValue(midlePane.translateXProperty(), -widthInitial);
+
+		final KeyValue kvleft5 = new KeyValue(sideBar.prefWidthProperty(), 0);
+		final KeyValue kvleft6 = new KeyValue(sideBar.translateXProperty(), -widthInitial);
+
+		final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
+		final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(), -widthInitial);
+		final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1, kvleft2, kvleft3, kvleft4, kvleft5, kvleft6,
+				kvleft7, kvleft8);
+		timelineDown.getKeyFrames().add(kfDwn);
+		timelineDown.play();
 	}
 	
+	public void xTranslate(){
+		if (leftRigth){
+			right();
+			leftRigth = false;}
+		
+		else{
+			left();
+			leftRigth = true;}
+		
+	}
+
 	private EventHandler<ActionEvent> createBouncingEffect(double height) {
 
 		final Timeline timelineBounce = new Timeline();
@@ -209,18 +267,20 @@ public class Controller {
 
 	@FXML
 	void initialize() {
-		double widthInitial = 200;
-		double heightInitial = 200;
+
 		clipRect = new Rectangle();
 		clipRect.setWidth(widthInitial);
 		clipRect.setHeight(0);
 		clipRect.translateYProperty().set(heightInitial);
-		//growingPane.setClip(clipRect);
-		//growingPane.translateYProperty().set(-heightInitial);
-		//growingPane.prefHeightProperty().set(0);
-		
-		//growingTabs.translateYProperty().set(-heightInitial);
-		//System.out.println("Initialization");
+		growingPane.setClip(clipRect);
+		growingPane.translateYProperty().set(-heightInitial);
+		growingPane.prefHeightProperty().set(0);
+		growingTabs.translateYProperty().set(-heightInitial);
+		sideBar.translateXProperty().set(-widthInitial);
+		midlePane.translateXProperty().set(-widthInitial);
+		rightPane.translateXProperty().set(-widthInitial);
+		leftRigth = true;
+
 	}
 
 }

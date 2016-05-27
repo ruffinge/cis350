@@ -45,11 +45,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane prefHeight="510.0" prefWidth="350.0" GridPane.rowSpan="2147483647">
+                  <AnchorPane id="sideBar" fx:id="sideBar" prefHeight="510.0" prefWidth="350.0" GridPane.rowSpan="2147483647">
                      <children>
-                        <VBox alignment="TOP_RIGHT" layoutY="1.0" prefHeight="618.0" prefWidth="298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox alignment="TOP_RIGHT" layoutY="1.0" prefHeight="618.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="114.0" text="Button" />
+                              <Button mnemonicParsing="false" onAction="#xTranslate" prefHeight="45.0" prefWidth="44.0" text="Button" />
                               <TitledPane animated="false" text="Search filter">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="296.0">
@@ -77,13 +77,13 @@
                         <Button layoutX="139.0" layoutY="628.0" mnemonicParsing="false" text="Sign In" AnchorPane.bottomAnchor="20.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
+                  <AnchorPane id="midlePane" fx:id="midlePane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
                      <children>
                         <TextField id="searchField" fx:id="searchField" onKeyReleased="#search" onKeyTyped="#search" prefHeight="39.0" prefWidth="315.0" AnchorPane.leftAnchor="10.0" />
                         <ListView id="listView" fx:id="listView" layoutX="14.0" layoutY="39.0" onMouseClicked="#getSelection" prefHeight="414.0" prefWidth="315.0" AnchorPane.leftAnchor="10.0" />
                      </children>
                   </AnchorPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
+                  <BorderPane id="rightPane" fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
                      <top>
                         <AnchorPane id="growingPane" fx:id="growingPane" maxHeight="-Infinity" prefHeight="300.0" prefWidth="724.0" BorderPane.alignment="CENTER">
                            <children>
