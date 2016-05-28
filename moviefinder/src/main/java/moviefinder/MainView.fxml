@@ -32,11 +32,11 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER_LEFT">
          <children>
-            <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+            <GridPane prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" maxWidth="350.0" minWidth="302.0" prefWidth="304.0" />
-                <ColumnConstraints hgrow="NEVER" maxWidth="357.0" minWidth="324.0" prefWidth="324.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="361.0" prefWidth="400.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="357.0" minWidth="298.0" prefWidth="298.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0" minWidth="361.0" prefWidth="426.0" />
                   <ColumnConstraints hgrow="ALWAYS" minWidth="361.0" prefWidth="362.0" />
               </columnConstraints>
               <rowConstraints>
@@ -79,8 +79,8 @@
                   </AnchorPane>
                   <AnchorPane id="midlePane" fx:id="midlePane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
                      <children>
-                        <TextField id="searchField" fx:id="searchField" onKeyReleased="#search" onKeyTyped="#search" prefHeight="39.0" prefWidth="315.0" AnchorPane.leftAnchor="10.0" />
-                        <ListView id="listView" fx:id="listView" layoutX="14.0" layoutY="39.0" onMouseClicked="#getSelection" prefHeight="414.0" prefWidth="315.0" AnchorPane.leftAnchor="10.0" />
+                        <TextField id="searchField" fx:id="searchField" onKeyReleased="#search" onKeyTyped="#search" prefHeight="28.0" prefWidth="290.0" AnchorPane.leftAnchor="5.0" />
+                        <ListView id="listView" fx:id="listView" layoutX="14.0" layoutY="39.0" onMouseClicked="#getSelection" prefHeight="350.0" prefWidth="290.0" AnchorPane.leftAnchor="5.0" />
                      </children>
                   </AnchorPane>
                   <BorderPane id="rightPane" fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
