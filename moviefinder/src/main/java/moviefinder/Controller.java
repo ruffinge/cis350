@@ -169,10 +169,13 @@ public class Controller {
 		Timeline timelineUp = new Timeline();
 		final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
 		final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), growingPane.getHeight());
+		
 		final KeyValue kvUp3 = new KeyValue(growingPane.translateYProperty(), -growingPane.getHeight());
 		final KeyValue kvUp4 = new KeyValue(growingPane.prefHeightProperty(), 0);
+		
 		final KeyValue kvUp5 = new KeyValue(growingTabs.prefHeightProperty(), 0);
 		final KeyValue kvUp6 = new KeyValue(growingTabs.translateYProperty(), -growingPane.getHeight());
+		
 		final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2, kvUp3, kvUp4, kvUp5, kvUp6);
 		timelineUp.getKeyFrames().add(kfUp);
 		timelineUp.play();
@@ -183,11 +186,14 @@ public class Controller {
 		Timeline timelineDown = new Timeline();
 		final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), growingPane.getHeight());
 		final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
+		
 		final KeyValue kvDwn3 = new KeyValue(growingPane.translateYProperty(), 0);
 		final KeyValue kvDwn4 = new KeyValue(growingPane.prefHeightProperty(), growingPane.getHeight());
+		
 		final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(), 0);
 		final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(), 0);
-		final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), createBouncingEffect(growingPane.getHeight()),
+		
+		final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), imageEffect(growingPane.getHeight()),
 				kvDwn1, kvDwn2, kvDwn3, kvDwn4, kvDwn7, kvDwn8);
 		timelineDown.getKeyFrames().add(kfDwn);
 		timelineDown.play();
@@ -206,6 +212,7 @@ public class Controller {
 
 		final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
 		final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
+		
 		final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1, kvright2, kvright3, kvright4, kvright5,
 				kvright6, kvright7, kvright8);
 		timelineDown.getKeyFrames().add(kfDwn);
@@ -218,8 +225,6 @@ public class Controller {
 		final KeyValue kvleft1 = new KeyValue(clipRect.widthProperty(), widthInitial);
 		final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
 
-		
-		
 		final KeyValue kvleft3 = new KeyValue(midlePane.prefWidthProperty(), 0);
 		final KeyValue kvleft4 = new KeyValue(midlePane.translateXProperty(), -widthInitial);
 
@@ -228,6 +233,7 @@ public class Controller {
 
 		final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
 		final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(), -widthInitial);
+		
 		final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1, kvleft2, kvleft3, kvleft4, kvleft5, kvleft6,
 				kvleft7, kvleft8);
 		timelineDown.getKeyFrames().add(kfDwn);
@@ -245,7 +251,7 @@ public class Controller {
 		
 	}
 
-	private EventHandler<ActionEvent> createBouncingEffect(double height) {
+	private EventHandler<ActionEvent> imageEffect(double height) {
 
 		final Timeline timelineBounce = new Timeline();
 		timelineBounce.setCycleCount(4);
@@ -253,6 +259,7 @@ public class Controller {
 		final KeyValue kv1 = new KeyValue(clipRect.heightProperty(), (height - 15));
 		final KeyValue kv2 = new KeyValue(clipRect.translateYProperty(), 15);
 		final KeyValue kv3 = new KeyValue(growingPane.translateYProperty(), -15);
+		
 		final KeyFrame kf1 = new KeyFrame(Duration.millis(100), kv1, kv2, kv3);
 		timelineBounce.getKeyFrames().add(kf1);
 
