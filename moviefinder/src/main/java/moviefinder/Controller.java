@@ -1,5 +1,9 @@
 package moviefinder;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.primitives.Booleans;
 
 import info.movito.themoviedbapi.model.*;
@@ -12,10 +16,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,6 +31,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -58,7 +68,9 @@ public class Controller {
 	private AnchorPane midlePane;
 	@FXML
 	private BorderPane rightPane;
-
+	
+    private  AnchorPane IDiscover;
+    
 	private Rectangle clipRect;
 	private Rectangle clipRect2;
 
@@ -70,6 +82,17 @@ public class Controller {
 	private double heightInitial = 300;
 	private Boolean leftRigth;
 
+	
+	//discoverPane
+	@FXML
+	private AnchorPane discoverPane;
+	
+	@FXML
+	private Tab discoverTab;
+	
+	@FXML
+	private GridPane discoverGrid;
+	
 	public boolean isMovies;
 
 	public void btnMenuChange() {
@@ -243,12 +266,10 @@ public class Controller {
 	public void xTranslate(){
 		if (leftRigth){
 			right();
-			leftRigth = false;}
-		
+			leftRigth = false;}		
 		else{
 			left();
 			leftRigth = true;}
-		
 	}
 
 	private EventHandler<ActionEvent> imageEffect(double height) {
@@ -271,10 +292,31 @@ public class Controller {
 		};
 		return handler;
 	}
+	
+	public void discoverLayout(){
+		int n=0;
+		List<MovieDb> list = new ArrayList<MovieDb>();
+		list = cl.discoverMovies();
+		ScrollPane temp = (ScrollPane) IDiscover.getChildren().get(0);
+		discoverPane = (AnchorPane) temp.getContent();
+		discoverGrid = (GridPane) discoverPane.getChildren().get(0);
+		for(int i=0; i< 4 ; i++){
+			for( int j=0; j<3; j++){
+				MovieDb containt = list.get(n);
+				Image image = cl.getImage(containt);
+				DiscoverOBject ob = new DiscoverOBject(image, containt.getTitle());
+				VBox box = ob.getVBox();
+				discoverGrid.add(box, j, i);
+				n++;
+			}
+			
+		}
+	}
 
 	@FXML
 	void initialize() {
 
+	   
 		clipRect = new Rectangle();
 		clipRect.setWidth(widthInitial);
 		clipRect.setHeight(0);
@@ -282,12 +324,19 @@ public class Controller {
 		growingPane.setClip(clipRect);
 		growingPane.translateYProperty().set(-heightInitial);
 		growingPane.prefHeightProperty().set(0);
-		growingTabs.translateYProperty().set(-heightInitial);
+		growingTabs.translateYProperty().set(-(heightInitial+20));
 		sideBar.translateXProperty().set(-widthInitial);
 		midlePane.translateXProperty().set(-widthInitial);
 		rightPane.translateXProperty().set(-widthInitial);
 		leftRigth = true;
-
+		try {
+			IDiscover = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/discoverView.fxml"));
+			discoverTab.setContent(IDiscover);
+			discoverLayout();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

@@ -97,18 +97,10 @@
                      <center>
                         <AnchorPane fx:id="growingTabs" prefHeight="403.0" prefWidth="724.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TabPane id="growingTabs" layoutY="7.0" prefHeight="686.0" prefWidth="727.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                              <TabPane id="growingTabs" layoutY="7.0" maxWidth="-Infinity" prefHeight="700.0" prefWidth="840.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
-                                  <Tab text="Discover">
+                                  <Tab id="discoverTab" fx:id="discoverTab" text="Discover">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="637.0" prefWidth="760.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="2.0">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                                                  </content>
-                                                </ScrollPane>
-                                             </children></AnchorPane>
                                     </content>
                                   </Tab>
                                   <Tab text="Untitled Tab 2">
