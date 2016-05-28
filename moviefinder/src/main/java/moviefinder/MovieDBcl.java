@@ -1,11 +1,9 @@
 package moviefinder;
 
-
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
 import java.util.List;
-
 
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbMovies;
@@ -31,12 +29,12 @@ public class MovieDBcl {
 		MultiListResultsPage results = search.searchMulti(query, null, 0);
 		return results.getResults();
 	}
-	
+
 	public List<MovieDb> SearchingMovies(String str) {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbMovies movies = tmdbApi.getMovies();
-		MovieResultsPage searchIt = search.searchMovie(str,null, null, true, 0);
-		return searchIt.getResults();		
+		MovieResultsPage searchIt = search.searchMovie(str, null, null, true, 0);
+		return searchIt.getResults();
 	}
 
 	public List<TvSeries> SearchingShows(String str) {
@@ -54,19 +52,22 @@ public class MovieDBcl {
 			return getSeriesImage((TvSeries) query);
 		case PERSON:
 			return getPersonImage((Person) query);
-		default :	return null;
+		default:
+			return null;
 		}
 	}
-	
+
 	public String getTitle(Multi selectedItem) {
 		switch (selectedItem.getMediaType()) {
 		case MOVIE:
 			return ((MovieDb) selectedItem).getTitle();
 		case TV_SERIES:
 			return ((TvSeries) selectedItem).getName();
-		default: 	return null;
+		default:
+			return null;
 		}
 	}
+
 	public String getDescription(Multi selectedItem) {
 
 		switch (selectedItem.getMediaType()) {
@@ -74,7 +75,8 @@ public class MovieDBcl {
 			return ((MovieDb) selectedItem).getOverview();
 		case TV_SERIES:
 			return ((TvSeries) selectedItem).getOverview();
-		default: 	return null;
+		default:
+			return null;
 		}
 	}
 
@@ -84,8 +86,8 @@ public class MovieDBcl {
 		List<Artwork> posters = artworks.getPosters();
 		String imageFilePath = posters.get(0).getFilePath();
 		Image image = null;
-		if(imageFilePath != null){
-			String path = dbImagePath + imageFilePath ;
+		if (imageFilePath != null) {
+			String path = dbImagePath + imageFilePath;
 			System.out.println(path);
 			image = new Image(path);
 		}
@@ -97,21 +99,21 @@ public class MovieDBcl {
 		TvSeries result = series.getSeries(query.getId(), null, TvMethod.images);
 		String imageFilePath = result.getPosterPath();
 		Image image = null;
-		if(imageFilePath != null){
-			String path = dbImagePath + imageFilePath ;
+		if (imageFilePath != null) {
+			String path = dbImagePath + imageFilePath;
 			System.out.println(path);
 			image = new Image(path);
 		}
 		return image;
 	}
 
-	public Image getPersonImage(Person query){
+	public Image getPersonImage(Person query) {
 		TmdbPeople people = tmdbApi.getPeople();
 		List<Artwork> profiles = people.getPersonImages(query.getId());
 		String imageFilePath = profiles.get(0).getFilePath();
 		Image image = null;
-		if(imageFilePath != null){
-			String path = dbImagePath + imageFilePath ;
+		if (imageFilePath != null) {
+			String path = dbImagePath + imageFilePath;
 			System.out.println(path);
 			image = new Image(path);
 		}
