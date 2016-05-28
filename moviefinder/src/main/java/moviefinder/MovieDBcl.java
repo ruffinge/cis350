@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import java.util.List;
 
 import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbDiscover;
 import info.movito.themoviedbapi.TmdbMovies;
 import info.movito.themoviedbapi.TmdbPeople;
 import info.movito.themoviedbapi.TmdbSearch;
@@ -119,5 +120,54 @@ public class MovieDBcl {
 		}
 		return image;
 	}
+	//String sortBY, int votCount, String genre
+	public List<Multi> discover(){
+		
+		TmdbDiscover discover = tmdbApi.getDiscover();
+		MovieResultsPage page = discover.getDiscover(0, null, "popularity.desc",false,2016, 2016, 0, 0, "28|21|16|99|53|27|36", "2016-01-01", "2018-01-01", null, null, null);
+		List<MovieDb> results = page.getResults();
+		
+		for(int i=0; i<results.size();i++){
+			System.out.println(results.get(i));
+		}
+		
+		return null;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
