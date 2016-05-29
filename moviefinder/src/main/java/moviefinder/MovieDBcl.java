@@ -1,14 +1,15 @@
 package moviefinder;
 
 import info.movito.themoviedbapi.model.people.Person;
+import info.movito.themoviedbapi.model.people.PersonPeople;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
 import java.util.List;
-
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbDiscover;
 import info.movito.themoviedbapi.TmdbMovies;
 import info.movito.themoviedbapi.TmdbPeople;
+import info.movito.themoviedbapi.TmdbPeople.PersonResultsPage;
 import info.movito.themoviedbapi.TmdbSearch;
 import info.movito.themoviedbapi.TmdbTV;
 import info.movito.themoviedbapi.TmdbTV.TvMethod;
@@ -42,6 +43,12 @@ public class MovieDBcl {
 		TmdbSearch search = tmdbApi.getSearch();
 		TmdbTV shows = tmdbApi.getTvSeries();
 		TvResultsPage searchIt = search.searchTv(str, null, 0);
+		return searchIt.getResults();
+	}
+	public List<Person> SearchingPeople(String str){
+		TmdbSearch search = tmdbApi.getSearch();
+		TmdbPeople people = tmdbApi.getPeople();
+		PersonResultsPage searchIt = search.searchPerson(str, true, 0);
 		return searchIt.getResults();
 	}
 
