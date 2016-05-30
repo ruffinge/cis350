@@ -35,7 +35,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class Controller {
+public class MainViewController {
 
     MovieDBcl cl = new MovieDBcl();
     @FXML
