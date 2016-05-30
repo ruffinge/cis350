@@ -107,11 +107,11 @@ public class Controller {
 		up();
 	} else {
 	    if (moviesCheckBox.isSelected()) {
-		ObservableList<MovieDb> movies = FXCollections.observableArrayList(cl.SearchingMovies(userInput1));
+		ObservableList<MovieDb> movies = FXCollections.observableArrayList(cl.searchMovies(userInput1));
 		listView.setItems(movies);
 	    }
 	    if (seriesCheckBox.isSelected()) {
-		ObservableList<TvSeries> shows = FXCollections.observableArrayList(cl.SearchingShows(userInput1));
+		ObservableList<TvSeries> shows = FXCollections.observableArrayList(cl.searchShows(userInput1));
 		listView.setItems(shows);
 	    }
 	}
@@ -135,17 +135,17 @@ public class Controller {
 	     * if(resultsPeople.size()>0) { listView.setItems(resultsPeople); }
 	     */
 	    if (seriesCheckBox.isSelected()) {
-		results = FXCollections.observableArrayList(cl.SearchingShows(query));
+		results = FXCollections.observableArrayList(cl.searchShows(query));
 		if (results.size() > 0) {
 		    listView.setItems(results);
 		}
 	    } else if (moviesCheckBox.isSelected()) {
-		results = FXCollections.observableArrayList(cl.SearchingMovies(query));
+		results = FXCollections.observableArrayList(cl.searchMovies(query));
 		if (results.size() > 0) {
 		    listView.setItems(results);
 		}
 	    } else {
-		results = FXCollections.observableArrayList(cl.Search(query));
+		results = FXCollections.observableArrayList(cl.search(query));
 		listView.setItems(results);
 	    }
 	}
