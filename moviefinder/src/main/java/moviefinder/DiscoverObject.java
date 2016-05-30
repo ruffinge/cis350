@@ -20,8 +20,8 @@ public class DiscoverObject {
 
     DiscoverObject(Image pImage, String pTitle) {
         try {
-            discoverVBox = FXMLLoader.load(getClass().getClassLoader().getResource(
-                    "moviefinder/discoverObject.fxml"));
+            discoverVBox = FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("moviefinder/discoverObject.fxml"));
             image = (ImageView) discoverVBox.getChildren().get(0);
             title = (Text) discoverVBox.getChildren().get(1);
         } catch (IOException e) {

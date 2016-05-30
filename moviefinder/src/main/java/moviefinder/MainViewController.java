@@ -368,8 +368,8 @@ public class MainViewController {
         rightPane.translateXProperty().set(-widthInitial);
         leftRigth = true;
         try {
-            discoverer = FXMLLoader.load(getClass().getClassLoader().getResource(
-                    "moviefinder/discoverView.fxml"));
+            discoverer = FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("moviefinder/discoverView.fxml"));
             discoverTab.setContent(discoverer);
             discoverLayout();
         } catch (IOException e) {
