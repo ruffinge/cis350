@@ -16,12 +16,13 @@ public class MovieFinder extends Application {
      * Loads and launches the main window.
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-	Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/MainView.fxml"));
-	primaryStage.setTitle("Movie DB");
-	primaryStage.getIcons().add(new Image("bird.png"));
-	primaryStage.setScene(new Scene(root));
-	primaryStage.show();
+    public final void start(final Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader()
+                .getResource("moviefinder/MainView.fxml"));
+        primaryStage.setTitle("Movie DB");
+        primaryStage.getIcons().add(new Image("bird.png"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
     /**
@@ -31,7 +32,7 @@ public class MovieFinder extends Application {
      * @param args
      *            Command line arguments.
      */
-    public static void main(String[] args) {
-	launch(args);
+    public static void main(final String[] args) {
+        launch(args);
     }
 }
