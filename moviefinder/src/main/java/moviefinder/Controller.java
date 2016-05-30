@@ -316,7 +316,7 @@ public class Controller {
 			for( int j=0; j<3; j++){
 				MovieDb containt = list.get(n);
 				Image image = cl.getImage(containt);
-				DiscoverOBject ob = new DiscoverOBject(image, containt.getTitle());
+				DiscoverObject ob = new DiscoverObject(image, containt.getTitle());
 				VBox box = ob.getVBox();
 				discoverGrid.add(box, j, i);
 				n++;

@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class DiscoverOBject {
+public class DiscoverObject {
 		
 	
 	private ImageView image;
@@ -19,7 +19,7 @@ public class DiscoverOBject {
 	 
 	private VBox Vdiscover;
 	
-	DiscoverOBject(Image pImage, String pTitle){
+	DiscoverObject(Image pImage, String pTitle){
 		try {
 			Vdiscover = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/discoverObject.fxml"));
 			image =  (ImageView) Vdiscover.getChildren().get(0);
