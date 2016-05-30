@@ -1,6 +1,5 @@
 package moviefinder;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,9 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MovieFinder extends Application{
+/**
+ * Main class for the movie finder application.
+ */
+public class MovieFinder extends Application {
 
-
+    /**
+     * Loads and launches the main window.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/MainView.fxml"));
@@ -19,7 +23,15 @@ public class MovieFinder extends Application{
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-    public static void main(String[] args){
+
+    /**
+     * Main method for launching the movie finder. Initializes the JavaFX
+     * launching process.
+     *
+     * @param args
+     *            Command line arguments.
+     */
+    public static void main(String[] args) {
         launch(args);
     }
 }
