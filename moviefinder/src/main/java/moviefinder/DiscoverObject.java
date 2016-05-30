@@ -19,22 +19,24 @@ public class DiscoverObject {
     private VBox Vdiscover;
 
     DiscoverObject(Image pImage, String pTitle) {
-	try {
-	    Vdiscover = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/discoverObject.fxml"));
-	    image = (ImageView) Vdiscover.getChildren().get(0);
-	    title = (Text) Vdiscover.getChildren().get(1);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        try {
+            Vdiscover = FXMLLoader.load(getClass().getClassLoader().getResource(
+                    "moviefinder/discoverObject.fxml"));
+            image = (ImageView) Vdiscover.getChildren().get(0);
+            title = (Text) Vdiscover.getChildren().get(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	if (pImage != null)
-	    image.setImage(pImage);
-	title.setText(pTitle);
+        if (pImage != null) {
+            image.setImage(pImage);
+        }
+        title.setText(pTitle);
     }
 
     public VBox getVBox() {
-	VBox box = Vdiscover;
-	return box;
+        VBox box = Vdiscover;
+        return box;
     }
 
 }

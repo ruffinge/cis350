@@ -17,8 +17,8 @@ public class MovieFinder extends Application {
      */
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader()
-                .getResource("moviefinder/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(
+                "moviefinder/MainView.fxml"));
         primaryStage.setTitle("Movie DB");
         primaryStage.getIcons().add(new Image("bird.png"));
         primaryStage.setScene(new Scene(root));

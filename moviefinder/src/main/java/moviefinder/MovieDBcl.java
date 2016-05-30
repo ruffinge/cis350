@@ -57,8 +57,8 @@ public class MovieDBcl {
      */
     public final List<MovieDb> searchMovies(final String str) {
         TmdbSearch search = tmdbApi.getSearch();
-        MovieResultsPage searchIt =
-                search.searchMovie(str, null, null, true, 0);
+        MovieResultsPage searchIt = search.searchMovie(str, null, null, true,
+                0);
         return searchIt.getResults();
     }
 
