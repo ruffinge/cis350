@@ -37,7 +37,7 @@ import javafx.util.Duration;
 
 public class MainViewController {
 
-    MovieDBcl cl = new MovieDBcl();
+    MovieDBClient cl = new MovieDBClient();
     @FXML
     private TextField searchField;
     @FXML
@@ -74,7 +74,7 @@ public class MainViewController {
     @FXML
     private CheckBox peopleCheckBox;
 
-    private AnchorPane IDiscover;
+    private AnchorPane discoverer;
 
     private Rectangle clipRect;
     private Rectangle clipRect2;
@@ -336,7 +336,7 @@ public class MainViewController {
         int n = 0;
         List<MovieDb> list = new ArrayList<MovieDb>();
         list = cl.discoverMovies();
-        ScrollPane temp = (ScrollPane) IDiscover.getChildren().get(0);
+        ScrollPane temp = (ScrollPane) discoverer.getChildren().get(0);
         discoverPane = (AnchorPane) temp.getContent();
         discoverGrid = (GridPane) discoverPane.getChildren().get(0);
         for (int i = 0; i < 4; i++) {
@@ -355,7 +355,6 @@ public class MainViewController {
 
     @FXML
     void initialize() {
-
         clipRect = new Rectangle();
         clipRect.setWidth(widthInitial);
         clipRect.setHeight(0);
@@ -369,9 +368,9 @@ public class MainViewController {
         rightPane.translateXProperty().set(-widthInitial);
         leftRigth = true;
         try {
-            IDiscover = FXMLLoader.load(getClass().getClassLoader().getResource(
+            discoverer = FXMLLoader.load(getClass().getClassLoader().getResource(
                     "moviefinder/discoverView.fxml"));
-            discoverTab.setContent(IDiscover);
+            discoverTab.setContent(discoverer);
             discoverLayout();
         } catch (IOException e) {
             e.printStackTrace();
