@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class DiscoverObject {
+public class MediaObject {
 
     private ImageView image;
 
@@ -18,7 +18,7 @@ public class DiscoverObject {
 
     private VBox discoverVBox;
 
-    DiscoverObject(Image pImage, String pTitle) {
+    MediaObject(Image pImage, String pTitle) {
         try {
             discoverVBox = FXMLLoader.load(getClass().getClassLoader()
                     .getResource("view/MediaObject.fxml"));

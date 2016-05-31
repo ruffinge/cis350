@@ -338,11 +338,11 @@ public class MainViewController {
         list = cl.discoverMovies();
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < 2; j++) {
                 MovieDb containt = list.get(n);
                 Image image = cl.getImage(containt);
-                DiscoverObject ob = new DiscoverObject(image, containt
+                MediaObject ob = new MediaObject(image, containt
                         .getTitle());
                 VBox box = ob.getVBox();
                 discoverGrid.add(box, j, i);
