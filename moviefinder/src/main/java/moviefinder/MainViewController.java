@@ -352,6 +352,11 @@ public class MainViewController {
 
         }
     }
+    
+    public void clickImageInDiscovery(int col, int row) {
+		// TODO Auto-generated method stub
+		
+	}
 
     @FXML
     void initialize() {
@@ -367,15 +372,8 @@ public class MainViewController {
         midlePane.translateXProperty().set(-widthInitial);
         rightPane.translateXProperty().set(-widthInitial);
         leftRigth = true;
-        try {
-            discoverer = FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("moviefinder/discoverView.fxml"));
-            discoverTab.setContent(discoverer);
-            discoverLayout();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+      //  discoverLayout();
     }
+
 
 }

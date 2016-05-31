@@ -22,7 +22,7 @@ public class MediaController {
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);
 
-     //   main.clickImageInDiscovery(col, row);
+       main.clickImageInDiscovery(col, row);
     }
 
     public void growingShrinkingEffect() {
