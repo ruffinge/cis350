@@ -343,7 +343,7 @@ public class MainViewController {
                 MovieDb containt = list.get(n);
                 Image image = cl.getImage(containt);
                 MediaObject ob = new MediaObject(image, containt
-                        .getTitle());
+                        .getTitle(),this);
                 VBox box = ob.getVBox();
                 discoverGrid.add(box, j, i);
                 n++;

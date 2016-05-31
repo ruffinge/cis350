@@ -39,8 +39,8 @@ public class MediaController {
         scale.play();
     }
 
-    public void init(MainViewController pmain) {
-        main = pmain;
+    public void init(MainViewController mainController) {
+        main = mainController;
     }
 }
 

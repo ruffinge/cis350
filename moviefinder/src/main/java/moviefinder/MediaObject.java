@@ -16,15 +16,19 @@ public class MediaObject {
     @FXML
     private Text title;
 
-    private VBox discoverVBox;
+    private VBox mediaVBox;
 
-    MediaObject(Image pImage, String pTitle) {
+    MediaObject(Image pImage, String pTitle, MainViewController mainController) {
         try {
-            discoverVBox = FXMLLoader.load(getClass().getClassLoader()
-                    .getResource("view/MediaObject.fxml"));
-            image = (ImageView) discoverVBox.getChildren().get(0);
-            title = (Text) discoverVBox.getChildren().get(1);
-        } catch (IOException e) {
+        	FXMLLoader mediaLoader = new FXMLLoader(getClass().getClassLoader()
+        			.getResource("view/MediaObject.fxml"));
+        	mediaVBox = mediaLoader.load();
+            image = (ImageView) mediaVBox.getChildren().get(0);
+            title = (Text) mediaVBox.getChildren().get(1);
+            MediaController controller = mediaLoader.getController();
+            controller.init(mainController);
+            
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -35,7 +39,7 @@ public class MediaObject {
     }
 
     public VBox getVBox() {
-        return discoverVBox;
+        return mediaVBox;
     }
 
 }
