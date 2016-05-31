@@ -29,7 +29,7 @@ public class MediaController {
 
         movieBox.toFront();
 
-        ScaleTransition scale = new ScaleTransition(Duration.millis(150),
+        ScaleTransition scale = new ScaleTransition(Duration.millis(120),
                 movieBox);
         scale.setByX(.2);
         scale.setByY(.2);
