@@ -160,7 +160,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
@@ -181,7 +180,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
@@ -201,7 +199,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
