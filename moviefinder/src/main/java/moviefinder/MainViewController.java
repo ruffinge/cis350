@@ -33,6 +33,7 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -91,6 +92,8 @@ public class MainViewController {
     private GridPane discoverGrid;
     @FXML
     private TabPane tabPanel;
+    @FXML
+    private StackPane test;
 
 
     private AnchorPane discoverer;
@@ -102,7 +105,7 @@ public class MainViewController {
     private String moviesList;
     private String showsList;
 
-    private double widthInitial = 252;
+    private double widthInitial = 206;
     private double heightInitial = 300;
     private Boolean leftRigth;
     
@@ -115,13 +118,15 @@ public class MainViewController {
     public boolean isMovies;
 
     public void searching() {
-        userInput1 = searchField.getText();
+    	
+ 
         if (userInput1.equals("")) {
             clipRect.setWidth(growingPane.getWidth());
             if (clipRect.heightProperty().get() != 0) {
                 up();
             }
         } else {
+        	
             if (moviesCheckBox.isSelected()) {
                 ObservableList<MovieDb> movies = FXCollections
                         .observableArrayList(cl.searchMovies(userInput1));
@@ -138,11 +143,16 @@ public class MainViewController {
     @FXML
     public void search() {
         String query = searchField.getText();
+        
         if (query.equals("")) {
             listView.getItems().clear();
             clipRect.setWidth(growingPane.getWidth());
+            midlePane.toBack();
+            midlePane.setVisible(false);
             up();
         } else {
+             midlePane.toFront();
+             midlePane.setVisible(true);
             ObservableList<Multi> results;
             /*
              * if (peopleCheckBox.isSelected()){ ObservableList<Person>
@@ -217,6 +227,9 @@ public class MainViewController {
     /* Testing new feature */
 
     public void up() {
+         if (clipRect.heightProperty().get() == 0) {
+             return;
+         }
         Timeline timelineUp = new Timeline();
         final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
         final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(),
@@ -230,16 +243,19 @@ public class MainViewController {
         final KeyValue kvUp5 = new KeyValue(growingTabs.prefHeightProperty(),
                 0);
         final KeyValue kvUp6 = new KeyValue(growingTabs.translateYProperty(),
-                -growingPane.getHeight());
+                0);
 
         final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2,
-                kvUp3, kvUp4, kvUp5, kvUp6);
+                kvUp3, kvUp4,kvUp5,kvUp6);
         timelineUp.getKeyFrames().add(kfUp);
         timelineUp.play();
     }
 
     public void down() {
 
+         if (clipRect.heightProperty().get() != 0) {
+             return;
+         }
         Timeline timelineDown = new Timeline();
         final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(),
                 growingPane.getHeight());
@@ -253,7 +269,7 @@ public class MainViewController {
         final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(),
                 0);
         final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(),
-                0);
+        		heightInitial);
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), imageEffect(
                 growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3, kvDwn4,
@@ -274,16 +290,16 @@ public class MainViewController {
         final KeyValue kvright4 = new KeyValue(rightPane.prefWidthProperty(),
                 widthInitial);
 
-        final KeyValue kvright5 = new KeyValue(midlePane.prefWidthProperty(),
-                0);
-        final KeyValue kvright6 = new KeyValue(midlePane.translateXProperty(),
-                0);
+       // final KeyValue kvright5 = new KeyValue(midlePane.prefWidthProperty(),
+       //         0);
+      //  final KeyValue kvright6 = new KeyValue(midlePane.translateXProperty(),
+      //          0);
 
         final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1,
-                kvright2, kvright3, kvright4, kvright5, kvright6, kvright7,
+                kvright2, kvright3, kvright4, kvright7,
                 kvright8);
         timelineDown.getKeyFrames().add(kfDwn);
         timelineDown.play();
@@ -296,9 +312,9 @@ public class MainViewController {
                 widthInitial);
         final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
 
-        final KeyValue kvleft3 = new KeyValue(midlePane.prefWidthProperty(), 0);
-        final KeyValue kvleft4 = new KeyValue(midlePane.translateXProperty(),
-                -widthInitial);
+       // final KeyValue kvleft3 = new KeyValue(midlePane.prefWidthProperty(), 0);
+        //final KeyValue kvleft4 = new KeyValue(midlePane.translateXProperty(),
+         //       -widthInitial);
 
         final KeyValue kvleft5 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvleft6 = new KeyValue(sideBar.translateXProperty(),
@@ -307,9 +323,11 @@ public class MainViewController {
         final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
         final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(),
                 -widthInitial);
+        final KeyValue kvleft9 = new KeyValue(growingPane.prefWidthProperty(),0);
+        final KeyValue kvleft10 = new KeyValue(growingPane.prefWidthProperty(),0);
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1,
-                kvleft2, kvleft3, kvleft4, kvleft5, kvleft6, kvleft7, kvleft8);
+                kvleft2 , kvleft5, kvleft6, kvleft7, kvleft8);
         timelineDown.getKeyFrames().add(kfDwn);
         timelineDown.play();
     }
@@ -396,16 +414,14 @@ public class MainViewController {
         clipRect.translateYProperty().set(heightInitial);
         growingPane.setClip(clipRect);
         growingPane.translateYProperty().set(-heightInitial);
-        growingPane.prefHeightProperty().set(0);
-        growingTabs.translateYProperty().set(-(heightInitial + 20));
         sideBar.translateXProperty().set(-widthInitial);
-        midlePane.translateXProperty().set(-widthInitial);
         rightPane.translateXProperty().set(-widthInitial);
         leftRigth = true;
-        tabPanel.toFront();
         popUpPanel.toBack();
         popUpPanel.setVisible(false);
+        midlePane.toBack();
         discoverLayout();
+     
     }
 
 
