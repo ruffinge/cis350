@@ -10,6 +10,7 @@ import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -298,6 +299,13 @@ public class MainViewController {
         final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
 
+        TranslateTransition translateTransition =
+                new TranslateTransition(Duration.millis(2000), growingPane);
+            translateTransition.setFromX(250);
+            translateTransition.setToX(0);
+            translateTransition.setCycleCount(1);
+            translateTransition.play();
+            
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1,
                 kvright2, kvright3, kvright4, kvright7,
                 kvright8);
@@ -323,9 +331,15 @@ public class MainViewController {
         final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
         final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(),
                 -widthInitial);
-        final KeyValue kvleft9 = new KeyValue(growingPane.prefWidthProperty(),0);
-        final KeyValue kvleft10 = new KeyValue(growingPane.prefWidthProperty(),0);
-
+        
+        TranslateTransition translateTransition =
+                new TranslateTransition(Duration.millis(2000), growingPane);
+            translateTransition.setFromX(0);
+            translateTransition.setToX(250);
+            translateTransition.setCycleCount(1);
+            translateTransition.play();
+           // translateTransition.setAutoReverse(true);
+            
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1,
                 kvleft2 , kvleft5, kvleft6, kvleft7, kvleft8);
         timelineDown.getKeyFrames().add(kfDwn);
