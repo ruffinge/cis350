@@ -26,7 +26,7 @@ public class MediaObject {
             image = (ImageView) mediaVBox.getChildren().get(0);
             title = (Text) mediaVBox.getChildren().get(1);
             MediaController controller = mediaLoader.getController();
-            controller.init(mainController);
+            controller.initialize(mainController);
             
         } catch (Exception e) {
             e.printStackTrace();
