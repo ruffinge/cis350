@@ -31,17 +31,38 @@ public class MovieDBClientTest {
 	String formattedResult = result.substring(0, result.length() - 7);
 	assertEquals(formattedResult, "Breaking Bad");
     }
+    
+    /**
+     * Test the generic search method.
+     */
+    @Test
+    public final void testSearch2() {
+	MovieDBClient client = new MovieDBClient();
+	String result = (client.search("veep").get(0)).toString();
+	String formattedResult = result.substring(0, result.length() - 7);
+	assertEquals(formattedResult, "Veep");
+    }
 
     /**
      * Test the movie search method.
      */
     @Test
-
     public final void testSearchMovies() {
 	MovieDBClient client = new MovieDBClient();
 	String result = (client.searchMovies("saving private Ryan").get(0)).toString();
 	String formattedResult = result.substring(0, result.length() - 13);
 	assertEquals(formattedResult, "Saving Private Ryan");
+    }
+    
+    /**
+     * Test the movie search method.
+     */
+    @Test
+    public final void testSearchMovies2() {
+	MovieDBClient client = new MovieDBClient();
+	String result = (client.searchMovies("star wars").get(0)).toString();
+	String formattedResult = result.substring(0, result.length() - 13);
+	assertEquals(formattedResult, "Star Wars");
     }
 
     /**
@@ -53,6 +74,17 @@ public class MovieDBClientTest {
 	String result = (client.searchShows("game of thrones").get(0)).toString();
 	String formattedResult = result.substring(0, result.length() - 7);
 	assertEquals(formattedResult, "Game of Thrones");
+    }
+    
+    /**
+     * Test the TV show search method.
+     */
+    @Test
+    public final void testSearchShows2() {
+	MovieDBClient client = new MovieDBClient();
+	String result = (client.searchShows("hell on wheels").get(0)).toString();
+	String formattedResult = result.substring(0, result.length() - 7);
+	assertEquals(formattedResult, "Hell on Wheels");
     }
 
     /**
@@ -66,6 +98,18 @@ public class MovieDBClientTest {
 	String formattedResult = result.substring(0, result.length() - 6);
 	assertEquals(formattedResult, "Steven Spielberg");
     }
+    
+    /**
+     * Test the people search method.
+     */
+    @Test
+    public final void testSearchPeople2() {
+
+	MovieDBClient client = new MovieDBClient();
+	String result = (client.searchPeople("quentin tarantino").get(0)).toString();
+	String formattedResult = result.substring(0, result.length() - 6);
+	assertEquals(formattedResult, "Quentin Tarantino");
+    }
 
     /**
      * Test the method for fetching a title.
@@ -77,9 +121,20 @@ public class MovieDBClientTest {
 	String title = client.getTitle(ex);
 	assertEquals(title, client.searchMovies("deadpool").get(0).getTitle());
     }
+    
+    /**
+     * Test the method for fetching a title.
+     */
+    @Test
+    public final void testGetTitle2() {
+	MovieDBClient client = new MovieDBClient();
+	MovieDb ex = client.searchMovies("star trek").get(0);
+	String title = client.getTitle(ex);
+	assertEquals(title, client.searchMovies("star trek").get(0).getTitle());
+    }
 
     /**
-     * Test the method for getting a description.
+     * Test the method for getting a movie description.
      */
     @Test
     public final void testGetDescription() {
@@ -87,6 +142,17 @@ public class MovieDBClientTest {
 	MovieDb ex = client.searchMovies("deadpool").get(0);
 	String description = client.getDescription(ex);
 	assertEquals(description, client.searchMovies("deadpool").get(0).getOverview());
+    }
+    
+    /**
+     * Test the method for getting a show description.
+     */
+    @Test
+    public final void testGetDescription2() {
+	MovieDBClient client = new MovieDBClient();
+	MovieDb ex = client.searchMovies("daredevil").get(0);
+	String description = client.getDescription(ex);
+	assertEquals(description, client.searchMovies("Daredevil").get(0).getOverview());
     }
 
     /**
