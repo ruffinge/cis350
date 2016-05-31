@@ -1,4 +1,3 @@
-
 package moviefinder;
 
 import javafx.animation.ScaleTransition;
@@ -18,11 +17,12 @@ public class MediaController {
     private ImageView image;
 
     public void inClick() {
-        int col, row;
+        int col, row, index;
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);
-
-       main.clickImageInDiscovery(col, row);
+        index = row * 3 + col;
+       main.clickImageInDiscovery(index);
+       
     }
 
     public void growingShrinkingEffect() {

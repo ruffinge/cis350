@@ -86,6 +86,9 @@ public class MainViewController {
     private double widthInitial = 252;
     private double heightInitial = 300;
     private Boolean leftRigth;
+    
+    private List<MovieDb> discoverList;
+    private List<Image> discoverImageList = new ArrayList<Image>();
 
     // discoverPane
     @FXML
@@ -334,15 +337,17 @@ public class MainViewController {
 
     public void discoverLayout() {
         int n = 0;
-        List<MovieDb> list = new ArrayList<MovieDb>();
-        list = cl.discoverMovies();
+        if(discoverList == null)
+        	discoverList = new ArrayList<MovieDb>();
+        discoverList = cl.discoverMovies();
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
         for (int i = 0; i < 1; i++) {
             for (int j = 0; j < 2; j++) {
-                MovieDb containt = list.get(n);
-                Image image = cl.getImage(containt);
-                MediaObject ob = new MediaObject(image, containt
+                MovieDb containt = discoverList.get(n);
+                Image tempImage = cl.getImage(containt);
+                discoverImageList.add(tempImage);
+                MediaObject ob = new MediaObject(tempImage, containt
                         .getTitle(),this);
                 VBox box = ob.getVBox();
                 discoverGrid.add(box, j, i);
@@ -352,8 +357,8 @@ public class MainViewController {
         }
     }
     
-    public void clickImageInDiscovery(int col, int row) {
-		// TODO Auto-generated method stub
+    public void clickImageInDiscovery(int index) {
+	    System.out.println(index);
 		
 	}
 
