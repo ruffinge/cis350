@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<ScrollPane id="discoverScrollPane" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" pannable="true" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane id="discoverScrollPane" focusTraversable="false" hbarPolicy="NEVER" minHeight="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <GridPane id="discoverGrid" fx:id="discoverGrid" alignment="CENTER" focusTraversable="true" hgap="60.0" layoutX="2.0" layoutY="-432.0" vgap="15.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="10.0">
+      <GridPane id="discoverGrid" fx:id="discoverGrid" alignment="CENTER" focusTraversable="true" hgap="60.0" layoutX="2.0" layoutY="-432.0" vgap="10.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="250.0" prefWidth="250.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="250.0" prefWidth="250.0" />
