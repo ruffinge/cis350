@@ -25,7 +25,7 @@ import javafx.scene.image.Image;
  * A utility class for accessing the database and fetching appropriate results
  * for use in the MovieFinder application.
  */
-public class MovieDBcl {
+public class MovieDBClient {
     /** The API key to use when connecting to the database. */
     private final String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
 
@@ -57,8 +57,8 @@ public class MovieDBcl {
      */
     public final List<MovieDb> searchMovies(final String str) {
         TmdbSearch search = tmdbApi.getSearch();
-        MovieResultsPage searchIt =
-                search.searchMovie(str, null, null, true, 0);
+        MovieResultsPage searchIt = search.searchMovie(str, null, null, true,
+                0);
         return searchIt.getResults();
     }
 

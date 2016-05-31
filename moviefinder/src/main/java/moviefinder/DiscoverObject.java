@@ -16,25 +16,26 @@ public class DiscoverObject {
     @FXML
     private Text title;
 
-    private VBox Vdiscover;
+    private VBox discoverVBox;
 
     DiscoverObject(Image pImage, String pTitle) {
-	try {
-	    Vdiscover = FXMLLoader.load(getClass().getClassLoader().getResource("moviefinder/discoverObject.fxml"));
-	    image = (ImageView) Vdiscover.getChildren().get(0);
-	    title = (Text) Vdiscover.getChildren().get(1);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        try {
+            discoverVBox = FXMLLoader.load(getClass().getClassLoader()
+                    .getResource("moviefinder/discoverObject.fxml"));
+            image = (ImageView) discoverVBox.getChildren().get(0);
+            title = (Text) discoverVBox.getChildren().get(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	if (pImage != null)
-	    image.setImage(pImage);
-	title.setText(pTitle);
+        if (pImage != null) {
+            image.setImage(pImage);
+        }
+        title.setText(pTitle);
     }
 
     public VBox getVBox() {
-	VBox box = Vdiscover;
-	return box;
+        return discoverVBox;
     }
 
 }
