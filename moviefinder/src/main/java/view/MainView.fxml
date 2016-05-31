@@ -118,7 +118,7 @@
                            <children>
                               <StackPane AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TabPane minHeight="635.0" minWidth="948.0" tabClosingPolicy="UNAVAILABLE">
+                                    <TabPane id="tabPanel" fx:id="tabPanel" minHeight="635.0" minWidth="948.0" tabClosingPolicy="UNAVAILABLE">
                                       <tabs>
                                         <Tab fx:id="discoverTab" text="Discover">
                                              <content>
@@ -132,6 +132,18 @@
                                         </Tab>
                                       </tabs>
                                     </TabPane>
+                                    <AnchorPane id="popUpPanel" fx:id="popUpPanel" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView id="popUpImage" fx:id="popUpImage" fitHeight="300.0" fitWidth="250.0" layoutX="108.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="128.0" />
+                                          <Text id="popUpTitle" fx:id="popUpTitle" layoutX="487.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" AnchorPane.leftAnchor="487.0" AnchorPane.topAnchor="128.0">
+                                             <font>
+                                                <Font name="System Bold" size="31.0" />
+                                             </font>
+                                          </Text>
+                                          <Text id="popUpDescription" fx:id="popUpDescription" layoutX="474.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="198.0" />
+                                          <Button id="popUpButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#hidePopUpPanel" prefHeight="54.0" prefWidth="67.0" text="Button" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </StackPane>
                            </children>

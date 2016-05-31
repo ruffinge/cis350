@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
@@ -23,6 +24,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -68,11 +70,28 @@ public class MainViewController {
     @FXML
     private BorderPane rightPane;
     @FXML
+    private AnchorPane popUpPanel;
+    @FXML
+    private ImageView popUpImage;
+    @FXML
+    private Text popUpTitle;
+    @FXML
+    private Text popUpDescription;
+    @FXML
     private CheckBox moviesCheckBox;
     @FXML
     private CheckBox seriesCheckBox;
     @FXML
     private CheckBox peopleCheckBox;
+    @FXML
+    private AnchorPane discoverPane;
+    @FXML
+    private Tab discoverTab;
+    @FXML
+    private GridPane discoverGrid;
+    @FXML
+    private TabPane tabPanel;
+
 
     private AnchorPane discoverer;
 
@@ -89,17 +108,10 @@ public class MainViewController {
     
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
+   
 
     // discoverPane
-    @FXML
-    private AnchorPane discoverPane;
-
-    @FXML
-    private Tab discoverTab;
-
-    @FXML
-    private GridPane discoverGrid;
-
+    
     public boolean isMovies;
 
     public void searching() {
@@ -358,9 +370,23 @@ public class MainViewController {
     }
     
     public void clickImageInDiscovery(int index) {
-	    System.out.println(index);
-		
+    	MovieDb movie = discoverList.get(index);
+    	popUpDescription.setText(cl.getDescription(movie));
+    	popUpTitle.setText(cl.getTitle(movie));
+    	popUpImage.setImage(discoverImageList.get(index));
+    	popUpPanel.toFront();
+    	popUpPanel.setVisible(true);
+    	tabPanel.toBack();
+    	tabPanel.setVisible(false);			
 	}
+    
+    @FXML
+    public void hidePopUpPanel(){
+    	popUpPanel.toBack();
+    	popUpPanel.setVisible(false);
+    	tabPanel.toFront();
+    	tabPanel.setVisible(true);
+    }
 
     @FXML
     void initialize() {
@@ -376,6 +402,9 @@ public class MainViewController {
         midlePane.translateXProperty().set(-widthInitial);
         rightPane.translateXProperty().set(-widthInitial);
         leftRigth = true;
+        tabPanel.toFront();
+        popUpPanel.toBack();
+        popUpPanel.setVisible(false);
         discoverLayout();
     }
 
