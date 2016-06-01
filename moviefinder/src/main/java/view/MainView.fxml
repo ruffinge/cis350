@@ -119,7 +119,7 @@
                   </BorderPane>
                   <AnchorPane id="viewListPane" fx:id="viewListPane" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
                      <children>
-                        <ListView id="listView" fx:id="listView" editable="true" layoutX="123.0" maxHeight="267.0" maxWidth="300.0" onMouseClicked="#getSelection" prefHeight="267.0" prefWidth="248.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="0.0" />
+                        <ListView id="listView" fx:id="resultsListView" editable="true" layoutX="123.0" maxHeight="267.0" maxWidth="300.0" onMouseClicked="#getSelection" prefHeight="267.0" prefWidth="248.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="0.0" />
                         <AnchorPane id="growingPane" fx:id="growingPane" maxHeight="300" prefHeight="300.0" prefWidth="904.0" AnchorPane.leftAnchor="250.0">
                            <children>
                               <Text id="id=&quot;theTitle&quot; " fx:id="theTitle" layoutX="509.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Text" wrappingWidth="197.205078125" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="26.0" />

@@ -114,7 +114,6 @@ public class MovieDBClient {
      * @return The description of the selected item, or null on failure.
      */
     public final String getDescription(final Multi selectedItem) {
-
         switch (selectedItem.getMediaType()) {
         case MOVIE:
             return ((MovieDb) selectedItem).getOverview();
@@ -160,7 +159,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
@@ -181,7 +179,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
@@ -201,7 +198,6 @@ public class MovieDBClient {
         Image image = null;
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
-            System.out.println(path);
             image = new Image(path);
         }
         return image;
@@ -212,6 +208,7 @@ public class MovieDBClient {
      *
      * @return A list of the matching movies.
      */
+    
     public final List<MovieDb> discoverMovies() {
         TmdbDiscover discover = tmdbApi.getDiscover();
         // TODO: Move the remainder of these to configurable parameters.
