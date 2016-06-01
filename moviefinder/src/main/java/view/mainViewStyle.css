@@ -1,0 +1,173 @@
+root { 
+    display: block;
+}
+.root {
+	
+}
+
+#searchField {
+    -fx-background-radius: 25;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 5 10 5 10;
+}
+
+#scrollPane{
+	-fx-background-color: #202020 ;
+}
+
+
+
+.scroll-pane {
+    -fx-background-color:#202020 ;
+    -fx-border-color: transparent;
+}
+
+.tab-pane *.tab-header-background {
+    -fx-background-color: #202020 ;
+    -fx-effect: innershadow(two-pass-box , transparent , 0, 0.0 , 0 , 0);
+    -fx-border-color: transparent;
+    -fx-tab-min-width:200px;
+    
+}
+
+.toolbar{
+	 -fx-background-color:transparent;
+}
+
+
+.tab-pane
+{
+    -fx-tab-min-width:200px;
+    -fx-tab-min-height:30px;
+}
+
+
+
+
+.TitledPane{
+	 -fx-border-color: transparent;
+}
+
+#accordion{
+	-fx-border-color: transparent;
+	-fx-background-color:#202020 ;
+}
+
+#accordion .title{
+	
+}
+
+
+.titledPane{
+	-fx-border-color: transparent;
+	-fx-background-color:#202020 ;
+	
+}
+
+#filter{
+	-fx-background-color:#202020 ;
+}
+
+#filter .title{
+	-fx-background-color:#202020 ;
+}
+
+#filter .title .text{
+	-fx-fill: #B8B8B8 ;
+}
+
+#borderPane{
+	-fx-background-color:#202020 ;
+}
+
+#mainGrid{
+	-fx-background-color:transparent ;
+}
+
+#topPlane{
+	-fx-background-color:transparent ;
+}
+
+#sideBar{
+	-fx-background-color:transparent ;
+}
+
+#rightPane{
+	-fx-background-color:transparent ;
+}
+
+#viewListPane{
+	-fx-background-color:transparent ;
+}
+
+#test{
+	-fx-background-color:transparent ;
+}
+
+#growingTabs{
+	-fx-background-color:transparent ;
+}
+
+#centerStack{
+    -fx-background-color:transparent ;
+	
+}
+
+#tabPanel{    
+	-fx-background-color:transparent ;
+}
+#discoverPlane{
+	-fx-background-color:transparent ;
+	-fx-tab-min-width:200px;
+	-fx-background-insets: 0 1 0 1,0,0;
+	
+}
+
+#discoverPlane .tab-label { 
+    -fx-text-fill: #828282;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+#discoverPlane:selected .tab-label { 
+    -fx-text-fill:green;
+}
+
+.descriptions{
+	-fx-fill: #B8B8B8 ;
+	-fx-font-size: 12px;
+}
+
+.titles{
+	-fx-fill: #B8B8B8 ;
+	-fx-font-size: 18px;
+}
+
+#filterBackground{
+	-fx-background-color:transparent ;
+}
+
+#filterBox{
+	-fx-background-color:transparent ;
+}
+
+#settingBtn{
+	-fx-background-color:transparent ;
+	-fx-graphic: url("settings.png");
+
+}
+
+#popUpButton{
+	-fx-background-color:transparent ;
+	-fx-graphic: url("back.png");
+}
+.tab-pane
+{
+    -fx-tab-min-width:200px;
+}
+
+
