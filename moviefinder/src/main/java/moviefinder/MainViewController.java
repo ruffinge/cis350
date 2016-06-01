@@ -68,7 +68,7 @@ public class MainViewController {
     @FXML
     private AnchorPane sideBar;
     @FXML
-    private AnchorPane midlePane;
+    private AnchorPane viewListPane;
     @FXML
     private BorderPane rightPane;
     @FXML
@@ -117,6 +117,14 @@ public class MainViewController {
     // discoverPane
     
     public boolean isMovies;
+    
+    @FXML
+    public void hidePopUpPanel(){
+    	popUpPanel.toBack();
+    	popUpPanel.setVisible(false);
+    	tabPanel.toFront();
+    	tabPanel.setVisible(true);
+    }
 
     public void searching() {
     	
@@ -148,12 +156,13 @@ public class MainViewController {
         if (query.equals("")) {
             listView.getItems().clear();
             clipRect.setWidth(growingPane.getWidth());
-            midlePane.toBack();
-            midlePane.setVisible(false);
+            viewListPane.toBack();
+            viewListPane.setVisible(false);
+           
             up();
         } else {
-             midlePane.toFront();
-             midlePane.setVisible(true);
+        	viewListPane.toFront();
+        	viewListPane.setVisible(true);
             ObservableList<Multi> results;
             /*
              * if (peopleCheckBox.isSelected()){ ObservableList<Person>
@@ -290,22 +299,9 @@ public class MainViewController {
                 0);
         final KeyValue kvright4 = new KeyValue(rightPane.prefWidthProperty(),
                 widthInitial);
-
-       // final KeyValue kvright5 = new KeyValue(midlePane.prefWidthProperty(),
-       //         0);
-      //  final KeyValue kvright6 = new KeyValue(midlePane.translateXProperty(),
-      //          0);
-
         final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
-
-        TranslateTransition translateTransition =
-                new TranslateTransition(Duration.millis(2000), growingPane);
-            translateTransition.setFromX(250);
-            translateTransition.setToX(0);
-            translateTransition.setCycleCount(1);
-            translateTransition.play();
-            
+        
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1,
                 kvright2, kvright3, kvright4, kvright7,
                 kvright8);
@@ -320,10 +316,6 @@ public class MainViewController {
                 widthInitial);
         final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
 
-       // final KeyValue kvleft3 = new KeyValue(midlePane.prefWidthProperty(), 0);
-        //final KeyValue kvleft4 = new KeyValue(midlePane.translateXProperty(),
-         //       -widthInitial);
-
         final KeyValue kvleft5 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvleft6 = new KeyValue(sideBar.translateXProperty(),
                 -widthInitial);
@@ -331,15 +323,7 @@ public class MainViewController {
         final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
         final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(),
                 -widthInitial);
-        
-        TranslateTransition translateTransition =
-                new TranslateTransition(Duration.millis(2000), growingPane);
-            translateTransition.setFromX(0);
-            translateTransition.setToX(250);
-            translateTransition.setCycleCount(1);
-            translateTransition.play();
-           // translateTransition.setAutoReverse(true);
-            
+      
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1,
                 kvleft2 , kvleft5, kvleft6, kvleft7, kvleft8);
         timelineDown.getKeyFrames().add(kfDwn);
@@ -412,13 +396,7 @@ public class MainViewController {
     	tabPanel.setVisible(false);			
 	}
     
-    @FXML
-    public void hidePopUpPanel(){
-    	popUpPanel.toBack();
-    	popUpPanel.setVisible(false);
-    	tabPanel.toFront();
-    	tabPanel.setVisible(true);
-    }
+    
 
     @FXML
     void initialize() {
@@ -433,9 +411,9 @@ public class MainViewController {
         leftRigth = true;
         popUpPanel.toBack();
         popUpPanel.setVisible(false);
-        midlePane.toBack();
+        viewListPane.toBack();
+        viewListPane.setVisible(false);
         discoverLayout();
-     
     }
 
 

@@ -1,0 +1,14 @@
+
+.scroll-pane {
+    -fx-background-color: #3c3c3c;
+    -fx-border-color: #3c3c3c;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #3c3c3c;
+}
+
+#discoverGrid{
+	-fx-border-color: #3c3c3c;
+	-fx-background-color:#3c3c3c;
+}
