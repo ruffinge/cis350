@@ -369,8 +369,8 @@ public final class MainViewController {
         discoverList = cl.discoverMovies();
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
-        for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
                 MovieDb containt = discoverList.get(n);
                 Image tempImage = cl.getImage(containt);
                 discoverImageList.add(tempImage);

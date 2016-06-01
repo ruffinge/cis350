@@ -1,5 +1,6 @@
 package moviefinder;
 
+
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

@@ -41,6 +41,7 @@ root {
 .tab-pane
 {
     -fx-tab-min-width:200px;
+    -fx-tab-min-height:30px;
 }
 
 
@@ -120,6 +121,20 @@ root {
 }
 #discoverPlane{
 	-fx-background-color:transparent ;
+	-fx-tab-min-width:200px;
+	-fx-background-insets: 0 1 0 1,0,0;
+	
+}
+
+#discoverPlane .tab-label { 
+    -fx-text-fill: #828282;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+#discoverPlane:selected .tab-label { 
+    -fx-text-fill:green;
 }
 
 .descriptions{
@@ -150,4 +165,9 @@ root {
 	-fx-background-color:transparent ;
 	-fx-graphic: url("back.png");
 }
+.tab-pane
+{
+    -fx-tab-min-width:200px;
+}
+
 
