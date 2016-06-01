@@ -32,7 +32,7 @@ public class MediaController {
     private ImageView image;
 
     // TODO: Remove this hardcoded system. Use JavaFX functions instead.
-    public void inClick() {
+    public final void inClick() {
         int col, row, index;
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);

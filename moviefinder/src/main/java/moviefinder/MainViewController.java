@@ -9,7 +9,6 @@ import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,12 +17,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,7 +38,7 @@ import javafx.util.Duration;
 public final class MainViewController {
 
     /** The client for the database. */
-    MovieDBClient cl = new MovieDBClient();
+    private MovieDBClient cl = new MovieDBClient();
 
     /** The search text field. */
     @FXML
@@ -54,7 +50,7 @@ public final class MainViewController {
 
     /** The list of results. */
     @FXML
-    private ListView resultsListView ;
+    private ListView resultsListView;
     /** Container for an image. */
     @FXML
     private ImageView imageView;
@@ -100,15 +96,8 @@ public final class MainViewController {
     @FXML
     private StackPane test;
 
-    private AnchorPane discoverer;
-
     private Rectangle clipRect;
-    private Rectangle clipRect2;
-
     private String userInput1;
-    private String moviesList;
-    private String showsList;
-
     private double widthInitial = 206;
     private double heightInitial = 300;
     private Boolean leftRigth;
@@ -116,22 +105,24 @@ public final class MainViewController {
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
 
-    // discoverPane
-    public boolean isMovies;
-    
+    /** Whether the current search is for movies. */
+    private boolean isMovies;
+
     /**
      * Hide the popup panel.
      */
     @FXML
-    public void hidePopUpPanel(){
-    	popUpPanel.toBack();
-    	popUpPanel.setVisible(false);
-    	tabPanel.toFront();
-    	tabPanel.setVisible(true);
+    public void hidePopUpPanel() {
+        popUpPanel.toBack();
+        popUpPanel.setVisible(false);
+        tabPanel.toFront();
+        tabPanel.setVisible(true);
     }
 
+    /**
+     * An intermediate step used for producing the immediate search results.
+     */
     public void searching() {
-
         if (userInput1.equals("")) {
             clipRect.setWidth(growingPane.getWidth());
             if (clipRect.heightProperty().get() != 0) {
@@ -160,26 +151,26 @@ public final class MainViewController {
         String query = searchField.getText();
 
         if (query.equals("")) {
-        		resultsListView.getItems().clear();
+            resultsListView.getItems().clear();
             clipRect.setWidth(growingPane.getWidth());
             viewListPane.toBack();
             viewListPane.setVisible(false);
-           
+
             up();
         } else {
 
-        	viewListPane.toFront();
-        	viewListPane.setVisible(true);        
+            viewListPane.toFront();
+            viewListPane.setVisible(true);
             ObservableList<Multi> results;
             if (seriesCheckBox.isSelected()) {
-                results = FXCollections.observableArrayList(cl.searchShows(
-                        query));
+                results = FXCollections
+                        .observableArrayList(cl.searchShows(query));
                 if (results.size() > 0) {
                     resultsListView.setItems(results);
                 }
             } else if (moviesCheckBox.isSelected()) {
-                results = FXCollections.observableArrayList(cl.searchMovies(
-                        query));
+                results = FXCollections
+                        .observableArrayList(cl.searchMovies(query));
                 if (results.size() > 0) {
                     resultsListView.setItems(results);
                 }
@@ -194,8 +185,8 @@ public final class MainViewController {
      * Display information for the selected search result.
      */
     public void getSelection() {
-        Multi selectedItem = (Multi) resultsListView.getSelectionModel()
-                .getSelectedItem();
+        Multi selectedItem =
+                (Multi) resultsListView.getSelectionModel().getSelectedItem();
         Image image = null;
         String title = null;
         String description = null;
@@ -216,27 +207,49 @@ public final class MainViewController {
         // TODO: set wanted info here: title, description,...
     }
 
-    public void convertFormId(int id) {
-        // take id and convert to movie/show that can call getTitle for list,
-        // getImage, getTrailer, etc.. for right side
+    /**
+     * Take an ID and convert it to movie/show that can call getTitle for list,
+     * getImage, getTrailer, etc.. for right side
+     *
+     * @param id
+     *            The id for the item.
+     */
+    public void convertFormId(final int id) {
+        // TODO: Not yet implemented.
     }
 
+    /**
+     * Get the cast of the current item.
+     *
+     * @return The cast.
+     */
     public String getCast() {
         // may have to be asking for a list?
         // send selectedMovie/Show
+
+        // TODO: Not yet implemented.
         return null;
     }
 
+    /**
+     * Add the current item to favorites.
+     */
     public void addFavorites() {
-
+        // TODO: Not yet implemented.
     }
 
+    /**
+     * Rate an item.
+     */
     public void rateIt() {
-
+        // TODO: Not yet implemented.
     }
 
     /* Testing new feature */
 
+    /**
+     * Move up.
+     */
     public void up() {
         if (clipRect.heightProperty().get() == 0) {
             return;
@@ -248,13 +261,13 @@ public final class MainViewController {
 
         final KeyValue kvUp3 = new KeyValue(growingPane.translateYProperty(),
                 -growingPane.getHeight());
-        final KeyValue kvUp4 = new KeyValue(growingPane.prefHeightProperty(),
-                0);
+        final KeyValue kvUp4 =
+                new KeyValue(growingPane.prefHeightProperty(), 0);
 
-        final KeyValue kvUp5 = new KeyValue(growingTabs.prefHeightProperty(),
-                0);
-        final KeyValue kvUp6 = new KeyValue(growingTabs.translateYProperty(),
-                0);
+        final KeyValue kvUp5 =
+                new KeyValue(growingTabs.prefHeightProperty(), 0);
+        final KeyValue kvUp6 =
+                new KeyValue(growingTabs.translateYProperty(), 0);
 
         final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2,
                 kvUp3, kvUp4, kvUp5, kvUp6);
@@ -262,6 +275,9 @@ public final class MainViewController {
         timelineUp.play();
     }
 
+    /**
+     * Move down.
+     */
     public void down() {
         if (clipRect.heightProperty().get() != 0) {
             return;
@@ -271,37 +287,39 @@ public final class MainViewController {
                 growingPane.getHeight());
         final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
 
-        final KeyValue kvDwn3 = new KeyValue(growingPane.translateYProperty(),
-                0);
+        final KeyValue kvDwn3 =
+                new KeyValue(growingPane.translateYProperty(), 0);
         final KeyValue kvDwn4 = new KeyValue(growingPane.prefHeightProperty(),
                 growingPane.getHeight());
 
-        final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(),
-                0);
-        final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(),
-                heightInitial);
+        final KeyValue kvDwn7 =
+                new KeyValue(growingTabs.prefHeightProperty(), 0);
+        final KeyValue kvDwn8 =
+                new KeyValue(growingTabs.translateYProperty(), heightInitial);
 
-        final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), imageEffect(
-                growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3, kvDwn4,
-                kvDwn7, kvDwn8);
+        final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000),
+                imageEffect(growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3,
+                kvDwn4, kvDwn7, kvDwn8);
         timelineDown.getKeyFrames().add(kfDwn);
         timelineDown.play();
     }
 
+    /**
+     * Move right.
+     */
     public void right() {
         Timeline timelineDown = new Timeline();
-        final KeyValue kvright1 = new KeyValue(clipRect.widthProperty(),
-                widthInitial);
-        final KeyValue kvright2 = new KeyValue(clipRect.translateXProperty(),
-                0);
+        final KeyValue kvright1 =
+                new KeyValue(clipRect.widthProperty(), widthInitial);
+        final KeyValue kvright2 =
+                new KeyValue(clipRect.translateXProperty(), 0);
 
-        final KeyValue kvright3 = new KeyValue(rightPane.translateXProperty(),
-                0);
-        final KeyValue kvright4 = new KeyValue(rightPane.prefWidthProperty(),
-                widthInitial);
+        final KeyValue kvright3 =
+                new KeyValue(rightPane.translateXProperty(), 0);
+        final KeyValue kvright4 =
+                new KeyValue(rightPane.prefWidthProperty(), widthInitial);
         final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
-        
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvright1,
                 kvright2, kvright3, kvright4, kvright7, kvright8);
@@ -309,20 +327,23 @@ public final class MainViewController {
         timelineDown.play();
     }
 
+    /**
+     * Move left.
+     */
     public void left() {
         Timeline timelineDown = new Timeline();
 
-        final KeyValue kvleft1 = new KeyValue(clipRect.widthProperty(),
-                widthInitial);
+        final KeyValue kvleft1 =
+                new KeyValue(clipRect.widthProperty(), widthInitial);
         final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
 
         final KeyValue kvleft5 = new KeyValue(sideBar.prefWidthProperty(), 0);
-        final KeyValue kvleft6 = new KeyValue(sideBar.translateXProperty(),
-                -widthInitial);
+        final KeyValue kvleft6 =
+                new KeyValue(sideBar.translateXProperty(), -widthInitial);
 
         final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
-        final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(),
-                -widthInitial);
+        final KeyValue kvleft8 =
+                new KeyValue(rightPane.translateXProperty(), -widthInitial);
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1,
                 kvleft2, kvleft5, kvleft6, kvleft7, kvleft8);
@@ -330,6 +351,9 @@ public final class MainViewController {
         timelineDown.play();
     }
 
+    /**
+     * Translate in the x direction.
+     */
     public void xTranslate() {
         if (leftRigth) {
             right();
@@ -340,42 +364,56 @@ public final class MainViewController {
         }
     }
 
-    private EventHandler<ActionEvent> imageEffect(double height) {
+    /**
+     * Produce an effect for an image.
+     *
+     * @param height
+     *            The height of the image.
+     * @return The event handler for the generated effect.
+     */
+    private EventHandler<ActionEvent> imageEffect(final double height) {
+        final int cycleCount = 4;
         final Timeline timelineBounce = new Timeline();
-        timelineBounce.setCycleCount(4);
+        timelineBounce.setCycleCount(cycleCount);
         timelineBounce.setAutoReverse(true);
-        final KeyValue kv1 = new KeyValue(clipRect.heightProperty(), (height
-                - 15));
+        final KeyValue kv1 =
+                new KeyValue(clipRect.heightProperty(), (height - 15));
         final KeyValue kv2 = new KeyValue(clipRect.translateYProperty(), 15);
-        final KeyValue kv3 = new KeyValue(growingPane.translateYProperty(),
-                -15);
+        final KeyValue kv3 =
+                new KeyValue(growingPane.translateYProperty(), -15);
 
         final KeyFrame kf1 = new KeyFrame(Duration.millis(100), kv1, kv2, kv3);
         timelineBounce.getKeyFrames().add(kf1);
 
         EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(final ActionEvent event) {
                 timelineBounce.play();
             }
         };
         return handler;
     }
 
+    /**
+     * Lay out the discover area.
+     */
     public void discoverLayout() {
         int n = 0;
-        if (discoverList == null)
+        final int dWidth = 4;
+        final int dHeight = 3;
+        if (discoverList == null) {
             discoverList = new ArrayList<MovieDb>();
+        }
         discoverList = cl.discoverMovies();
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < dWidth; i++) {
+            for (int j = 0; j < dHeight; j++) {
                 MovieDb containt = discoverList.get(n);
                 Image tempImage = cl.getImage(containt);
                 discoverImageList.add(tempImage);
-                MediaObject ob = new MediaObject(tempImage, containt.getTitle(),
-                        this);
+                MediaObject ob =
+                        new MediaObject(tempImage, containt.getTitle(), this);
                 VBox box = ob.getVBox();
                 discoverGrid.add(box, j, i);
                 n++;
@@ -384,17 +422,23 @@ public final class MainViewController {
         }
     }
 
-    public void clickImageInDiscovery(int index) {
-    	MovieDb movie = discoverList.get(index);
-    	popUpDescription.setText(cl.getDescription(movie));
-    	popUpTitle.setText(cl.getTitle(movie));
-    	popUpImage.setImage(discoverImageList.get(index));
-    	popUpPanel.toFront();
-    	popUpPanel.setVisible(true);
-    	tabPanel.toBack();
-    	tabPanel.setVisible(false);			
-	}
-    
+    /**
+     * Handler for a click in the discover area.
+     *
+     * @param index
+     *            The index of the item that was clicked.
+     */
+    public void clickImageInDiscovery(final int index) {
+        MovieDb movie = discoverList.get(index);
+        popUpDescription.setText(cl.getDescription(movie));
+        popUpTitle.setText(cl.getTitle(movie));
+        popUpImage.setImage(discoverImageList.get(index));
+        popUpPanel.toFront();
+        popUpPanel.setVisible(true);
+        tabPanel.toBack();
+        tabPanel.setVisible(false);
+    }
+
     /**
      * Initialize the controller. Called automatically by JavaFX internal code.
      */
@@ -414,5 +458,14 @@ public final class MainViewController {
         viewListPane.toBack();
         viewListPane.setVisible(false);
         discoverLayout();
+    }
+
+    /**
+     * Determine whether the current search is for movies.
+     *
+     * @return True if it is for movies.
+     */
+    public boolean isMovies() {
+        return isMovies;
     }
 }

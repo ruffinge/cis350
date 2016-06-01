@@ -57,8 +57,8 @@ public class MovieDBClient {
      */
     public final List<MovieDb> searchMovies(final String str) {
         TmdbSearch search = tmdbApi.getSearch();
-        MovieResultsPage searchIt = search.searchMovie(str, null, null, true,
-                0);
+        MovieResultsPage searchIt =
+                search.searchMovie(str, null, null, true, 0);
         return searchIt.getResults();
     }
 
@@ -173,8 +173,8 @@ public class MovieDBClient {
      */
     public final Image getSeriesImage(final TvSeries query) {
         TmdbTV series = tmdbApi.getTvSeries();
-        TvSeries result = series.getSeries(query.getId(), null,
-                TvMethod.images);
+        TvSeries result =
+                series.getSeries(query.getId(), null, TvMethod.images);
         String imageFilePath = result.getPosterPath();
         Image image = null;
         if (imageFilePath != null) {
@@ -208,7 +208,6 @@ public class MovieDBClient {
      *
      * @return A list of the matching movies.
      */
-    
     public final List<MovieDb> discoverMovies() {
         TmdbDiscover discover = tmdbApi.getDiscover();
         // TODO: Move the remainder of these to configurable parameters.
