@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -480,5 +481,9 @@ public final class MainViewController {
       MovieDb mv = discoverList.get(0);
       String url = cl.getVideo(mv);
       System.out.println(url);
+      WebEngine engine = webView.getEngine();
+      engine.load(url);
+      webViewPane.toFront();
+      
     }
 }
