@@ -16,6 +16,8 @@ import info.movito.themoviedbapi.model.Artwork;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.Multi;
+import info.movito.themoviedbapi.model.Multi.MediaType;
+import info.movito.themoviedbapi.model.Video;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
@@ -34,6 +36,8 @@ public class MovieDBClient {
 
     /** The path to images in the database. */
     private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
+    private static String youTubeURL = "https://www.youtube.com/watch?v=";
+   //private static String quickTime 
 
     /**
      * Searches the database using a given query.
@@ -218,5 +222,33 @@ public class MovieDBClient {
 
         return results;
     }
-
+    
+    public String getVideo(Multi querry){
+    	if(querry.getMediaType() == MediaType.MOVIE){
+    		TmdbMovies movies = tmdbApi.getMovies();
+    		List<Video> videoList = movies.getVideos(((MovieDb)querry).getId(), null);
+    		// you are only getting the first thriller
+    		Video thriller = videoList.get(0);
+    		if(thriller.getSite().equals("YouTube")){
+    		   String url = youTubeURL + thriller.getKey();
+    		   return url;
+    		}
+    	}
+    	//@TODO : add logic to query thriller for tv shows.
+    	else if(querry.getMediaType() ==  MediaType.TV_SERIES){
+    		
+    	}
+    	return null;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

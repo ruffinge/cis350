@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -95,6 +96,10 @@ public final class MainViewController {
     private TabPane tabPanel;
     @FXML
     private StackPane test;
+    @FXML 
+    private AnchorPane webViewPane;
+    @FXML
+    private WebView webView;
 
     private Rectangle clipRect;
     private String userInput1;
@@ -457,6 +462,7 @@ public final class MainViewController {
         popUpPanel.setVisible(false);
         viewListPane.toBack();
         viewListPane.setVisible(false);
+        webViewPane.toBack();
         discoverLayout();
     }
 
@@ -467,5 +473,12 @@ public final class MainViewController {
      */
     public boolean isMovies() {
         return isMovies;
+    }
+    
+    @FXML
+    public void getThriller(){
+      MovieDb mv = discoverList.get(0);
+      String url = cl.getVideo(mv);
+      System.out.println(url);
     }
 }
