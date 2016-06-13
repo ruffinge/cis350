@@ -1,7 +1,10 @@
 package moviefinder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.Multi;
@@ -101,6 +104,7 @@ public final class MainViewController {
     private AnchorPane webViewPane;
     @FXML
     private WebView webView;
+    private  WebEngine engine;
 
     private Rectangle clipRect;
     private String userInput1;
@@ -113,7 +117,8 @@ public final class MainViewController {
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
-
+    //@TODO : testing new mapping stuff;
+    private Map loadedMedia = new HashMap();
     /**
      * Hide the popup panel.
      */
@@ -411,6 +416,12 @@ public final class MainViewController {
             discoverList = new ArrayList<MovieDb>();
         }
         discoverList = cl.discoverMovies();
+        Iterator itr = discoverList.iterator();
+        while(itr.hasNext()){
+        	Multi media = (Multi) itr.next();
+            Image tempImage = cl.getImage(media);
+
+        }
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
         for (int i = 0; i < dWidth; i++) {
@@ -463,7 +474,7 @@ public final class MainViewController {
         popUpPanel.setVisible(false);
         viewListPane.toBack();
         viewListPane.setVisible(false);
-        webViewPane.toBack();
+       // webViewPane.toBack();
         discoverLayout();
     }
 
@@ -476,14 +487,21 @@ public final class MainViewController {
         return isMovies;
     }
     
-    @FXML
-    public void getThriller(){
+    
+    public void getThrillerUrl(){
       MovieDb mv = discoverList.get(0);
       String url = cl.getVideo(mv);
-      System.out.println(url);
-      WebEngine engine = webView.getEngine();
-      engine.load(url);
-      webViewPane.toFront();
-      
+      if(url != null){
+    	  engine = webView.getEngine();
+    	  engine.load(url);
+      }
+    }
+    
+    public boolean getURL(Multi media){
+    	String url = cl.getVideo(media);
+    	if(url != null)
+    		return true;
+    	
+    	return false;
     }
 }
