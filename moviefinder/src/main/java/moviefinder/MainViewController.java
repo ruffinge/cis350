@@ -53,7 +53,9 @@ public final class MainViewController {
     /** The message label. */
     @FXML
     private Labeled messageLabel;
-
+    /** The list of favorites. */
+    @FXML
+    private ListView favoritesListView;
     /** The list of results. */
     @FXML
     private ListView resultsListView;
@@ -255,9 +257,9 @@ public final class MainViewController {
 	favoritesList.add(selected);
 	     favoritesObservable = FXCollections
 	                     .observableArrayList(favoritesList);
+	     favoritesListView.setItems(favoritesObservable);
 	     System.out.println(favoritesObservable);
 	  
-
     }
 
     /**
