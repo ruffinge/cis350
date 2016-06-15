@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
@@ -65,6 +66,9 @@ public final class MainViewController {
     /** Description for a result. */
     @FXML
     private Text theDescription;
+    /** Button for adding to favorites */
+    @FXML 
+    private Button addFavorites;
 
     @FXML
     private AnchorPane growingPane;
@@ -245,8 +249,12 @@ public final class MainViewController {
     /**
      * Add the current item to favorites.
      */
-    public void addFavorites() {
-        // TODO: Not yet implemented.
+    public void addToFavorites() {
+	System.out.println("wired");
+	Multi selected =
+                (Multi) resultsListView.getSelectionModel().getSelectedItem();
+	System.out.println(selected);
+
     }
 
     /**
