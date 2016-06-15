@@ -69,7 +69,8 @@ public final class MainViewController {
     /** Button for adding to favorites */
     @FXML 
     private Button addFavorites;
-
+    private ObservableList<Multi> favoritesObservable;
+    ArrayList<Multi> favoritesList = new ArrayList<Multi>();
     @FXML
     private AnchorPane growingPane;
     @FXML
@@ -250,10 +251,12 @@ public final class MainViewController {
      * Add the current item to favorites.
      */
     public void addToFavorites() {
-	System.out.println("wired");
-	Multi selected =
-                (Multi) resultsListView.getSelectionModel().getSelectedItem();
-	System.out.println(selected);
+	Multi selected =(Multi) resultsListView.getSelectionModel().getSelectedItem();
+	favoritesList.add(selected);
+	     favoritesObservable = FXCollections
+	                     .observableArrayList(favoritesList);
+	     System.out.println(favoritesObservable);
+	  
 
     }
 
