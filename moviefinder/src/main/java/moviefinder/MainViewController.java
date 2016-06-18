@@ -105,6 +105,10 @@ public final class MainViewController {
     @FXML
     private GridPane discoverGrid;
     @FXML
+    private Tab favoritesTab;
+    @FXML
+    private GridPane favoritesGrid;
+    @FXML
     private TabPane tabPanel;
     @FXML
     private StackPane test;
@@ -485,6 +489,35 @@ public final class MainViewController {
 
         }
     }
+    
+    public void favoriteLayout(){
+    	int n = 0;
+        final int dWidth = 2;
+        final int dHeight = 1;
+        ScrollPane temp = (ScrollPane) favoritesTab.getContent();
+        favoritesGrid = (GridPane) temp.getContent();
+		for (int i = 0; i < dWidth; i++) {
+			for (int j = 0; j < dHeight; j++) {
+				Multi containt = favoriteList.get(n);
+				Image tempImage = cl.getImage(containt);
+				switch (containt.getMediaType()) {
+				case MOVIE:
+					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
+					VBox box = ob.getVBox();
+					favoritesGrid.add(box, j, i);
+					n++;
+					break;
+				case TV_SERIES:
+					containt = (TvSeries) containt;
+					MediaObject ob1 = new MediaObject(tempImage, ((TvSeries) containt).getName(), this);
+					VBox box1 = ob1.getVBox();
+					favoritesGrid.add(box1, j, i);
+					n++;
+					break;
+				}
+			}
+		}
+    }
 
     /**
      * Handler for a click in the discover area.
@@ -560,6 +593,7 @@ public final class MainViewController {
 			cl.startSession(userName, password);
 			favoriteList = cl.getFavorites();
 			System.out.println(favoriteList);
+			favoriteLayout();
 			goToAppPane();
 		} catch (Exception e) {
 			e.printStackTrace();

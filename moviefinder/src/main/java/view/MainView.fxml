@@ -94,15 +94,11 @@
                                                            <fx:include source="DiscoverView.fxml" />
                                                          </content>
                                                          </Tab>
-                                                      <Tab text="Favoirtes">
-                                                        <content>
-                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <ListView fx:id="favoritesListView" prefHeight="200.0" prefWidth="200.0" />
-                                                               </children>
-                                                            </AnchorPane>
-                                                        </content>
-                                                      </Tab>
+                                                      <Tab text="favorites" id="favoritesPlane" fx:id="favoritesTab">
+                                                      	<content>
+                                                      	   <fx:include source="FavoritesView.fxml" />
+                                                      	</content>
+                                                      	</Tab>
                                                   </tabs>
                                                    <StackPane.margin>
                                                       <Insets left="5.0" />
