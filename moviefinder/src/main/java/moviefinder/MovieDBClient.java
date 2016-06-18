@@ -3,6 +3,7 @@ package moviefinder;
 import java.util.List;
 
 import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbAuthentication;
 import info.movito.themoviedbapi.TmdbDiscover;
 import info.movito.themoviedbapi.TmdbMovies;
 import info.movito.themoviedbapi.TmdbPeople;
@@ -17,8 +18,11 @@ import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.Multi.MediaType;
+import info.movito.themoviedbapi.model.config.TokenAuthorisation;
+import info.movito.themoviedbapi.model.config.TokenSession;
 import info.movito.themoviedbapi.model.Video;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
+import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
@@ -33,6 +37,10 @@ public class MovieDBClient {
 
     /** The API connection. */
     private TmdbApi tmdbApi = new TmdbApi(apiKey);
+    
+    private static SessionToken sessionToken;
+	private String password;
+	private String user; 
 
     /** The path to images in the database. */
     private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
@@ -240,6 +248,35 @@ public class MovieDBClient {
     	}
     	return null;
     }
+    
+    public void startSession(String pUser, String pPassword, TmdbApi api)throws Exception{
+		if(pUser == null || pPassword == null || api == null)
+			 throw new Exception("Invalid user information.");
+		
+	    this.user = new String(pUser);
+	    this.password = new String(pPassword);
+	    sessionToken = getSessionToken(this.user, this.password, api);
+	}
+	
+	private static SessionToken getSessionToken(String user, String password, TmdbApi api) {
+		
+		TmdbAuthentication tmdbAuth = api.getAuthentication();
+		TokenAuthorisation tokenAuth = tmdbAuth.getLoginToken(tmdbAuth.getAuthorisationToken(),user, password);
+		TokenSession tokenSession = tmdbAuth.getSessionToken(tokenAuth);
+		String sessionId = tokenSession.getSessionId();
+		SessionToken sessionToken = new SessionToken(sessionId);
+		
+		return sessionToken;
+	}
+	
+	public SessionToken getSessionToken(){
+		return sessionToken;
+	} 
+	
+	public String getUsher(){
+		return this.user;
+	}
+	
 }
 
 

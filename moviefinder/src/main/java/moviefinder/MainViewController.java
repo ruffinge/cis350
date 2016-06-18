@@ -115,6 +115,8 @@ public final class MainViewController {
     
     @FXML
     private AnchorPane signInPane;
+    @FXML 
+    private Button mainSignInBtn;
 
     private Rectangle clipRect;
     private String userInput1;
@@ -428,8 +430,8 @@ public final class MainViewController {
      */
     public void discoverLayout() {
         int n = 0;
-        final int dWidth = 4;
-        final int dHeight = 3;
+        final int dWidth = 2;
+        final int dHeight = 1;
         if (discoverList == null) {
             discoverList = new ArrayList<MovieDb>();
         }
@@ -523,5 +525,11 @@ public final class MainViewController {
     		return true;
     	
     	return false;
+    }
+    
+    @FXML
+    public void goToSignInPane(){
+    	signInPane.toFront();
+    	signInPane.setVisible(true);
     }
 }
