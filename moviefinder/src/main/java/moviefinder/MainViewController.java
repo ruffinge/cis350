@@ -128,6 +128,8 @@ public final class MainViewController {
     private Button loginBtn;
     @FXML
     private Text loginMessage; 
+    @FXML
+    private Button popUpFavBtn;
     
     private Rectangle clipRect;
     private String userInput1;
@@ -139,6 +141,7 @@ public final class MainViewController {
 
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
+    private Multi selectedMedia ; 
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
@@ -221,16 +224,19 @@ public final class MainViewController {
      * Display information for the selected search result.
      */
     public void getSelection() {
-        Multi selectedItem =
+    	if(selectedMedia != null)
+    		selectedMedia = null; 
+    	
+        Multi selectedMedia =
                 (Multi) resultsListView.getSelectionModel().getSelectedItem();
         Image image = null;
         String title = null;
         String description = null;
-        if (selectedItem != null) {
-            image = cl.getImage(selectedItem);
-            title = cl.getTitle(selectedItem);
+        if (selectedMedia != null) {
+            image = cl.getImage(selectedMedia);
+            title = cl.getTitle(selectedMedia);
             theTitle.setText(title);
-            description = cl.getDescription(selectedItem);
+            description = cl.getDescription(selectedMedia);
             theDescription.setText(description);
         }
         if (image != null) {
@@ -477,14 +483,12 @@ public final class MainViewController {
      *            The index of the item that was clicked.
      */
     public void clickImageInDiscovery(final int index) {
+    	if (selectedMedia != null)
+    		selectedMedia = null;
         MovieDb movie = discoverList.get(index);
-        popUpDescription.setText(cl.getDescription(movie));
-        popUpTitle.setText(cl.getTitle(movie));
-        popUpImage.setImage(discoverImageList.get(index));
-        popUpPanel.toFront();
-        popUpPanel.setVisible(true);
-        tabPanel.toBack();
-        tabPanel.setVisible(false);
+        selectedMedia = movie;
+        Image poster = discoverImageList.get(index);
+        populatePopUpPane(poster);
     }
 
     /**
@@ -553,15 +557,29 @@ public final class MainViewController {
     	appPane.setVisible(true);
     }
     
-    @FXML
-    public void sinIn(){
-      String userName = userNameField.getText(); 
-      String password = passWordField.getText();
-      try {
-		cl.startSession(userName, password);
-		goToAppPane();
-	} catch (Exception e) {
-		e.printStackTrace();
+	@FXML
+	public void sinIn() {
+		String userName = userNameField.getText();
+		String password = passWordField.getText();
+		try {
+			cl.startSession(userName, password);
+			goToAppPane();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-    }
+	
+	private Multi getSelectedMedia(){
+		return this.selectedMedia;
+	}
+	
+	private void populatePopUpPane(Image poster){
+		popUpDescription.setText(cl.getDescription(selectedMedia));
+        popUpTitle.setText(cl.getTitle(selectedMedia));
+        popUpImage.setImage(poster);
+        popUpPanel.toFront();
+        popUpPanel.setVisible(true);
+        tabPanel.toBack();
+        tabPanel.setVisible(false);
+	}
 }
