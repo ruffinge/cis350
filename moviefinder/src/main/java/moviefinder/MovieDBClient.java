@@ -33,8 +33,9 @@ import info.movito.themoviedbapi.model.core.ResponseStatus;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
+import info.movito.themoviedbapi.tools.ApiUrl;
 import javafx.scene.image.Image;
-
+import info.movito.themoviedbapi.tools.ApiUrl;
 /**
  * A utility class for accessing the database and fetching appropriate results
  * for use in the MovieFinder application.
@@ -155,7 +156,7 @@ public class MovieDBClient {
      */
     public final Image getImage(final Multi query) {
     	
-    	if(imageCach.containsKey(query)){
+    	if( imageCach.get(query) != null ){
     		return imageCach.get(query);
     	}
     	
@@ -364,8 +365,7 @@ public class MovieDBClient {
 	}
 	public List<MovieDb> getNowPlaying(){
 		TmdbMovies mv = tmdbApi.getMovies();
-		MovieResultsPage results = mv.getNowPlayingMovies("english", 1);
-		
+		MovieResultsPage results = mv.getNowPlayingMovies(null,0);
 		return results.getResults();
 	}
 	

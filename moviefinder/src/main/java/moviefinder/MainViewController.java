@@ -551,7 +551,7 @@ public final class MainViewController {
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) nowPlayingTab.getContent();
         nowPlayingGrid = (GridPane) temp.getContent();
-        Iterator<Multi> itr = favoriteList.iterator();
+        Iterator<MovieDb> itr = cl.getNowPlaying().iterator();
 		for (int i = 0; i < dHeight  ; i++) {
 			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
 				Multi containt = (Multi) itr.next();
@@ -709,6 +709,8 @@ public final class MainViewController {
         signInPane.toBack();
         signInPane.setVisible(false);
        // webViewPane.toBack();
+        nowPlayingLayout();
         discoverLayout();
+       
     }
 }

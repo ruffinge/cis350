@@ -89,6 +89,11 @@
                                              <children>
                                                 <TabPane id="tabPanel" fx:id="tabPanel" minHeight="800.0" minWidth="948.0" tabClosingPolicy="UNAVAILABLE">
                                                   <tabs>
+                                                      <Tab text="Now playing" fx:id="nowPlayingTab">
+                                                        <content>
+                                                         <fx:include source="NowPlayingView.fxml" />
+                                                        </content>
+                                                      </Tab>
                                                     <Tab id="discoverPlane" fx:id="discoverTab" text="Discover">
                                                          <content>
                                                            <fx:include source="DiscoverView.fxml" />
