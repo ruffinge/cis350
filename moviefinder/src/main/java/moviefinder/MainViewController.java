@@ -546,10 +546,18 @@ public final class MainViewController {
     
     @FXML
     public void goToSignInPane(){
-    	signInPane.toFront();
-    	signInPane.setVisible(true);
-    	appPane.toBack();
-    	appPane.setVisible(false);
+    	if(isAuthorized() == false){
+    		signInPane.toFront();
+        	signInPane.setVisible(true);
+        	appPane.toBack();
+        	appPane.setVisible(false);
+        	mainSignInBtn.setText("Sign Out");
+    	}
+    	else
+    	{
+    		cl.endSession();
+    		mainSignInBtn.setText("Sign In");
+    	}
     }
     
     private void goToAppPane(){
@@ -594,15 +602,14 @@ public final class MainViewController {
 	}
 	
 	//@TODO add all the auth stuff that need to be done here 
-	private void isAuthorized(){
-		if(cl.getSessionToken() == null){
-        	popUpFavBtn.setDisable(true);
-        	addFavorites.setDisable(true);
-        }
-		else
-		{
-			popUpFavBtn.setDisable(false);
-			addFavorites.setDisable(false);
+	private boolean isAuthorized() {
+		if (cl.getSessionToken() == null) {
+			popUpFavBtn.setDisable(true);
+			addFavorites.setDisable(true);
+			return false;
 		}
+		popUpFavBtn.setDisable(false);
+		addFavorites.setDisable(false);
+        return true;
 	}
 }

@@ -257,6 +257,10 @@ public class MovieDBClient {
 	    this.password = new String(pPassword);
 	    sessionToken = getSessionToken(this.user, this.password);
 	}
+    
+    public void endSession(){
+        this.sessionToken = null;
+    }
 	
 	private static SessionToken getSessionToken(String user, String password) {
 		
