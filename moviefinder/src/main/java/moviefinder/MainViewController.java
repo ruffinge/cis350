@@ -278,16 +278,22 @@ public final class MainViewController {
     /**
      * Add the current item to favorites.
      */
-    @FXML
-    public void addToFavorites() {
-	Multi selected = selectedMedia ; 
-	favoritesList.add(selected);
-	     favoritesObservable = FXCollections
-	                     .observableArrayList(favoritesList);
-	     favoritesListView.setItems(favoritesObservable);
-	     System.out.println(favoritesObservable);
-	  
-    }
+	@FXML
+	public void addToFavorites() {
+		Multi selected = selectedMedia;
+		/*
+		 * favoritesList.add(selected); favoritesObservable = FXCollections
+		 * .observableArrayList(favoritesList);
+		 * favoritesListView.setItems(favoritesObservable);
+		 */
+
+		boolean code = cl.addFavorite(selected);
+		if(code == true)
+		{
+			favoriteList = cl.getFavorites(); 
+			System.out.println(favoriteList);
+		}
+	}
 
     /**
      * Rate an item.

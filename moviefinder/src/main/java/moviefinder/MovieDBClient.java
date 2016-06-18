@@ -28,6 +28,7 @@ import info.movito.themoviedbapi.model.config.TokenSession;
 import info.movito.themoviedbapi.model.Video;
 import info.movito.themoviedbapi.model.core.AccountID;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
+import info.movito.themoviedbapi.model.core.ResponseStatus;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.tv.TvSeries;
@@ -291,7 +292,7 @@ public class MovieDBClient {
 		return this.user;
 	}
 	
-	
+	//@TODO fox the hard coded number in the method later
 	public List<Multi> getFavorites() {
 		List<Multi> results = new ArrayList<Multi>();
 		List<MovieDb> movies = new ArrayList<MovieDb>();
@@ -329,7 +330,9 @@ public class MovieDBClient {
 		Account account = currentAccount.getAccount(getSessionToken());
 		if (account != null) {
 			AccountID id = new AccountID(account.getId());
-			currentAccount.addFavorite(getSessionToken(),id,mediaId,type);
+			ResponseStatus status =  currentAccount.addFavorite(getSessionToken(),id,mediaId,type);
+			if( status.getStatusCode() == 1)
+				return true;
 		}
 		return false;
 	}
