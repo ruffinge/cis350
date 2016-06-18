@@ -275,6 +275,7 @@ public final class MainViewController {
     /**
      * Add the current item to favorites.
      */
+    @FXML
     public void addToFavorites() {
 	Multi selected = selectedMedia ; 
 	favoritesList.add(selected);
