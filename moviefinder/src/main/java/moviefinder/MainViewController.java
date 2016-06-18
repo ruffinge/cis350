@@ -579,7 +579,8 @@ public final class MainViewController {
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
         popUpImage.setImage(poster);
-       
+        
+        isAuthorized();       
 	}
 	
 	@FXML
@@ -590,5 +591,18 @@ public final class MainViewController {
 		appPane.setVisible(false);
 		signInPane.toBack();
 		signInPane.setVisible(false);
+	}
+	
+	//@TODO add all the auth stuff that need to be done here 
+	private void isAuthorized(){
+		if(cl.getSessionToken() == null){
+        	popUpFavBtn.setDisable(true);
+        	addFavorites.setDisable(true);
+        }
+		else
+		{
+			popUpFavBtn.setDisable(false);
+			addFavorites.setDisable(false);
+		}
 	}
 }
