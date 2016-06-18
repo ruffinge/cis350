@@ -1,6 +1,7 @@
 package moviefinder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.omg.CORBA.TCKind;
@@ -55,6 +56,7 @@ public class MovieDBClient {
     private static String youTubeURL = "https://www.youtube.com/watch?v=";
    //private static String quickTime 
 	private List<Multi> favorites = new ArrayList<Multi>();
+	private HashMap<Multi,Image> imageCach = new HashMap<Multi,Image>();
     /**
      * Searches the database using a given query.
      *
@@ -152,6 +154,11 @@ public class MovieDBClient {
      * @return The image found, or null if no matching image is found.
      */
     public final Image getImage(final Multi query) {
+    	
+    	if(imageCach.containsKey(query)){
+    		return imageCach.get(query);
+    	}
+    	
         switch (query.getMediaType()) {
         case MOVIE:
             return getMovieImage((MovieDb) query);
@@ -180,6 +187,7 @@ public class MovieDBClient {
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
             image = new Image(path);
+            imageCach.put(query,image);
         }
         return image;
     }
@@ -200,6 +208,7 @@ public class MovieDBClient {
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
             image = new Image(path);
+            imageCach.put(query,image);
         }
         return image;
     }
@@ -219,6 +228,7 @@ public class MovieDBClient {
         if (imageFilePath != null) {
             String path = dbImagePath + imageFilePath;
             image = new Image(path);
+            imageCach.put((Multi) query,image);
         }
         return image;
     }
@@ -352,6 +362,13 @@ public class MovieDBClient {
 		}
 		return false;
 	}
+	public List<MovieDb> getNowPlaying(){
+		TmdbMovies mv = tmdbApi.getMovies();
+		MovieResultsPage results = mv.getNowPlayingMovies("english", 1);
+		
+		return results.getResults();
+	}
+	
 }
 
 
