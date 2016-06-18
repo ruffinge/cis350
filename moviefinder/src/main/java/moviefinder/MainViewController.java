@@ -286,13 +286,14 @@ public final class MainViewController {
 		 * .observableArrayList(favoritesList);
 		 * favoritesListView.setItems(favoritesObservable);
 		 */
-
-		boolean code = cl.addFavorite(selected);
-		if(code == true)
-		{
-			favoriteList = cl.getFavorites(); 
-			System.out.println(favoriteList);
-		}
+        if(favoriteList.contains(selected) == false){
+        	boolean code = cl.addFavorite(selected);
+    		if(code == true)
+    		{
+    			favoriteList = cl.getFavorites(); 
+    			System.out.println(favoriteList);
+    		}
+        }
 	}
 
     /**
