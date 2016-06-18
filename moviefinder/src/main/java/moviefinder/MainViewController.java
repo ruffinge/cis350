@@ -108,6 +108,10 @@ public final class MainViewController {
     private Tab favoritesTab;
     @FXML
     private GridPane favoritesGrid;
+    @FXML 
+    private Tab nowPlayingTab;
+    @FXML
+    private GridPane nowPlayingGrid;
     @FXML
     private TabPane tabPanel;
     @FXML
@@ -515,7 +519,6 @@ public final class MainViewController {
     }
     
     public void favoriteLayout(){
-    	int n = 0;
         final int dWidth = 3;
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) favoritesTab.getContent();
@@ -542,6 +545,24 @@ public final class MainViewController {
 			}
 		}
     }
+    
+    public void nowPlayingLayout(){
+    	final int dWidth = 3;
+        final int dHeight = 4;
+        ScrollPane temp = (ScrollPane) nowPlayingTab.getContent();
+        nowPlayingGrid = (GridPane) temp.getContent();
+        Iterator<Multi> itr = favoriteList.iterator();
+		for (int i = 0; i < dHeight  ; i++) {
+			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
+				Multi containt = (Multi) itr.next();
+				Image tempImage = cl.getImage(containt);
+				 cache.put(tempImage, containt); 
+					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
+					VBox box = ob.getVBox();
+					nowPlayingGrid.add(box, j, i);
+				}
+			}
+	}
 
     /**
      * Handler for a click in the discover area.
