@@ -227,8 +227,7 @@ public final class MainViewController {
     	if(selectedMedia != null)
     		selectedMedia = null; 
     	
-        Multi selectedMedia =
-                (Multi) resultsListView.getSelectionModel().getSelectedItem();
+        selectedMedia = (Multi) resultsListView.getSelectionModel().getSelectedItem();
         Image image = null;
         String title = null;
         String description = null;
@@ -277,7 +276,7 @@ public final class MainViewController {
      * Add the current item to favorites.
      */
     public void addToFavorites() {
-	Multi selected =(Multi) resultsListView.getSelectionModel().getSelectedItem();
+	Multi selected = selectedMedia ; 
 	favoritesList.add(selected);
 	     favoritesObservable = FXCollections
 	                     .observableArrayList(favoritesList);
