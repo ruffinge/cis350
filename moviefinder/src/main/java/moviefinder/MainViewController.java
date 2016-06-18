@@ -154,8 +154,8 @@ public final class MainViewController {
     public void hidePopUpPanel() {
         popUpPanel.toBack();
         popUpPanel.setVisible(false);
-        tabPanel.toFront();
-        tabPanel.setVisible(true);
+        appPane.toFront();
+        appPane.setVisible(true);
     }
 
     /**
@@ -240,6 +240,7 @@ public final class MainViewController {
         }
         if (image != null) {
             imageView.setImage(image);
+            populatePopUpPane(image);
             clipRect.setWidth(growingPane.getWidth());
             if (clipRect.heightProperty().get() == 0) {
                 down();
@@ -489,6 +490,7 @@ public final class MainViewController {
         selectedMedia = movie;
         Image poster = discoverImageList.get(index);
         populatePopUpPane(poster);
+        goToPopUpPane();
     }
 
     /**
@@ -550,7 +552,7 @@ public final class MainViewController {
     	appPane.setVisible(false);
     }
     
-    public void goToAppPane(){
+    private void goToAppPane(){
     	signInPane.toBack();
     	signInPane.setVisible(false);
     	appPane.toFront();
@@ -577,9 +579,16 @@ public final class MainViewController {
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
         popUpImage.setImage(poster);
-        popUpPanel.toFront();
-        popUpPanel.setVisible(true);
-        tabPanel.toBack();
-        tabPanel.setVisible(false);
+       
+	}
+	
+	@FXML
+	public void goToPopUpPane() {
+		popUpPanel.toFront();
+		popUpPanel.setVisible(true);
+		appPane.toBack();
+		appPane.setVisible(false);
+		signInPane.toBack();
+		signInPane.setVisible(false);
 	}
 }
