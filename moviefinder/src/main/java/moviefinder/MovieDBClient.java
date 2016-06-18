@@ -54,7 +54,7 @@ public class MovieDBClient {
     private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
     private static String youTubeURL = "https://www.youtube.com/watch?v=";
    //private static String quickTime 
-
+	private List<Multi> favorites = new ArrayList<Multi>();
     /**
      * Searches the database using a given query.
      *
@@ -294,7 +294,8 @@ public class MovieDBClient {
 	
 	//@TODO fox the hard coded number in the method later
 	public List<Multi> getFavorites() {
-		List<Multi> results = new ArrayList<Multi>();
+	
+		favorites.clear();
 		List<MovieDb> movies = new ArrayList<MovieDb>();
 		List<TvSeries> series = new ArrayList<TvSeries>();
 		Account account = currentAccount.getAccount(getSessionToken());
@@ -304,19 +305,23 @@ public class MovieDBClient {
 			TvResultsPage favoriteSeries = currentAccount.getFavoriteSeries(this.getSessionToken(), id, 3);
 			movies = favoriteMovies.getResults();
 			series = favoriteSeries.getResults();
-			results.addAll(movies);
-			results.addAll(series);
+			favorites.addAll(movies);
+			favorites.addAll(series);
 
 		}
-		return results;
+		return favorites;
 	}
 	
 	public boolean addFavorite(Multi media){
 		if(media == null)
 			return false;
+		
+		Account account = currentAccount.getAccount(getSessionToken());
+		AccountID id = new AccountID(account.getId());
 		MediaType mediaType = media.getMediaType();
 		info.movito.themoviedbapi.TmdbAccount.MediaType type; 
 		Integer mediaId = null; 
+		
 		switch(mediaType){
 		  case MOVIE : mediaId = ((MovieDb)media).getId();
 		               type = info.movito.themoviedbapi.TmdbAccount.MediaType.MOVIE ;
@@ -327,17 +332,26 @@ public class MovieDBClient {
 		  default : 
 			       return false;
 		}
-		Account account = currentAccount.getAccount(getSessionToken());
+		
+		
 		if (account != null) {
-			AccountID id = new AccountID(account.getId());
-			ResponseStatus status =  currentAccount.addFavorite(getSessionToken(),id,mediaId,type);
-			if( status.getStatusCode() == 1)
-				return true;
+			
+			if(favorites.contains(media)){
+				ResponseStatus status = currentAccount.removeFavorite(getSessionToken(), id, mediaId, type);
+				if( status.getStatusCode() == 13){
+					favorites.remove(media);
+					return true;
+				}
+					
+			}
+			else{
+				ResponseStatus status =  currentAccount.addFavorite(getSessionToken(),id,mediaId,type);
+				if( status.getStatusCode() == 1)
+					return true;
+			}	
 		}
 		return false;
 	}
-	
-	
 }
 
 

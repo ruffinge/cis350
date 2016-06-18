@@ -306,6 +306,21 @@ public final class MainViewController {
     			System.out.println(favoriteList);
     		}
         }
+        else
+        {
+        	boolean code = cl.addFavorite(selected);
+    		if(code == true)
+    		{
+    			favoriteList = cl.getFavorites(); 
+    			favoriteLayout();
+    			if(favoriteList.contains(selectedMedia)){
+                 	popUpFavBtn.setStyle("-fx-background-color: red");
+                 }
+                 else
+                 	popUpFavBtn.setStyle("-fx-background-color: green");
+    			System.out.println(favoriteList);
+    		}
+        }
 	}
 
     /**
@@ -617,14 +632,15 @@ public final class MainViewController {
 	private void populatePopUpPane(Image poster){
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
-       
+        popUpImage.setImage(poster);
+        
         if(isAuthorized()){
         	 if(favoriteList.contains(selectedMedia)){
              	popUpFavBtn.setStyle("-fx-background-color: red");
              }
              else
              	popUpFavBtn.setStyle("-fx-background-color: green");
-             popUpImage.setImage(poster);
+            
              
         }      
 	}
