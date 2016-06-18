@@ -112,12 +112,17 @@ public final class MainViewController {
     @FXML
     private WebView webView;
     private  WebEngine engine;
+    
+    @FXML
+    private AnchorPane signInPane;
 
     private Rectangle clipRect;
     private String userInput1;
     private double widthInitial = 206;
     private double heightInitial = 300;
     private Boolean leftRigth;
+    
+    
 
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
@@ -487,6 +492,8 @@ public final class MainViewController {
         popUpPanel.setVisible(false);
         viewListPane.toBack();
         viewListPane.setVisible(false);
+        signInPane.toBack();
+        signInPane.setVisible(false);
        // webViewPane.toBack();
         discoverLayout();
     }
