@@ -37,7 +37,8 @@ public class MediaController {
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);
         index = row * 3 + col;
-        main.clickImageInDiscovery(index);
+        ImageView imageView = (ImageView) movieBox.getChildren().get(0);
+        main.clickImageInDiscovery(imageView.getImage());
     }
 
     /**

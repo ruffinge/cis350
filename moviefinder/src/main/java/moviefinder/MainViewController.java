@@ -146,8 +146,8 @@ public final class MainViewController {
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
     private Multi selectedMedia ; 
-    
     private List<Multi> favoriteList = new ArrayList<Multi>();
+    private HashMap<Image,Multi> cache = new HashMap<Image,Multi>();
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
@@ -234,6 +234,7 @@ public final class MainViewController {
     		selectedMedia = null; 
     	
         selectedMedia = (Multi) resultsListView.getSelectionModel().getSelectedItem();
+         
         Image image = null;
         String title = null;
         String description = null;
@@ -245,6 +246,7 @@ public final class MainViewController {
             theDescription.setText(description);
         }
         if (image != null) {
+        	cache.put(image, selectedMedia); 
             imageView.setImage(image);
             populatePopUpPane(image);
             clipRect.setWidth(growingPane.getWidth());
@@ -295,6 +297,12 @@ public final class MainViewController {
     		if(code == true)
     		{
     			favoriteList = cl.getFavorites(); 
+    			favoriteLayout();
+    			if(favoriteList.contains(selectedMedia)){
+                 	popUpFavBtn.setStyle("-fx-background-color: red");
+                 }
+                 else
+                 	popUpFavBtn.setStyle("-fx-background-color: green");
     			System.out.println(favoriteList);
     		}
         }
@@ -461,8 +469,8 @@ public final class MainViewController {
      */
     public void discoverLayout() {
         int n = 0;
-        final int dWidth = 2;
-        final int dHeight = 1;
+        final int dWidth = 3;
+        final int dHeight = 4;
         if (discoverList == null) {
             discoverList = new ArrayList<MovieDb>();
         }
@@ -475,11 +483,12 @@ public final class MainViewController {
         }
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
-        for (int i = 0; i < dWidth; i++) {
-            for (int j = 0; j < dHeight; j++) {
+        for (int i = 0; i < dHeight; i++) {
+            for (int j = 0; j < dWidth; j++) {
                 MovieDb containt = discoverList.get(n);
                 Image tempImage = cl.getImage(containt);
                 discoverImageList.add(tempImage);
+                cache.put(tempImage, containt); 
                 MediaObject ob =
                         new MediaObject(tempImage, containt.getTitle(), this);
                 VBox box = ob.getVBox();
@@ -492,27 +501,27 @@ public final class MainViewController {
     
     public void favoriteLayout(){
     	int n = 0;
-        final int dWidth = 2;
-        final int dHeight = 1;
+        final int dWidth = 3;
+        final int dHeight = 4;
         ScrollPane temp = (ScrollPane) favoritesTab.getContent();
         favoritesGrid = (GridPane) temp.getContent();
-		for (int i = 0; i < dWidth; i++) {
-			for (int j = 0; j < dHeight; j++) {
-				Multi containt = favoriteList.get(n);
+        Iterator<Multi> itr = favoriteList.iterator();
+		for (int i = 0; i < dHeight  ; i++) {
+			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
+				Multi containt = (Multi) itr.next();
 				Image tempImage = cl.getImage(containt);
+				 cache.put(tempImage, containt); 
 				switch (containt.getMediaType()) {
 				case MOVIE:
 					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
 					VBox box = ob.getVBox();
 					favoritesGrid.add(box, j, i);
-					n++;
 					break;
 				case TV_SERIES:
 					containt = (TvSeries) containt;
 					MediaObject ob1 = new MediaObject(tempImage, ((TvSeries) containt).getName(), this);
 					VBox box1 = ob1.getVBox();
 					favoritesGrid.add(box1, j, i);
-					n++;
 					break;
 				}
 			}
@@ -525,14 +534,15 @@ public final class MainViewController {
      * @param index
      *            The index of the item that was clicked.
      */
-    public void clickImageInDiscovery(final int index) {
+    public void clickImageInDiscovery(Image image) {
     	if (selectedMedia != null)
     		selectedMedia = null;
-        MovieDb movie = discoverList.get(index);
-        selectedMedia = movie;
-        Image poster = discoverImageList.get(index);
-        populatePopUpPane(poster);
-        goToPopUpPane();
+    	Multi media = (Multi) cache.get(image);
+    	if(media != null){
+    		selectedMedia = media;
+    		populatePopUpPane(image);
+    		goToPopUpPane();
+    	}
     }
 
     /**
@@ -607,9 +617,16 @@ public final class MainViewController {
 	private void populatePopUpPane(Image poster){
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
-        popUpImage.setImage(poster);
-        
-        isAuthorized();       
+       
+        if(isAuthorized()){
+        	 if(favoriteList.contains(selectedMedia)){
+             	popUpFavBtn.setStyle("-fx-background-color: red");
+             }
+             else
+             	popUpFavBtn.setStyle("-fx-background-color: green");
+             popUpImage.setImage(poster);
+             
+        }      
 	}
 	
 	@FXML

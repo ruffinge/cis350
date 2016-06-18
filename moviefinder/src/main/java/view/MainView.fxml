@@ -94,7 +94,7 @@
                                                            <fx:include source="DiscoverView.fxml" />
                                                          </content>
                                                          </Tab>
-                                                      <Tab text="favorites" id="favoritesPlane" fx:id="favoritesTab">
+                                                      <Tab id="favoritesPlane" fx:id="favoritesTab" text="favorites">
                                                       	<content>
                                                       	   <fx:include source="FavoritesView.fxml" />
                                                       	</content>
@@ -179,7 +179,7 @@
                   </Text>
                   <Text id="popUpDescription" fx:id="popUpDescription" layoutX="318.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="Description" textAlignment="JUSTIFY" wrappingWidth="198.0" AnchorPane.leftAnchor="318.0" AnchorPane.topAnchor="123.576171875" />
                   <Button id="popUpButton" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hidePopUpPanel" prefHeight="50.0" prefWidth="50.0" styleClass="popUpButton" text="Button" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-                  <Button id="popUpFavBtn" fx:id="popUpFavBtn" layoutX="577.0" layoutY="65.0" mnemonicParsing="false" onAction="#addToFavorites" prefHeight="39.0" prefWidth="158.0" text="Add To Favorites" />
+                  <Button id="popUpFavBtn" fx:id="popUpFavBtn" layoutX="646.0" layoutY="128.0" mnemonicParsing="false" onAction="#addToFavorites" prefHeight="39.0" prefWidth="104.0" text="Favorites" />
                </children>
             </AnchorPane>
          </children>
