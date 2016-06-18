@@ -1,7 +1,11 @@
 package moviefinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.TCKind;
+
+import info.movito.themoviedbapi.TmdbAccount;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbAuthentication;
 import info.movito.themoviedbapi.TmdbDiscover;
@@ -18,9 +22,11 @@ import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.Multi.MediaType;
+import info.movito.themoviedbapi.model.config.Account;
 import info.movito.themoviedbapi.model.config.TokenAuthorisation;
 import info.movito.themoviedbapi.model.config.TokenSession;
 import info.movito.themoviedbapi.model.Video;
+import info.movito.themoviedbapi.model.core.AccountID;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
@@ -41,7 +47,8 @@ public class MovieDBClient {
     private static SessionToken sessionToken;
 	private String password;
 	private String user; 
-
+    
+	private TmdbAccount currentAccount;
     /** The path to images in the database. */
     private static String dbImagePath = "https://image.tmdb.org/t/p/w396";
     private static String youTubeURL = "https://www.youtube.com/watch?v=";
@@ -256,6 +263,9 @@ public class MovieDBClient {
 	    this.user = new String(pUser);
 	    this.password = new String(pPassword);
 	    sessionToken = getSessionToken(this.user, this.password);
+	    if(sessionToken != null){
+	    	this.currentAccount = tmdbApi.getAccount();
+	    }
 	}
     
     public void endSession(){
@@ -277,9 +287,53 @@ public class MovieDBClient {
 		return sessionToken;
 	} 
 	
-	public String getUsher(){
+	public String getUser(){
 		return this.user;
 	}
+	
+	
+	public List<Multi> getFavorites() {
+		List<Multi> results = new ArrayList<Multi>();
+		List<MovieDb> movies = new ArrayList<MovieDb>();
+		List<TvSeries> series = new ArrayList<TvSeries>();
+		Account account = currentAccount.getAccount(getSessionToken());
+		if (account != null) {
+			AccountID id = new AccountID(account.getId());
+			MovieResultsPage favoriteMovies = currentAccount.getFavoriteMovies(this.getSessionToken(), id);
+			TvResultsPage favoriteSeries = currentAccount.getFavoriteSeries(this.getSessionToken(), id, 3);
+			movies = favoriteMovies.getResults();
+			series = favoriteSeries.getResults();
+			results.addAll(movies);
+			results.addAll(series);
+
+		}
+		return results;
+	}
+	
+	public boolean addFavorite(Multi media){
+		if(media == null)
+			return false;
+		MediaType mediaType = media.getMediaType();
+		info.movito.themoviedbapi.TmdbAccount.MediaType type; 
+		Integer mediaId = null; 
+		switch(mediaType){
+		  case MOVIE : mediaId = ((MovieDb)media).getId();
+		               type = info.movito.themoviedbapi.TmdbAccount.MediaType.MOVIE ;
+			  break;
+		  case  TV_SERIES : mediaId = ((TvSeries)media).getId(); 
+		  					type = info.movito.themoviedbapi.TmdbAccount.MediaType.TV ;
+		  	 break;
+		  default : 
+			       return false;
+		}
+		Account account = currentAccount.getAccount(getSessionToken());
+		if (account != null) {
+			AccountID id = new AccountID(account.getId());
+			currentAccount.addFavorite(getSessionToken(),id,mediaId,type);
+		}
+		return false;
+	}
+	
 	
 }
 

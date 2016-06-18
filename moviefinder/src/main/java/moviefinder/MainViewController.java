@@ -142,6 +142,8 @@ public final class MainViewController {
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
     private Multi selectedMedia ; 
+    
+    private List<Multi> favoriteList = new ArrayList<Multi>();
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
@@ -494,30 +496,6 @@ public final class MainViewController {
     }
 
     /**
-     * Initialize the controller. Called automatically by JavaFX internal code.
-     */
-    @FXML
-    void initialize() {
-        clipRect = new Rectangle();
-        clipRect.setWidth(widthInitial);
-        clipRect.setHeight(0);
-        clipRect.translateYProperty().set(heightInitial);
-        growingPane.setClip(clipRect);
-        growingPane.translateYProperty().set(-heightInitial);
-        sideBar.translateXProperty().set(-widthInitial);
-        rightPane.translateXProperty().set(-widthInitial);
-        leftRigth = true;
-        popUpPanel.toBack();
-        popUpPanel.setVisible(false);
-        viewListPane.toBack();
-        viewListPane.setVisible(false);
-        signInPane.toBack();
-        signInPane.setVisible(false);
-       // webViewPane.toBack();
-        discoverLayout();
-    }
-
-    /**
      * Determine whether the current search is for movies.
      *
      * @return True if it is for movies.
@@ -573,6 +551,8 @@ public final class MainViewController {
 		String password = passWordField.getText();
 		try {
 			cl.startSession(userName, password);
+			favoriteList = cl.getFavorites();
+			System.out.println(favoriteList);
 			goToAppPane();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -612,4 +592,28 @@ public final class MainViewController {
 		addFavorites.setDisable(false);
         return true;
 	}
+	
+	/**
+     * Initialize the controller. Called automatically by JavaFX internal code.
+     */
+    @FXML
+    void initialize() {
+        clipRect = new Rectangle();
+        clipRect.setWidth(widthInitial);
+        clipRect.setHeight(0);
+        clipRect.translateYProperty().set(heightInitial);
+        growingPane.setClip(clipRect);
+        growingPane.translateYProperty().set(-heightInitial);
+        sideBar.translateXProperty().set(-widthInitial);
+        rightPane.translateXProperty().set(-widthInitial);
+        leftRigth = true;
+        popUpPanel.toBack();
+        popUpPanel.setVisible(false);
+        viewListPane.toBack();
+        viewListPane.setVisible(false);
+        signInPane.toBack();
+        signInPane.setVisible(false);
+       // webViewPane.toBack();
+        discoverLayout();
+    }
 }
