@@ -33,10 +33,10 @@ import javafx.scene.image.Image;
  */
 public class MovieDBClient {
     /** The API key to use when connecting to the database. */
-    private final String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
+    private final static String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
 
     /** The API connection. */
-    private TmdbApi tmdbApi = new TmdbApi(apiKey);
+    private static TmdbApi tmdbApi = new TmdbApi(apiKey);
     
     private static SessionToken sessionToken;
 	private String password;
@@ -249,18 +249,18 @@ public class MovieDBClient {
     	return null;
     }
     
-    public void startSession(String pUser, String pPassword, TmdbApi api)throws Exception{
-		if(pUser == null || pPassword == null || api == null)
+    public void startSession(String pUser, String pPassword)throws Exception{
+		if(pUser == null || pPassword == null)
 			 throw new Exception("Invalid user information.");
 		
 	    this.user = new String(pUser);
 	    this.password = new String(pPassword);
-	    sessionToken = getSessionToken(this.user, this.password, api);
+	    sessionToken = getSessionToken(this.user, this.password);
 	}
 	
-	private static SessionToken getSessionToken(String user, String password, TmdbApi api) {
+	private static SessionToken getSessionToken(String user, String password) {
 		
-		TmdbAuthentication tmdbAuth = api.getAuthentication();
+		TmdbAuthentication tmdbAuth = tmdbApi.getAuthentication();
 		TokenAuthorisation tokenAuth = tmdbAuth.getLoginToken(tmdbAuth.getAuthorisationToken(),user, password);
 		TokenSession tokenSession = tmdbAuth.getSessionToken(tokenAuth);
 		String sessionId = tokenSession.getSessionId();

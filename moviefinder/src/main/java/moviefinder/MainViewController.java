@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -116,8 +117,18 @@ public final class MainViewController {
     @FXML
     private AnchorPane signInPane;
     @FXML 
+    private AnchorPane appPane;
+    @FXML 
     private Button mainSignInBtn;
-
+    @FXML
+    private TextField userNameField;
+    @FXML
+    private PasswordField passWordField;
+    @FXML
+    private Button loginBtn;
+    @FXML
+    private Text loginMessage; 
+    
     private Rectangle clipRect;
     private String userInput1;
     private double widthInitial = 206;
@@ -531,5 +542,26 @@ public final class MainViewController {
     public void goToSignInPane(){
     	signInPane.toFront();
     	signInPane.setVisible(true);
+    	appPane.toBack();
+    	appPane.setVisible(false);
+    }
+    
+    public void goToAppPane(){
+    	signInPane.toBack();
+    	signInPane.setVisible(false);
+    	appPane.toFront();
+    	appPane.setVisible(true);
+    }
+    
+    @FXML
+    public void sinIn(){
+      String userName = userNameField.getText(); 
+      String password = passWordField.getText();
+      try {
+		cl.startSession(userName, password);
+		goToAppPane();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
     }
 }
