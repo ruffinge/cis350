@@ -306,7 +306,7 @@ public class MovieDBClient {
 	//@TODO fox the hard coded number in the method later
 	public List<Multi> getFavorites() {
 	
-		favorites.clear();
+		favorites = new ArrayList<Multi>();
 		List<MovieDb> movies = new ArrayList<MovieDb>();
 		List<TvSeries> series = new ArrayList<TvSeries>();
 		Account account = currentAccount.getAccount(getSessionToken());

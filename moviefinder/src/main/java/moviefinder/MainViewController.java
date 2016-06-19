@@ -304,8 +304,8 @@ public final class MainViewController {
         	boolean code = cl.addFavorite(selected);
     		if(code == true)
     		{
+    			favoriteList.clear();
     			favoriteList = cl.getFavorites(); 
-    			favoriteLayout();
     			if(favoriteList.contains(selectedMedia)){
                  	popUpFavBtn.setStyle("-fx-background-color: red");
                  }
@@ -319,8 +319,8 @@ public final class MainViewController {
         	boolean code = cl.addFavorite(selected);
     		if(code == true)
     		{
+    			favoriteList.clear();
     			favoriteList = cl.getFavorites(); 
-    			favoriteLayout();
     			if(favoriteList.contains(selectedMedia)){
                  	popUpFavBtn.setStyle("-fx-background-color: red");
                  }
@@ -329,6 +329,7 @@ public final class MainViewController {
     			System.out.println(favoriteList);
     		}
         }
+        favoriteLayout();
 	}
 
     /**
@@ -506,6 +507,7 @@ public final class MainViewController {
         }
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
+        discoverGrid.getChildren().clear();
         for (int i = 0; i < dHeight; i++) {
             for (int j = 0; j < dWidth; j++) {
                 MovieDb containt = discoverList.get(n);
@@ -527,6 +529,7 @@ public final class MainViewController {
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) favoritesTab.getContent();
         favoritesGrid = (GridPane) temp.getContent();
+        favoritesGrid.getChildren().clear();
         Iterator<Multi> itr = favoriteList.iterator();
 		for (int i = 0; i < dHeight  ; i++) {
 			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
@@ -555,6 +558,7 @@ public final class MainViewController {
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) nowPlayingTab.getContent();
         nowPlayingGrid = (GridPane) temp.getContent();
+        nowPlayingGrid.getChildren().clear();
         Iterator<MovieDb> itr = cl.getNowPlaying().iterator();
 		for (int i = 0; i < dHeight  ; i++) {
 			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
@@ -573,6 +577,7 @@ public final class MainViewController {
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) upComingTab.getContent();
         upComingGrid = (GridPane) temp.getContent();
+        upComingGrid.getChildren().clear();
         Iterator<MovieDb> itr = cl.getUpComping().iterator();
 		for (int i = 0; i < dHeight  ; i++) {
 			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
