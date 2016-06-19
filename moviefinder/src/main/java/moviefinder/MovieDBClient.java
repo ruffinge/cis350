@@ -389,6 +389,24 @@ public class MovieDBClient {
 		return 0;
 	}
 	
+	public boolean rateContain(Multi query, int rating){
+		
+		Account account = currentAccount.getAccount(getSessionToken());
+		if(account == null)
+			return false;
+		
+		AccountID id = new AccountID(account.getId());
+		MediaType mediaType = query.getMediaType();
+		switch(mediaType){
+		case MOVIE: MovieDb mv = (MovieDb)query ;
+		       return  currentAccount.postMovieRating(getSessionToken(), mv.getId(), rating); 
+		case TV_SERIES: TvSeries s =   (TvSeries)query;
+	    return  currentAccount.postTvSeriesRating(getSessionToken(), s.getId(), rating);
+		default:
+			return false;
+		}
+	}
+	
 }
 
 

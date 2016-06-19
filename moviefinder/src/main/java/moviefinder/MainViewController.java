@@ -164,7 +164,9 @@ public final class MainViewController {
     /** Whether the current search is for movies. */
     private boolean isMovies;
     @FXML
-    private HBox hboxPop;
+    private HBox dbRating;
+    @FXML
+    private HBox userRating;
     private Rating rating;
   
     /**
@@ -692,9 +694,10 @@ public final class MainViewController {
         if(selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES){
         	 rating = new Rating(maximumRating);
         	 rating.setPartialRating(true);
+        	 rating.setUpdateOnHover(false);
         	 rating.setRating(cl.getRating(selectedMedia));
-        	 hboxPop.getChildren().clear();
-             hboxPop.getChildren().add(rating);
+        	 dbRating.getChildren().clear();
+        	 dbRating.getChildren().add(rating);
         }
         else
         	hboxPop.getChildren().clear();
