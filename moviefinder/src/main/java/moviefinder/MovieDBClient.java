@@ -2,6 +2,7 @@ package moviefinder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.omg.CORBA.TCKind;
@@ -389,24 +390,65 @@ public class MovieDBClient {
 		return 0;
 	}
 	
-	public boolean rateContain(Multi query, int rating){
+	public void rateContaint(Multi query, double d){
 		
+		if(d < 1 )
+			d = 1;
 		Account account = currentAccount.getAccount(getSessionToken());
 		if(account == null)
-			return false;
+		   return ;
 		
 		AccountID id = new AccountID(account.getId());
 		MediaType mediaType = query.getMediaType();
-		switch(mediaType){
-		case MOVIE: MovieDb mv = (MovieDb)query ;
-		       return  currentAccount.postMovieRating(getSessionToken(), mv.getId(), rating); 
-		case TV_SERIES: TvSeries s =   (TvSeries)query;
-	    return  currentAccount.postTvSeriesRating(getSessionToken(), s.getId(), rating);
-		default:
-			return false;
+		switch (mediaType) {
+		case MOVIE:
+			MovieDb mv = (MovieDb) query;
+			currentAccount.postMovieRating(getSessionToken(), mv.getId(), (int) d);
+			break;
+		case TV_SERIES:
+			TvSeries s = (TvSeries) query;
+			currentAccount.postTvSeriesRating(getSessionToken(), s.getId(), (int) d);
+			break;
 		}
 	}
 	
+	public double getUserRating(Multi query){
+		Account account = currentAccount.getAccount(getSessionToken());
+		if(account == null)
+		   return 0 ;
+		
+		AccountID id = new AccountID(account.getId());
+		MediaType mediaType = query.getMediaType();
+		switch (mediaType) {
+		case MOVIE:
+			MovieDb mv = (MovieDb) query;
+			MovieResultsPage ratedMovies = currentAccount.getRatedMovies(getSessionToken(), id, 1);
+			List<MovieDb> m = ratedMovies.getResults();
+			MovieDb r = null;
+			Iterator<MovieDb> itr = m.iterator();
+			while (itr.hasNext()) {
+				r = itr.next();
+				if (mv.getId() == r.getId()) {
+					return r.getUserRating() /2;
+				}
+			}
+			break;
+		case TV_SERIES:
+			TvSeries sr = (TvSeries) query;
+			TvResultsPage ratedSeries = currentAccount.getRatedTvSeries(getSessionToken(), id, 1);
+			List<TvSeries> tv = ratedSeries.getResults();
+			TvSeries s = null;
+			Iterator<TvSeries> itr1 = tv.iterator();
+			while (itr1.hasNext()) {
+				s = itr1.next();
+				if (sr.getId() == s.getId()) {
+					return s.getUserRating() / 2;
+				}
+			}
+			break;
+		}
+		return 0;
+	}
 }
 
 

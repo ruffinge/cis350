@@ -28,8 +28,7 @@ public class MovieFinder extends Application {
     /**
      * Main method for launching the movie finder. Initializes the JavaFX
      * launching process.
-     *
-     * @param args
+     *     * @param args
      *            Command line arguments.
      */
     public static void main(final String[] args) {

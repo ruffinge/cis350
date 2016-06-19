@@ -31,6 +31,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -167,7 +168,8 @@ public final class MainViewController {
     private HBox dbRating;
     @FXML
     private HBox userRating;
-    private Rating rating;
+    private Rating ratingDb;
+    private Rating ratingUser;
   
     /**
      * Hide the popup panel.
@@ -691,25 +693,44 @@ public final class MainViewController {
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
         popUpImage.setImage(poster);
-        if(selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES){
-        	 rating = new Rating(maximumRating);
-        	 rating.setPartialRating(true);
-        	 rating.setUpdateOnHover(false);
-        	 rating.setRating(cl.getRating(selectedMedia));
-        	 dbRating.getChildren().clear();
-        	 dbRating.getChildren().add(rating);
-        }
-        else
-        	hboxPop.getChildren().clear();
-        if(isAuthorized()){
-        	 if(favoriteList.contains(selectedMedia)){
-             	popUpFavBtn.setStyle("-fx-background-color: red");
-             }
-             else
-             	popUpFavBtn.setStyle("-fx-background-color: green");
-            
-             
-        }      
+		if (selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
+			ratingDb = new Rating(maximumRating);
+			ratingDb.setPartialRating(true);
+			ratingDb.setUpdateOnHover(false);
+			ratingDb.setRating(cl.getRating(selectedMedia));
+			dbRating.getChildren().clear();
+			dbRating.getChildren().add(ratingDb);
+		} else
+			dbRating.getChildren().clear();
+		
+		if (isAuthorized()) {
+			userRating.getChildren().clear();
+			userRating.setVisible(true);
+			ratingUser = new Rating(maximumRating);
+			ratingUser.setPartialRating(false);
+			ratingUser.setUpdateOnHover(false);
+			ratingUser.setRating(cl.getUserRating(selectedMedia));
+		    ratingUser.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+				@Override
+				public void handle(MouseEvent event) {
+                    cl.rateContaint(selectedMedia, ratingUser.getRating() * 2 );
+				}
+		    	
+		    });
+			userRating.getChildren().clear();
+			userRating.getChildren().add(ratingUser);
+			if (favoriteList.contains(selectedMedia)) {
+				popUpFavBtn.setStyle("-fx-background-color: red");
+			} 
+			else {
+				popUpFavBtn.setStyle("-fx-background-color: green");
+			}
+		}
+		else{
+			userRating.setVisible(false);
+		}
+			
 	}
 	
 	@FXML
