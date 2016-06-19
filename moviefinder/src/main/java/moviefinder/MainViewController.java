@@ -6,8 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.controlsfx.control.Rating;
+
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.Multi;
+import info.movito.themoviedbapi.model.Multi.MediaType;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -34,6 +37,7 @@ import javafx.scene.web.WebView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -159,8 +163,10 @@ public final class MainViewController {
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
-    //@TODO : testing new mapping stuff;
-    private Map loadedMedia = new HashMap();
+    @FXML
+    private HBox hboxPop;
+    private Rating rating;
+  
     /**
      * Hide the popup panel.
      */
@@ -679,10 +685,19 @@ public final class MainViewController {
 	}
 	
 	private void populatePopUpPane(Image poster){
+		int maximumRating = 5;
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
         popUpImage.setImage(poster);
-        
+        if(selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES){
+        	 rating = new Rating(maximumRating);
+        	 rating.setPartialRating(true);
+        	 rating.setRating(cl.getRating(selectedMedia));
+        	 hboxPop.getChildren().clear();
+             hboxPop.getChildren().add(rating);
+        }
+        else
+        	hboxPop.getChildren().clear();
         if(isAuthorized()){
         	 if(favoriteList.contains(selectedMedia)){
              	popUpFavBtn.setStyle("-fx-background-color: red");

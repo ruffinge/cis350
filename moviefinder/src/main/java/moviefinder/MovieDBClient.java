@@ -184,7 +184,7 @@ public class MovieDBClient {
         Image image = null;
         MovieImages artworks = movies.getImages(query.getId(), null);
         List<Artwork> posters = artworks.getPosters();
-        if(posters != null){
+        if(posters.isEmpty() == false){
         	String imageFilePath = posters.get(0).getFilePath();
             if (imageFilePath != null) {
                 String path = dbImagePath + imageFilePath;
@@ -228,7 +228,7 @@ public class MovieDBClient {
     	Image image = null;
         TmdbPeople people = tmdbApi.getPeople();
         List<Artwork> profiles = people.getPersonImages(query.getId());
-        if(profiles != null){
+        if(profiles.isEmpty() == false){
         	String imageFilePath = profiles.get(0).getFilePath();
             if (imageFilePath != null) {
                 String path = dbImagePath + imageFilePath;
@@ -379,6 +379,14 @@ public class MovieDBClient {
 		TmdbMovies mv = tmdbApi.getMovies();
 		MovieResultsPage results = mv.getUpcoming(null,0);
 		return results.getResults();
+	}
+	
+	public double getRating(Multi query){
+		switch(query.getMediaType()){
+		case MOVIE: return ((MovieDb) query).getVoteAverage() / 2;
+		case TV_SERIES: return ((TvSeries)query).getVoteAverage() / 2;
+		}
+		return 0;
 	}
 	
 }
