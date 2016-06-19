@@ -181,15 +181,18 @@ public class MovieDBClient {
      */
     public final Image getMovieImage(final MovieDb query) {
         TmdbMovies movies = tmdbApi.getMovies();
+        Image image = null;
         MovieImages artworks = movies.getImages(query.getId(), null);
         List<Artwork> posters = artworks.getPosters();
-        String imageFilePath = posters.get(0).getFilePath();
-        Image image = null;
-        if (imageFilePath != null) {
-            String path = dbImagePath + imageFilePath;
-            image = new Image(path);
-            imageCach.put(query,image);
+        if(posters != null){
+        	String imageFilePath = posters.get(0).getFilePath();
+            if (imageFilePath != null) {
+                String path = dbImagePath + imageFilePath;
+                image = new Image(path);
+                imageCach.put(query,image);
+            }	
         }
+        
         return image;
     }
 
@@ -222,15 +225,18 @@ public class MovieDBClient {
      * @return The image for the given person.
      */
     public final Image getPersonImage(final Person query) {
+    	Image image = null;
         TmdbPeople people = tmdbApi.getPeople();
         List<Artwork> profiles = people.getPersonImages(query.getId());
-        String imageFilePath = profiles.get(0).getFilePath();
-        Image image = null;
-        if (imageFilePath != null) {
-            String path = dbImagePath + imageFilePath;
-            image = new Image(path);
-            imageCach.put((Multi) query,image);
+        if(profiles != null){
+        	String imageFilePath = profiles.get(0).getFilePath();
+            if (imageFilePath != null) {
+                String path = dbImagePath + imageFilePath;
+                image = new Image(path);
+                imageCach.put((Multi) query,image);
+            }
         }
+        
         return image;
     }
 
