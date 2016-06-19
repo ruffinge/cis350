@@ -94,6 +94,11 @@
                                                          <fx:include source="NowPlayingView.fxml" />
                                                         </content>
                                                       </Tab>
+                                                      <Tab text="Up Coming" fx:id="upComingTab">
+                                                         <content>
+                                                          <fx:include source="UpComingView.fxml" />
+                                                         </content>
+                                                      </Tab>
                                                     <Tab id="discoverPlane" fx:id="discoverTab" text="Discover">
                                                          <content>
                                                            <fx:include source="DiscoverView.fxml" />

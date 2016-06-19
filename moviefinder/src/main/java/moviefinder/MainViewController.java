@@ -112,6 +112,10 @@ public final class MainViewController {
     private Tab nowPlayingTab;
     @FXML
     private GridPane nowPlayingGrid;
+    @FXML 
+    private Tab upComingTab;
+    @FXML
+    private GridPane upComingGrid;
     @FXML
     private TabPane tabPanel;
     @FXML
@@ -563,6 +567,25 @@ public final class MainViewController {
 				}
 			}
 	}
+    
+    public void upComingLaying(){
+    	final int dWidth = 3;
+        final int dHeight = 4;
+        ScrollPane temp = (ScrollPane) upComingTab.getContent();
+        upComingGrid = (GridPane) temp.getContent();
+        Iterator<MovieDb> itr = cl.getUpComping().iterator();
+		for (int i = 0; i < dHeight  ; i++) {
+			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
+				Multi containt = (Multi) itr.next();
+				Image tempImage = cl.getImage(containt);
+				 cache.put(tempImage, containt); 
+					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
+					VBox box = ob.getVBox();
+					upComingGrid.add(box, j, i);
+				}
+			}
+    }
+    	
 
     /**
      * Handler for a click in the discover area.
@@ -709,6 +732,7 @@ public final class MainViewController {
         signInPane.toBack();
         signInPane.setVisible(false);
        // webViewPane.toBack();
+        upComingLaying();
         nowPlayingLayout();
         discoverLayout();
        

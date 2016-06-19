@@ -369,6 +369,12 @@ public class MovieDBClient {
 		return results.getResults();
 	}
 	
+	public List<MovieDb> getUpComping(){
+		TmdbMovies mv = tmdbApi.getMovies();
+		MovieResultsPage results = mv.getUpcoming(null,0);
+		return results.getResults();
+	}
+	
 }
 
 
