@@ -191,7 +191,7 @@
                   <Button id="popUpButton" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hidePopUpPanel" prefHeight="50.0" prefWidth="50.0" styleClass="popUpButton" text="Button" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
                   <Button id="popUpFavBtn" fx:id="popUpFavBtn" layoutX="631.0" layoutY="137.0" mnemonicParsing="false" onAction="#addToFavorites" prefHeight="30.0" prefWidth="100.0" text="Favorites" />
                   <HBox fx:id="dbRating" layoutX="317.0" layoutY="96.0" maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
-                  <HBox fx:id="userRating" layoutX="550.0" layoutY="96.0" maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" AnchorPane.rightAnchor="686.0" />
+                  <HBox fx:id="userRating" layoutX="550.0" layoutY="96.0" maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
                   <Text layoutX="317.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cast" />
                   <Text id="castingActors" fx:id = "castingActors" layoutX="317.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="actors" />
                </children>
