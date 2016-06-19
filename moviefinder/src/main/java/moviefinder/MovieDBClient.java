@@ -33,6 +33,7 @@ import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import info.movito.themoviedbapi.model.core.ResponseStatus;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
+import info.movito.themoviedbapi.model.people.PersonCast;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import info.movito.themoviedbapi.tools.ApiUrl;
 import javafx.scene.image.Image;
@@ -448,6 +449,21 @@ public class MovieDBClient {
 			break;
 		}
 		return 0;
+	}
+	
+	public List<Person> getCasting(Multi query){
+		MediaType mediaType = query.getMediaType();
+		switch (mediaType) {
+		case MOVIE:
+			MovieDb mv = (MovieDb) query;
+			List<PersonCast> cast = mv.getCast();
+			System.out.println(cast);
+			break;
+		case TV_SERIES:
+			TvSeries s = (TvSeries) query;
+			break;
+		}
+		return null;
 	}
 }
 

@@ -515,7 +515,6 @@ public final class MainViewController {
         while(itr.hasNext()){
         	Multi media = (Multi) itr.next();
             Image tempImage = cl.getImage(media);
-
         }
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
         discoverGrid = (GridPane) temp.getContent();
@@ -694,6 +693,7 @@ public final class MainViewController {
 		int maximumRating = 5;
 		popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
+        cl.getCasting(selectedMedia);
         popUpImage.setImage(poster);
 		if (selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
 			ratingDb = new Rating(maximumRating);
