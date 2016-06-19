@@ -170,6 +170,8 @@ public final class MainViewController {
     private HBox userRating;
     private Rating ratingDb;
     private Rating ratingUser;
+    @FXML
+    private Text castingActors;
   
     /**
      * Hide the popup panel.
