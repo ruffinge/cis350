@@ -33,6 +33,7 @@ import info.movito.themoviedbapi.model.core.ResponseStatus;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.people.PersonCrew;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
 
@@ -581,5 +582,19 @@ public final class MovieDBClient {
         default:
             return new ArrayList<PersonCast>();
         }
+    }
+    
+    public List<PersonCrew> getCrew(final Multi query){
+    	 final MediaType mediaType = query.getMediaType();
+         switch (mediaType) {
+         case MOVIE:
+             final MovieDb mv = (MovieDb) query;
+             TmdbMovies movies = tmdbApi.getMovies();
+             Credits credits = movies.getCredits(mv.getId());
+             final List<PersonCrew> crew = credits.getCrew();
+             return crew;
+         default:
+             return new ArrayList<PersonCrew>();
+         }
     }
 }

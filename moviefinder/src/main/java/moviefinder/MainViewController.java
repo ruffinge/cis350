@@ -11,6 +11,7 @@ import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.Multi.MediaType;
 import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.people.PersonCrew;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -184,7 +185,22 @@ public final class MainViewController {
     /** The casting list. */
     @FXML
     private Text castingActors;
-
+    
+    @FXML
+    private Text writer;
+    @FXML
+    private Text director;
+    @FXML
+    private Text soundPerson;
+    @FXML
+    private Text crewDr;
+    @FXML
+    private Text crewWrt;
+    @FXML
+    private Text crewSd;
+    @FXML
+    private Text castingT;
+    
     /**
      * Hide the popup panel.
      */
@@ -728,14 +744,53 @@ public final class MainViewController {
         final int maximumRating = 5;
         popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
-        List<PersonCast> casting = cl.getCasting(selectedMedia);
-        Iterator itr = casting.iterator();
-        String actor = "" ;
-        while(itr.hasNext()){
-        	PersonCast person = (PersonCast) itr.next();
-        	actor += person.getName() + ", ";
+        
+        if(selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES){
+        	crewDr.setVisible(true);
+       	    crewWrt.setVisible(true);
+       	    crewSd.setVisible(true);
+       	    castingT.setVisible(true);
+        	List<PersonCast> casting = cl.getCasting(selectedMedia);
+            List<PersonCrew> crew = cl.getCrew(selectedMedia);
+            Iterator itr = casting.iterator();
+            String actor = "" ;
+            String dr = "";
+            String wrt = "";
+            String sd = "";
+            while(itr.hasNext()){
+            	PersonCast person = (PersonCast) itr.next();
+            	actor += person.getName() + ", ";
+            }
+            Iterator itr2 = crew.iterator();
+            while(itr2.hasNext()){
+            	PersonCrew person = (PersonCrew) itr2.next();
+            	if(person.getDepartment().equals("Directing") ){
+            		dr += person.getName() + ", " ;
+            	}
+            	else if(person.getDepartment().equals("Writing")){
+            		wrt += person.getName() + ", " ;
+            	}
+            	else if(person.getDepartment().equals("Sound")){
+            		sd += person.getName() + ", " ;
+            	}
+            }
+            writer.setText(wrt);
+            director.setText(dr);
+            soundPerson.setText(sd);
+            castingActors.setText(actor);
         }
-        castingActors.setText(actor);
+        else
+        {
+        	 crewDr.setVisible(false);
+        	 crewWrt.setVisible(false);
+        	 crewSd.setVisible(false);
+        	 castingT.setVisible(false);
+        	 writer.setText("");
+             director.setText("");
+             soundPerson.setText("");
+             castingActors.setText("");
+        }
+        
         popUpImage.setImage(poster);
         if (selectedMedia.getMediaType() == MediaType.MOVIE
                 || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
