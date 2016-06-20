@@ -10,6 +10,7 @@ import org.controlsfx.control.Rating;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.Multi.MediaType;
+import info.movito.themoviedbapi.model.people.PersonCast;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -727,7 +728,14 @@ public final class MainViewController {
         final int maximumRating = 5;
         popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
-        cl.getCasting(selectedMedia);
+        List<PersonCast> casting = cl.getCasting(selectedMedia);
+        Iterator itr = casting.iterator();
+        String actor = "" ;
+        while(itr.hasNext()){
+        	PersonCast person = (PersonCast) itr.next();
+        	actor += person.getName() + ", ";
+        }
+        castingActors.setText(actor);
         popUpImage.setImage(poster);
         if (selectedMedia.getMediaType() == MediaType.MOVIE
                 || selectedMedia.getMediaType() == MediaType.TV_SERIES) {

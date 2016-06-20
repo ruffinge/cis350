@@ -577,7 +577,6 @@ public final class MovieDBClient {
             TmdbMovies movies = tmdbApi.getMovies();
             Credits credits = movies.getCredits(mv.getId());
             final List<PersonCast> cast = credits.getCast();
-            System.out.println(cast);
             return cast;
         default:
             return new ArrayList<PersonCast>();
