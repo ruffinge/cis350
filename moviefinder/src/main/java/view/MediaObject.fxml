@@ -6,9 +6,15 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<VBox id="movieBox" fx:id="movieBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#inClick" onMouseEntered="#growingShrinkingEffect" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moviefinder.MediaController">
-   <children>
-      <ImageView id="image" fx:id="image" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
-      <Text id="title" fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="TITLE" textAlignment="CENTER" wrappingWidth="245.205078125" />
-   </children>
+<VBox id="movieBox" fx:id="movieBox" alignment="CENTER" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	onMouseClicked="#inClick" onMouseEntered="#growingShrinkingEffect"
+	prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="moviefinder.MediaController">
+	<children>
+		<ImageView id="image" fx:id="image" fitHeight="250.0"
+			fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+		<Text id="title" fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0"
+			text="TITLE" textAlignment="CENTER" wrappingWidth="245.205078125" />
+	</children>
 </VBox>
