@@ -18,6 +18,7 @@ import info.movito.themoviedbapi.TmdbTV;
 import info.movito.themoviedbapi.TmdbTV.TvMethod;
 import info.movito.themoviedbapi.TvResultsPage;
 import info.movito.themoviedbapi.model.Artwork;
+import info.movito.themoviedbapi.model.Credits;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.Multi;
@@ -32,6 +33,7 @@ import info.movito.themoviedbapi.model.core.ResponseStatus;
 import info.movito.themoviedbapi.model.core.SessionToken;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.people.PersonCrew;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.scene.image.Image;
 
@@ -86,8 +88,8 @@ public final class MovieDBClient {
      */
     public List<MovieDb> searchMovies(final String str) {
         final TmdbSearch search = tmdbApi.getSearch();
-        final MovieResultsPage searchIt =
-                search.searchMovie(str, null, null, true, 0);
+        final MovieResultsPage searchIt = search.searchMovie(str, null, null,
+                true, 0);
         return searchIt.getResults();
     }
 
@@ -211,8 +213,8 @@ public final class MovieDBClient {
      */
     public Image getSeriesImage(final TvSeries query) {
         final TmdbTV series = tmdbApi.getTvSeries();
-        final TvSeries result =
-                series.getSeries(query.getId(), null, TvMethod.images);
+        final TvSeries result = series.getSeries(query.getId(), null,
+                TvMethod.images);
         final String imageFilePath = result.getPosterPath();
         Image image = null;
         if (imageFilePath != null) {
@@ -254,10 +256,10 @@ public final class MovieDBClient {
     public List<MovieDb> discoverMovies() {
         final TmdbDiscover discover = tmdbApi.getDiscover();
         // TODO: Move the remainder of these to configurable parameters.
-        final MovieResultsPage page =
-                discover.getDiscover(0, null, "popularity.desc", false, 2016,
-                        2016, 0, 0, "28|21|16|99|53|27|36", "2016-01-01",
-                        "2018-01-01", null, null, null);
+        final MovieResultsPage page = discover.getDiscover(0, null,
+                "popularity.desc", false, 2016, 2016, 0, 0,
+                "28|21|16|99|53|27|36", "2016-01-01", "2018-01-01", null, null,
+                null);
         final List<MovieDb> results = page.getResults();
 
         return results;
@@ -273,8 +275,8 @@ public final class MovieDBClient {
     public String getVideo(final Multi querry) {
         if (querry.getMediaType() == MediaType.MOVIE) {
             final TmdbMovies movies = tmdbApi.getMovies();
-            final List<Video> videoList =
-                    movies.getVideos(((MovieDb) querry).getId(), null);
+            final List<Video> videoList = movies.getVideos(((MovieDb) querry)
+                    .getId(), null);
             // you are only getting the first thriller
             final Video thriller = videoList.get(0);
             if (thriller.getSite().equals("YouTube")) {
@@ -331,8 +333,8 @@ public final class MovieDBClient {
             final String password) {
 
         final TmdbAuthentication tmdbAuth = tmdbApi.getAuthentication();
-        final TokenAuthorisation tokenAuth = tmdbAuth.getLoginToken(
-                tmdbAuth.getAuthorisationToken(), user, password);
+        final TokenAuthorisation tokenAuth = tmdbAuth.getLoginToken(tmdbAuth
+                .getAuthorisationToken(), user, password);
         final TokenSession tokenSession = tmdbAuth.getSessionToken(tokenAuth);
         final String sessionId = tokenSession.getSessionId();
         sessionToken = new SessionToken(sessionId);
@@ -418,8 +420,8 @@ public final class MovieDBClient {
 
         if (account != null) {
             if (favorites.contains(media)) {
-                final ResponseStatus status = currentAccount
-                        .removeFavorite(getSessionToken(), id, mediaId, type);
+                final ResponseStatus status = currentAccount.removeFavorite(
+                        getSessionToken(), id, mediaId, type);
                 final int okResponse = 13;
                 if (status.getStatusCode() == okResponse) {
                     favorites.remove(media);
@@ -427,8 +429,8 @@ public final class MovieDBClient {
                 }
 
             } else {
-                final ResponseStatus status = currentAccount
-                        .addFavorite(getSessionToken(), id, mediaId, type);
+                final ResponseStatus status = currentAccount.addFavorite(
+                        getSessionToken(), id, mediaId, type);
                 if (status.getStatusCode() == 1) {
                     return true;
                 }
@@ -529,8 +531,8 @@ public final class MovieDBClient {
         switch (mediaType) {
         case MOVIE:
             final MovieDb mv = (MovieDb) query;
-            final MovieResultsPage ratedMovies =
-                    currentAccount.getRatedMovies(getSessionToken(), id, 1);
+            final MovieResultsPage ratedMovies = currentAccount.getRatedMovies(
+                    getSessionToken(), id, 1);
             final List<MovieDb> m = ratedMovies.getResults();
             MovieDb r = null;
             final Iterator<MovieDb> itr = m.iterator();
@@ -543,8 +545,8 @@ public final class MovieDBClient {
             break;
         case TV_SERIES:
             final TvSeries sr = (TvSeries) query;
-            final TvResultsPage ratedSeries =
-                    currentAccount.getRatedTvSeries(getSessionToken(), id, 1);
+            final TvResultsPage ratedSeries = currentAccount.getRatedTvSeries(
+                    getSessionToken(), id, 1);
             final List<TvSeries> tv = ratedSeries.getResults();
             TvSeries s = null;
             final Iterator<TvSeries> itr1 = tv.iterator();
@@ -573,10 +575,33 @@ public final class MovieDBClient {
         switch (mediaType) {
         case MOVIE:
             final MovieDb mv = (MovieDb) query;
-            final List<PersonCast> cast = mv.getCast();
+            TmdbMovies movies = tmdbApi.getMovies();
+            Credits credits = movies.getCredits(mv.getId());
+            final List<PersonCast> cast = credits.getCast();
             return cast;
         default:
             return new ArrayList<PersonCast>();
+        }
+    }
+
+    /**
+     * Get the crew list.
+     *
+     * @param query
+     *            The item to get the crew for.
+     * @return The list of the crew.
+     */
+    public List<PersonCrew> getCrew(final Multi query) {
+        final MediaType mediaType = query.getMediaType();
+        switch (mediaType) {
+        case MOVIE:
+            final MovieDb mv = (MovieDb) query;
+            TmdbMovies movies = tmdbApi.getMovies();
+            Credits credits = movies.getCredits(mv.getId());
+            final List<PersonCrew> crew = credits.getCrew();
+            return crew;
+        default:
+            return new ArrayList<PersonCrew>();
         }
     }
 }

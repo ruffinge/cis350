@@ -10,6 +10,8 @@ import org.controlsfx.control.Rating;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.Multi;
 import info.movito.themoviedbapi.model.Multi.MediaType;
+import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.people.PersonCrew;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -184,6 +186,21 @@ public final class MainViewController {
     @FXML
     private Text castingActors;
 
+    @FXML
+    private Text writer;
+    @FXML
+    private Text director;
+    @FXML
+    private Text soundPerson;
+    @FXML
+    private Text crewDr;
+    @FXML
+    private Text crewWrt;
+    @FXML
+    private Text crewSd;
+    @FXML
+    private Text castingT;
+
     /**
      * Hide the popup panel.
      */
@@ -239,14 +256,14 @@ public final class MainViewController {
             viewListPane.setVisible(true);
             ObservableList<Multi> results;
             if (seriesCheckBox.isSelected()) {
-                results = FXCollections
-                        .observableArrayList(cl.searchShows(query));
+                results = FXCollections.observableArrayList(cl.searchShows(
+                        query));
                 if (results.size() > 0) {
                     resultsListView.setItems(results);
                 }
             } else if (moviesCheckBox.isSelected()) {
-                results = FXCollections
-                        .observableArrayList(cl.searchMovies(query));
+                results = FXCollections.observableArrayList(cl.searchMovies(
+                        query));
                 if (results.size() > 0) {
                     resultsListView.setItems(results);
                 }
@@ -265,8 +282,8 @@ public final class MainViewController {
             selectedMedia = null;
         }
 
-        selectedMedia =
-                (Multi) resultsListView.getSelectionModel().getSelectedItem();
+        selectedMedia = (Multi) resultsListView.getSelectionModel()
+                .getSelectedItem();
 
         Image image = null;
         String title = null;
@@ -374,13 +391,13 @@ public final class MainViewController {
 
         final KeyValue kvUp3 = new KeyValue(growingPane.translateYProperty(),
                 -growingPane.getHeight());
-        final KeyValue kvUp4 =
-                new KeyValue(growingPane.prefHeightProperty(), 0);
+        final KeyValue kvUp4 = new KeyValue(growingPane.prefHeightProperty(),
+                0);
 
-        final KeyValue kvUp5 =
-                new KeyValue(growingTabs.prefHeightProperty(), 0);
-        final KeyValue kvUp6 =
-                new KeyValue(growingTabs.translateYProperty(), 0);
+        final KeyValue kvUp5 = new KeyValue(growingTabs.prefHeightProperty(),
+                0);
+        final KeyValue kvUp6 = new KeyValue(growingTabs.translateYProperty(),
+                0);
 
         final KeyFrame kfUp = new KeyFrame(Duration.millis(1000), kvUp1, kvUp2,
                 kvUp3, kvUp4, kvUp5, kvUp6);
@@ -400,19 +417,19 @@ public final class MainViewController {
                 growingPane.getHeight());
         final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
 
-        final KeyValue kvDwn3 =
-                new KeyValue(growingPane.translateYProperty(), 0);
+        final KeyValue kvDwn3 = new KeyValue(growingPane.translateYProperty(),
+                0);
         final KeyValue kvDwn4 = new KeyValue(growingPane.prefHeightProperty(),
                 growingPane.getHeight());
 
-        final KeyValue kvDwn7 =
-                new KeyValue(growingTabs.prefHeightProperty(), 0);
-        final KeyValue kvDwn8 =
-                new KeyValue(growingTabs.translateYProperty(), heightInitial);
+        final KeyValue kvDwn7 = new KeyValue(growingTabs.prefHeightProperty(),
+                0);
+        final KeyValue kvDwn8 = new KeyValue(growingTabs.translateYProperty(),
+                heightInitial);
 
-        final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000),
-                imageEffect(growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3,
-                kvDwn4, kvDwn7, kvDwn8);
+        final KeyFrame kfDwn = new KeyFrame(Duration.millis(1000), imageEffect(
+                growingPane.getHeight()), kvDwn1, kvDwn2, kvDwn3, kvDwn4,
+                kvDwn7, kvDwn8);
         timelineDown.getKeyFrames().add(kfDwn);
         timelineDown.play();
     }
@@ -422,15 +439,15 @@ public final class MainViewController {
      */
     public void right() {
         final Timeline timelineDown = new Timeline();
-        final KeyValue kvright1 =
-                new KeyValue(clipRect.widthProperty(), widthInitial);
-        final KeyValue kvright2 =
-                new KeyValue(clipRect.translateXProperty(), 0);
+        final KeyValue kvright1 = new KeyValue(clipRect.widthProperty(),
+                widthInitial);
+        final KeyValue kvright2 = new KeyValue(clipRect.translateXProperty(),
+                0);
 
-        final KeyValue kvright3 =
-                new KeyValue(rightPane.translateXProperty(), 0);
-        final KeyValue kvright4 =
-                new KeyValue(rightPane.prefWidthProperty(), widthInitial);
+        final KeyValue kvright3 = new KeyValue(rightPane.translateXProperty(),
+                0);
+        final KeyValue kvright4 = new KeyValue(rightPane.prefWidthProperty(),
+                widthInitial);
         final KeyValue kvright7 = new KeyValue(sideBar.prefWidthProperty(), 0);
         final KeyValue kvright8 = new KeyValue(sideBar.translateXProperty(), 0);
 
@@ -446,17 +463,17 @@ public final class MainViewController {
     public void left() {
         final Timeline timelineDown = new Timeline();
 
-        final KeyValue kvleft1 =
-                new KeyValue(clipRect.widthProperty(), widthInitial);
+        final KeyValue kvleft1 = new KeyValue(clipRect.widthProperty(),
+                widthInitial);
         final KeyValue kvleft2 = new KeyValue(clipRect.translateXProperty(), 0);
 
         final KeyValue kvleft5 = new KeyValue(sideBar.prefWidthProperty(), 0);
-        final KeyValue kvleft6 =
-                new KeyValue(sideBar.translateXProperty(), -widthInitial);
+        final KeyValue kvleft6 = new KeyValue(sideBar.translateXProperty(),
+                -widthInitial);
 
         final KeyValue kvleft7 = new KeyValue(rightPane.prefWidthProperty(), 0);
-        final KeyValue kvleft8 =
-                new KeyValue(rightPane.translateXProperty(), -widthInitial);
+        final KeyValue kvleft8 = new KeyValue(rightPane.translateXProperty(),
+                -widthInitial);
 
         final KeyFrame kfDwn = new KeyFrame(Duration.millis(500), kvleft1,
                 kvleft2, kvleft5, kvleft6, kvleft7, kvleft8);
@@ -489,11 +506,11 @@ public final class MainViewController {
         final Timeline timelineBounce = new Timeline();
         timelineBounce.setCycleCount(cycleCount);
         timelineBounce.setAutoReverse(true);
-        final KeyValue kv1 =
-                new KeyValue(clipRect.heightProperty(), (height - 15));
+        final KeyValue kv1 = new KeyValue(clipRect.heightProperty(), (height
+                - 15));
         final KeyValue kv2 = new KeyValue(clipRect.translateYProperty(), 15);
-        final KeyValue kv3 =
-                new KeyValue(growingPane.translateYProperty(), -15);
+        final KeyValue kv3 = new KeyValue(growingPane.translateYProperty(),
+                -15);
 
         final KeyFrame kf1 = new KeyFrame(Duration.millis(100), kv1, kv2, kv3);
         timelineBounce.getKeyFrames().add(kf1);
@@ -533,8 +550,8 @@ public final class MainViewController {
                 final Image tempImage = cl.getImage(containt);
                 discoverImageList.add(tempImage);
                 cache.put(tempImage, containt);
-                final MediaObject ob =
-                        new MediaObject(tempImage, containt.getTitle(), this);
+                final MediaObject ob = new MediaObject(tempImage, containt
+                        .getTitle(), this);
                 final VBox box = ob.getVBox();
                 discoverGrid.add(box, j, i);
                 n++;
@@ -727,10 +744,53 @@ public final class MainViewController {
         final int maximumRating = 5;
         popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
-        cl.getCasting(selectedMedia);
+
+        if (selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia
+                .getMediaType() == MediaType.TV_SERIES) {
+            crewDr.setVisible(true);
+            crewWrt.setVisible(true);
+            crewSd.setVisible(true);
+            castingT.setVisible(true);
+            List<PersonCast> casting = cl.getCasting(selectedMedia);
+            List<PersonCrew> crew = cl.getCrew(selectedMedia);
+            Iterator itr = casting.iterator();
+            String actor = "";
+            String dr = "";
+            String wrt = "";
+            String sd = "";
+            while (itr.hasNext()) {
+                PersonCast person = (PersonCast) itr.next();
+                actor += person.getName() + ", ";
+            }
+            Iterator itr2 = crew.iterator();
+            while (itr2.hasNext()) {
+                PersonCrew person = (PersonCrew) itr2.next();
+                if (person.getDepartment().equals("Directing")) {
+                    dr += person.getName() + ", ";
+                } else if (person.getDepartment().equals("Writing")) {
+                    wrt += person.getName() + ", ";
+                } else if (person.getDepartment().equals("Sound")) {
+                    sd += person.getName() + ", ";
+                }
+            }
+            writer.setText(wrt);
+            director.setText(dr);
+            soundPerson.setText(sd);
+            castingActors.setText(actor);
+        } else {
+            crewDr.setVisible(false);
+            crewWrt.setVisible(false);
+            crewSd.setVisible(false);
+            castingT.setVisible(false);
+            writer.setText("");
+            director.setText("");
+            soundPerson.setText("");
+            castingActors.setText("");
+        }
+
         popUpImage.setImage(poster);
-        if (selectedMedia.getMediaType() == MediaType.MOVIE
-                || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
+        if (selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia
+                .getMediaType() == MediaType.TV_SERIES) {
             ratingDb = new Rating(maximumRating);
             ratingDb.setPartialRating(true);
             ratingDb.setUpdateOnHover(false);

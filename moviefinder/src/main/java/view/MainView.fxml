@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
@@ -30,59 +31,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="625.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="moviefinder.MainViewController">
+<BorderPane id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="625.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moviefinder.MainViewController">
 	<center>
 		<StackPane>
 			<children>
-				<AnchorPane id="appPane" fx:id="appPane"
-					BorderPane.alignment="CENTER_LEFT">
+				<AnchorPane id="appPane" fx:id="appPane" BorderPane.alignment="CENTER_LEFT">
 					<children>
-						<GridPane id="mainGrid" minWidth="1200.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+						<GridPane id="mainGrid" minWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
 							<columnConstraints>
-								<ColumnConstraints hgrow="NEVER" maxWidth="250.0"
-									minWidth="250.0" prefWidth="250.0" />
+								<ColumnConstraints hgrow="NEVER" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
 								<ColumnConstraints hgrow="ALWAYS" minWidth="600.0" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints minHeight="10.0" prefHeight="30.0"
-									vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0" prefHeight="30.0"
-									vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0" prefHeight="30.0"
-									vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<AnchorPane id="sideBar" fx:id="sideBar" maxWidth="250.0"
-									prefWidth="250.0" GridPane.hgrow="NEVER" GridPane.rowSpan="2147483647">
+								<AnchorPane id="sideBar" fx:id="sideBar" maxWidth="250.0" prefWidth="250.0" GridPane.hgrow="NEVER" GridPane.rowSpan="2147483647">
 									<children>
 										<Accordion id="accordion" AnchorPane.topAnchor="150.0">
 											<panes>
-												<TitledPane id="filter" animated="false"
-													styleClass="filter" text="Filter" textFill="#d0d0d059">
+												<TitledPane id="filter" animated="false" styleClass="filter" text="Filter" textFill="#d0d0d059">
 													<content>
-														<AnchorPane id="filterBackground" minHeight="0.0"
-															minWidth="0.0" prefHeight="117.0" prefWidth="251.0">
+														<AnchorPane id="filterBackground" minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="251.0">
 															<children>
-																<VBox id="filterBox" layoutX="2.4000000000000004"
-																	layoutY="25.4" prefHeight="152.0" prefWidth="280.0"
-																	spacing="8.0" AnchorPane.leftAnchor="0.0"
-																	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+																<VBox id="filterBox" layoutX="2.4000000000000004" layoutY="25.4" prefHeight="152.0" prefWidth="280.0" spacing="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																	<children>
-																		<CheckBox fx:id="moviesCheckBox"
-																			mnemonicParsing="false" text="movies" textAlignment="JUSTIFY"
-																			VBox.vgrow="ALWAYS">
+																		<CheckBox fx:id="moviesCheckBox" mnemonicParsing="false" text="movies" textAlignment="JUSTIFY" VBox.vgrow="ALWAYS">
 																			<VBox.margin>
 																				<Insets />
 																			</VBox.margin>
 																		</CheckBox>
-																		<CheckBox fx:id="seriesCheckBox"
-																			mnemonicParsing="false" text="series" />
-																		<CheckBox fx:id="peopleCheckBox"
-																			mnemonicParsing="false" text="people" />
+																		<CheckBox fx:id="seriesCheckBox" mnemonicParsing="false" text="series" />
+																		<CheckBox fx:id="peopleCheckBox" mnemonicParsing="false" text="people" />
 																	</children>
 																</VBox>
 															</children>
@@ -94,53 +76,36 @@
 												</TitledPane>
 											</panes>
 										</Accordion>
-										<Button id="mainSignInBtn" fx:id="mainSignInBtn"
-											layoutX="139.0" layoutY="628.0" mnemonicParsing="false"
-											onAction="#goToSignInPane" text="Sign In"
-											AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0"
-											AnchorPane.rightAnchor="80.0" />
-										<Button id="settingBtn" maxHeight="44.0" maxWidth="44.0"
-											minHeight="44.0" minWidth="44.0" mnemonicParsing="false"
-											onAction="#xTranslate" prefHeight="44.0" prefWidth="44.0"
-											styleClass="settingBtn" text="Button" AnchorPane.rightAnchor="0.0" />
+										<Button id="mainSignInBtn" fx:id="mainSignInBtn" layoutX="139.0" layoutY="628.0" mnemonicParsing="false" onAction="#goToSignInPane" text="Sign In" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" />
+										<Button id="settingBtn" maxHeight="44.0" maxWidth="44.0" minHeight="44.0" minWidth="44.0" mnemonicParsing="false" onAction="#xTranslate" prefHeight="44.0" prefWidth="44.0" styleClass="settingBtn" text="Button" AnchorPane.rightAnchor="0.0" />
 									</children>
 								</AnchorPane>
-								<BorderPane id="rightPane" fx:id="rightPane"
-									prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-									GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647"
-									GridPane.valignment="TOP">
+								<BorderPane id="rightPane" fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
 									<top>
-										<StackPane id="test" fx:id="test" alignment="TOP_CENTER"
-											maxHeight="300.0">
+										<StackPane id="test" fx:id="test" alignment="TOP_CENTER" maxHeight="300.0">
 											<children>
 												<AnchorPane id="growingTabs" fx:id="growingTabs">
 													<children>
-														<StackPane id="centerStack"
-															AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+														<StackPane id="centerStack" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
 															<children>
-																<TabPane id="tabPanel" fx:id="tabPanel"
-																	minHeight="800.0" minWidth="948.0" tabClosingPolicy="UNAVAILABLE">
+																<TabPane id="tabPanel" fx:id="tabPanel" minHeight="800.0" minWidth="948.0" tabClosingPolicy="UNAVAILABLE">
 																	<tabs>
-																		<Tab fx:id="nowPlayingTab" text="Now playing"
-																			styleClass="tab">
+																		<Tab fx:id="nowPlayingTab" styleClass="tab" text="Now playing">
 																			<content>
 																				<fx:include source="NowPlayingView.fxml" />
 																			</content>
 																		</Tab>
-																		<Tab fx:id="upComingTab" text="Up Coming"
-																			styleClass="tab">
+																		<Tab fx:id="upComingTab" styleClass="tab" text="Up Coming">
 																			<content>
 																				<fx:include source="UpComingView.fxml" />
 																			</content>
 																		</Tab>
-																		<Tab id="discoverPlane" fx:id="discoverTab" text="Discover"
-																			styleClass="tab">
+																		<Tab id="discoverPlane" fx:id="discoverTab" styleClass="tab" text="Discover">
 																			<content>
 																				<fx:include source="DiscoverView.fxml" />
 																			</content>
 																		</Tab>
-																		<Tab id="favoritesPlane" fx:id="favoritesTab"
-																			text="Favorites" styleClass="tab">
+																		<Tab id="favoritesPlane" fx:id="favoritesTab" styleClass="tab" text="Favorites">
 																			<content>
 																				<fx:include source="FavoritesView.fxml" />
 																			</content>
@@ -158,35 +123,15 @@
 										</StackPane>
 									</top>
 								</BorderPane>
-								<AnchorPane id="viewListPane" fx:id="viewListPane"
-									GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
+								<AnchorPane id="viewListPane" fx:id="viewListPane" GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
 									<children>
-										<ListView id="listView" fx:id="resultsListView"
-											editable="true" layoutX="123.0" maxHeight="267.0" maxWidth="300.0"
-											onMouseClicked="#getSelection" prefHeight="267.0" prefWidth="248.0"
-											AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="0.0" />
-										<AnchorPane id="growingPane" fx:id="growingPane"
-											maxHeight="300" prefHeight="300.0" prefWidth="904.0"
-											AnchorPane.leftAnchor="250.0">
+										<ListView id="listView" fx:id="resultsListView" editable="true" layoutX="123.0" maxHeight="267.0" maxWidth="300.0" onMouseClicked="#getSelection" prefHeight="267.0" prefWidth="248.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="0.0" />
+										<AnchorPane id="growingPane" fx:id="growingPane" maxHeight="300" prefHeight="300.0" prefWidth="904.0" AnchorPane.leftAnchor="250.0">
 											<children>
-												<Text id="id=&quot;theTitle&quot; " fx:id="theTitle"
-													layoutX="509.0" layoutY="46.0" strokeType="OUTSIDE"
-													strokeWidth="0.0" styleClass="titles" text="Text"
-													wrappingWidth="197.205078125" AnchorPane.leftAnchor="509.0"
-													AnchorPane.topAnchor="26.0" />
-												<ImageView id="imageView" fx:id="imageView"
-													fitHeight="300.0" fitWidth="250.0" layoutX="187.0"
-													onMouseClicked="#goToPopUpPane" pickOnBounds="true"
-													preserveRatio="true" AnchorPane.bottomAnchor="0.0"
-													AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="0.0" />
-												<Text id="id=&quot;theDescription&quot; " fx:id="theDescription"
-													layoutX="509.0" layoutY="73.0" strokeType="OUTSIDE"
-													strokeWidth="0.0" styleClass="descriptions" text="Text"
-													wrappingWidth="198.205078125" AnchorPane.leftAnchor="509.0"
-													AnchorPane.topAnchor="53.0" />
-												<Button id="addToFavorites" fx:id="addFavorites"
-													layoutX="724.0" layoutY="77.0" mnemonicParsing="false"
-													onAction="#addToFavorites" text="Add to favorites" />
+												<Text id="id=&quot;theTitle&quot; " fx:id="theTitle" layoutX="509.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Text" wrappingWidth="197.205078125" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="26.0" />
+												<ImageView id="imageView" fx:id="imageView" fitHeight="300.0" fitWidth="250.0" layoutX="187.0" onMouseClicked="#goToPopUpPane" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="0.0" />
+												<Text id="id=&quot;theDescription&quot; " fx:id="theDescription" layoutX="509.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="Text" wrappingWidth="198.205078125" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="53.0" />
+												<Button id="addToFavorites" fx:id="addFavorites" layoutX="724.0" layoutY="77.0" mnemonicParsing="false" onAction="#addToFavorites" text="Add to favorites" />
 											</children>
 										</AnchorPane>
 									</children>
@@ -198,110 +143,74 @@
 				<AnchorPane id="signInPane" fx:id="signInPane">
 					<children>
 
-						<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity"
-							maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-							prefHeight="572.0" prefWidth="1182.0" styleClass="root" vgap="10.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1182.0" styleClass="root" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0"
-									minWidth="10.0" prefWidth="67.0" />
-								<ColumnConstraints hgrow="SOMETIMES" maxWidth="388.0"
-									minWidth="10.0" prefWidth="227.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="67.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="388.0" minWidth="10.0" prefWidth="227.0" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints maxHeight="115.0" minHeight="10.0"
-									prefHeight="98.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="71.0" minHeight="10.0"
-									prefHeight="54.0" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0" prefHeight="30.0"
-									vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="31.0" minHeight="0.0"
-									prefHeight="0.0" vgrow="SOMETIMES" />
-								<RowConstraints maxHeight="97.0" minHeight="10.0"
-									prefHeight="97.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+								<RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Label text="User Name:" GridPane.rowIndex="1" />
-								<Label text="Password" GridPane.rowIndex="2" />
-								<PasswordField id="passWordField" fx:id="passWordField"
-									GridPane.columnIndex="1" GridPane.rowIndex="2" />
-								<TextField id="userNameField" fx:id="userNameField"
-									GridPane.columnIndex="1" GridPane.rowIndex="1" />
-								<HBox alignment="TOP_RIGHT" spacing="10.0"
-									GridPane.columnIndex="1" GridPane.rowIndex="4">
+								<Label id="userNameFied" text="User Name:" GridPane.rowIndex="1" />
+								<Label id="passwordField" text="Password" GridPane.rowIndex="2" />
+								<PasswordField id="passWordField" fx:id="passWordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+								<TextField id="userNameField" fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+								<HBox alignment="TOP_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
 									<children>
-										<Button id="loginBtn" fx:id="loginBtn" onAction="#signIn"
-											prefHeight="24.0" prefWidth="113.0" text="Sign In" />
+										<Button id="loginBtn" fx:id="loginBtn" onAction="#signIn" prefHeight="24.0" prefWidth="113.0" text="Sign In" />
 									</children>
 								</HBox>
-								<Text id="bigTitle-text" text="TheMovieApp"
-									GridPane.columnSpan="2">
+								<Text id="bigTitle-text" text="TheMovieApp" GridPane.columnSpan="2">
 								</Text>
-								<Text id="app-Version" text="Version 1.0"
-									GridPane.rowIndex="4" />
-								<Text fx:id="logInMsg" fill="#eb0d0d" GridPane.columnIndex="1"
-									GridPane.rowIndex="3" />
+								<Text id="app-Version" text="Version 1.0" GridPane.rowIndex="4" />
+								<Text fx:id="logInMsg" fill="#eb0d0d" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 							</children>
 							<padding>
 								<Insets bottom="12.0" left="25.0" right="25.0" top="25.0" />
 							</padding>
 							<stylesheets>
-
+								<URL value="@loginViewStyle.css" />
 							</stylesheets>
 
 						</GridPane>
 					</children>
 				</AnchorPane>
-				<AnchorPane id="popUpPanel" fx:id="popUpPanel"
-					prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane">
+				<AnchorPane id="popUpPanel" fx:id="popUpPanel" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane">
 					<children>
-						<ImageView id="popUpImage" fx:id="popUpImage" fitHeight="350.0"
-							fitWidth="250.0" layoutX="55.0" layoutY="50.0" pickOnBounds="true"
-							preserveRatio="true" AnchorPane.leftAnchor="55.0"
-							AnchorPane.topAnchor="50.0" />
-						<Text id="popUpTitle" fx:id="popUpTitle" layoutX="318.0"
-							layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles"
-							text="Title" AnchorPane.leftAnchor="318.0" AnchorPane.topAnchor="55.0">
+						<ImageView id="popUpImage" fx:id="popUpImage" fitHeight="350.0" fitWidth="250.0" layoutX="55.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="50.0" />
+						<Text id="popUpTitle" fx:id="popUpTitle" layoutX="318.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Title" AnchorPane.leftAnchor="318.0" AnchorPane.topAnchor="55.0">
 							<font>
 								<Font name="System Bold" size="31.0" />
 							</font>
 						</Text>
-						<Text id="popUpDescription" fx:id="popUpDescription" layoutX="311.0"
-							layoutY="238.423828125" strokeType="OUTSIDE" strokeWidth="0.0"
-							styleClass="descriptions" text="Description" textAlignment="JUSTIFY"
-							wrappingWidth="639.0" AnchorPane.leftAnchor="311.0"
-							AnchorPane.topAnchor="219.0" />
-						<Button id="popUpButton" layoutX="14.0" layoutY="14.0"
-							maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-							minWidth="-Infinity" mnemonicParsing="false" onAction="#hidePopUpPanel"
-							prefHeight="50.0" prefWidth="50.0" styleClass="popUpButton" text="Button"
-							AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
-						<Button id="popUpFavBtn" fx:id="popUpFavBtn" layoutX="631.0"
-							layoutY="137.0" mnemonicParsing="false" onAction="#addToFavorites"
-							prefHeight="30.0" prefWidth="100.0" text="Favorites" />
-						<HBox fx:id="dbRating" layoutX="317.0" layoutY="96.0"
-							maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
-						<HBox fx:id="userRating" layoutX="550.0" layoutY="96.0"
-							maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
-						<Text layoutX="317.0" layoutY="419.0" strokeType="OUTSIDE"
-							strokeWidth="0.0" text="Cast" />
-						<Text id="castingActors" fx:id="castingActors" layoutX="317.0"
-							layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="actors" />
+						<Text id="popUpDescription" fx:id="popUpDescription" fill="#f0f0f0" layoutX="312.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="Description" wrappingWidth="639.0" AnchorPane.leftAnchor="312.0" AnchorPane.topAnchor="187.05078125" />
+						<Button id="popUpButton" layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#hidePopUpPanel" prefHeight="50.0" prefWidth="50.0" styleClass="popUpButton" text="Button" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
+						<Button id="popUpFavBtn" fx:id="popUpFavBtn" layoutX="631.0" layoutY="137.0" mnemonicParsing="false" onAction="#addToFavorites" prefHeight="30.0" prefWidth="100.0" text="Favorites" />
+						<HBox fx:id="dbRating" layoutX="317.0" layoutY="96.0" maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
+						<HBox fx:id="userRating" layoutX="550.0" layoutY="96.0" maxHeight="20.0" prefHeight="15.0" prefWidth="200.0" />
+						<Text fx:id="castingT" layoutX="314.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="decrText" text="Cast" AnchorPane.leftAnchor="312.0" />
+						<Text id="castingActors" fx:id="castingActors" layoutX="318.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="actors" textAlignment="JUSTIFY" wrappingWidth="600.0" AnchorPane.leftAnchor="312.0" />
+                  <Text id="crewDirector" fx:id="crewDr" layoutX="307.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="decrText" text="Director:" AnchorPane.leftAnchor="312.0" />
+                  <Text id="director" fx:id="director" layoutX="384.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="director" wrappingWidth="576.0" AnchorPane.leftAnchor="380.0" />
+                  <Text id="crewWriter" fx:id="crewWrt" layoutX="308.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="decrText" text="Writer:" AnchorPane.leftAnchor="312.0" />
+                  <Text id="writer" fx:id="writer" layoutX="389.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="writer" wrappingWidth="565.263671875" AnchorPane.leftAnchor="380.0" />
+                  <Text id="soundCrew" fx:id="crewSd" layoutX="305.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="decrText" text="Sound: " AnchorPane.leftAnchor="312.0" />
+                  <Text id="soundPerson" fx:id="soundPerson" layoutX="383.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="descriptions" text="sound" textAlignment="JUSTIFY" wrappingWidth="578.771484375" AnchorPane.leftAnchor="380.0" />
 					</children>
 				</AnchorPane>
 			</children>
 		</StackPane>
 	</center>
 	<top>
-		<ToolBar maxHeight="-Infinity" prefHeight="28.0" prefWidth="200.0"
-			styleClass="toolbar" BorderPane.alignment="CENTER">
+		<ToolBar maxHeight="-Infinity" prefHeight="28.0" prefWidth="200.0" styleClass="toolbar" BorderPane.alignment="CENTER">
 			<items>
-				<Separator halignment="RIGHT" prefWidth="110.0"
-					styleClass="toolbar" />
-				<TextField id="searchField" fx:id="searchField" maxHeight="-Infinity"
-					onKeyReleased="#search" onKeyTyped="#search" prefHeight="28.0"
-					prefWidth="248.0" />
+				<Separator halignment="RIGHT" prefWidth="110.0" styleClass="toolbar" />
+				<TextField id="searchField" fx:id="searchField" maxHeight="-Infinity" onKeyReleased="#search" onKeyTyped="#search" prefHeight="28.0" prefWidth="248.0" />
 			</items>
 		</ToolBar>
 	</top>
