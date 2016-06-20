@@ -6,12 +6,12 @@ root {
 }
 
 #searchField {
-    -fx-background-radius: 25;
-    -fx-background-insets: 0,1,2,3,0;
+    -fx-background-radius: 25.0;
+    -fx-background-insets: 0.0,1.0,2.0,3.0,0.0;
     -fx-text-fill: #654b00;
     -fx-font-weight: bold;
-    -fx-font-size: 12px;
-    -fx-padding: 5 10 5 10;
+    -fx-font-size: 12.0px;
+    -fx-padding: 5.0 10.0 5.0 10.0;
 }
 
 #scrollPane{
@@ -27,9 +27,9 @@ root {
 
 .tab-pane *.tab-header-background {
     -fx-background-color: #202020 ;
-    -fx-effect: innershadow(two-pass-box , transparent , 0, 0.0 , 0 , 0);
+    -fx-effect: innershadow(two-pass-box , transparent , 0.0, 0.0 , 0.0 , 0.0);
     -fx-border-color: transparent;
-    -fx-tab-min-width:200px;
+    -fx-tab-min-width:200.0px;
     
 }
 
@@ -40,8 +40,8 @@ root {
 
 .tab-pane
 {
-    -fx-tab-min-width:200px;
-    -fx-tab-min-height:30px;
+    -fx-tab-min-width:200.0px;
+    -fx-tab-min-height:30.0px;
 }
 
 
@@ -119,32 +119,32 @@ root {
 #tabPanel{    
 	-fx-background-color:transparent ;
 }
-#discoverPlane{
+.tab {
 	-fx-background-color:transparent ;
-	-fx-tab-min-width:200px;
-	-fx-background-insets: 0 1 0 1,0,0;
+	-fx-tab-min-width:200.0px;
+	-fx-background-insets: 0.0 1.0 0.0 1.0,0.0,0.0;
 	
 }
 
-#discoverPlane .tab-label { 
+.tab .tab-label { 
     -fx-text-fill: #828282;
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
     -fx-font-weight: bold;
 }
 
 
-#discoverPlane:selected .tab-label { 
+.tab:selected .tab-label { 
     -fx-text-fill:green;
 }
 
 .descriptions{
 	-fx-fill: #B8B8B8 ;
-	-fx-font-size: 12px;
+	-fx-font-size: 12.0px;
 }
 
 .titles{
 	-fx-fill: #B8B8B8 ;
-	-fx-font-size: 18px;
+	-fx-font-size: 18.0px;
 }
 
 #filterBackground{
@@ -167,7 +167,7 @@ root {
 }
 .tab-pane
 {
-    -fx-tab-min-width:200px;
+    -fx-tab-min-width:200.0px;
 }
 
 

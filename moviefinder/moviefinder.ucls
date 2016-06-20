@@ -3,7 +3,7 @@
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="moviefinder.MovieFinder" project="moviefinder" 
     file="/moviefinder/src/main/java/moviefinder/MovieFinder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="110" width="103" x="41" y="37"/>    
+    <position height="-1" width="-1" x="89" y="20"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="moviefinder.MainViewController" project="moviefinder" 
     file="/moviefinder/src/main/java/moviefinder/MainViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="926" width="248" x="368" y="37"/>    
+    <position height="-1" width="-1" x="511" y="492"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,38 +48,38 @@
   </class>  
   <class id="6" language="java" name="moviefinder.MovieDBClientTest" project="moviefinder" 
     file="/moviefinder/src/test/java/moviefinder/MovieDBClientTest.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="318" width="144" x="184" y="37"/>    
+    <position height="-1" width="-1" x="251" y="-89"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="7">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </dependency>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="9">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="10">    
+  <association id="7">    
     <bendpoint x="822" y="590"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="11" name="main">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="8" name="main">        
+        <position height="0" width="0" x="19" y="-8"/>      
       </attribute>      
-      <multiplicity id="12" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="9" minimum="0" maximum="1">        
+        <position height="0" width="0" x="19" y="-8"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="false" multiplicity="false"/>  
   </association>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
   <dependency id="13">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  

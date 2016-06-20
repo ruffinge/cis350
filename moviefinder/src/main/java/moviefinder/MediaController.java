@@ -1,6 +1,5 @@
 package moviefinder;
 
-
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -12,6 +11,10 @@ import javafx.util.Duration;
  * A controller class for the media display.
  */
 public class MediaController {
+    /** The scale factor to use for the transition effect. */
+    private static final double SCALEFACTOR = 0.2;
+    /** The transition duration, in milliseconds. */
+    private static final double TRANSDURATION = 120;
 
     /**
      * The {@link MainViewController} that this will belong to.
@@ -31,13 +34,16 @@ public class MediaController {
     @FXML
     private ImageView image;
 
-    // TODO: Remove this hardcoded system. Use JavaFX functions instead.
+    /**
+     * Produce a transition effect.
+     */
     public final void inClick() {
-        int col, row, index;
+        // TODO: Remove this hardcoded system. Use JavaFX functions instead.
+        int col, row;
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);
-        index = row * 3 + col;
-        main.clickImageInDiscovery(index);
+        ImageView imageView = (ImageView) movieBox.getChildren().get(0);
+        main.clickImageInDiscovery(imageView.getImage());
     }
 
     /**
@@ -46,10 +52,10 @@ public class MediaController {
     public final void growingShrinkingEffect() {
         movieBox.toFront();
 
-        ScaleTransition scale = new ScaleTransition(Duration.millis(120),
-                movieBox);
-        scale.setByX(.2);
-        scale.setByY(.2);
+        ScaleTransition scale =
+                new ScaleTransition(Duration.millis(TRANSDURATION), movieBox);
+        scale.setByX(SCALEFACTOR);
+        scale.setByY(SCALEFACTOR);
         scale.setCycleCount(2);
         scale.setAutoReverse(true);
         scale.autoReverseProperty();

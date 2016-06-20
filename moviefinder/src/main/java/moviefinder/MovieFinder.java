@@ -17,8 +17,8 @@ public class MovieFinder extends Application {
      */
     @Override
     public final void start(final Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(
-                "view/MainView.fxml"));
+        Parent root = FXMLLoader.load(
+                getClass().getClassLoader().getResource("view/MainView.fxml"));
         primaryStage.setTitle("Movie DB");
         primaryStage.getIcons().add(new Image("bird.png"));
         primaryStage.setScene(new Scene(root));
@@ -27,10 +27,7 @@ public class MovieFinder extends Application {
 
     /**
      * Main method for launching the movie finder. Initializes the JavaFX
-     * launching process.
-     *
-     * @param args
-     *            Command line arguments.
+     * launching process. * @param args Command line arguments.
      */
     public static void main(final String[] args) {
         launch(args);
