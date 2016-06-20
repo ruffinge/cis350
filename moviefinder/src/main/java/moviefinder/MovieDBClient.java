@@ -41,10 +41,10 @@ import javafx.scene.image.Image;
  */
 public final class MovieDBClient {
     /** The API key to use when connecting to the database. */
-    private static final String apiKey = "d8b7fb813be397e444f220fab2edb3ff";
+    private static final String APIKEY = "d8b7fb813be397e444f220fab2edb3ff";
 
     /** The API connection. */
-    private static TmdbApi tmdbApi = new TmdbApi(apiKey);
+    private static TmdbApi tmdbApi = new TmdbApi(APIKEY);
 
     /** The token obtained for the current session. */
     private static SessionToken sessionToken;
@@ -335,7 +335,7 @@ public final class MovieDBClient {
                 tmdbAuth.getAuthorisationToken(), user, password);
         final TokenSession tokenSession = tmdbAuth.getSessionToken(tokenAuth);
         final String sessionId = tokenSession.getSessionId();
-        final SessionToken sessionToken = new SessionToken(sessionId);
+        sessionToken = new SessionToken(sessionId);
 
         return sessionToken;
     }
@@ -439,7 +439,7 @@ public final class MovieDBClient {
 
     /**
      * Get a list of currently playing movies.
-     * 
+     *
      * @return A list of currently playing movies.
      */
     public List<MovieDb> getNowPlaying() {

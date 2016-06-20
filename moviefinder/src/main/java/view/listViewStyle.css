@@ -11,4 +11,5 @@
 .resultsGrid {
 	-fx-border-color: #3c3c3c;
 	-fx-background-color:#3c3c3c;
+	-fx-text-fill:#ffffff;
 }

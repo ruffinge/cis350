@@ -231,7 +231,7 @@
 								<HBox alignment="TOP_RIGHT" spacing="10.0"
 									GridPane.columnIndex="1" GridPane.rowIndex="4">
 									<children>
-										<Button id="loginBtn" fx:id="loginBtn" onAction="#sinIn"
+										<Button id="loginBtn" fx:id="loginBtn" onAction="#signIn"
 											prefHeight="24.0" prefWidth="113.0" text="Sign In" />
 									</children>
 								</HBox>

@@ -73,11 +73,13 @@ public final class MainViewController {
     /** Description for a result. */
     @FXML
     private Text theDescription;
-    /** Button for adding to favorites */
+    /** Button for adding to favorites. */
     @FXML
     private Button addFavorites;
+    /** The favorites list. */
     private ObservableList<Multi> favoritesObservable;
-    ArrayList<Multi> favoritesList = new ArrayList<Multi>();
+    /** The list of favorites. */
+    private List<Multi> favoritesList = new ArrayList<Multi>();
     @FXML
     private AnchorPane growingPane;
     @FXML
@@ -146,16 +148,26 @@ public final class MainViewController {
     @FXML
     private Button popUpFavBtn;
 
+    /** A rectangle used for clipping. */
     private Rectangle clipRect;
+    /** Input from the user in the general-purpose box. */
     private String userInput1;
+    /** The initial width to use. */
     private final double widthInitial = 206;
+    /** The initial height to use. */
     private final double heightInitial = 300;
+    /** Whether to use the left or right. */
     private Boolean leftRigth;
 
+    /** List of discovered items. */
     private List<MovieDb> discoverList;
+    /** List of images of discovered list. */
     private final List<Image> discoverImageList = new ArrayList<Image>();
+    /** The currently selected item. */
     private Multi selectedMedia;
+    /** The list of favorite items. */
     private List<Multi> favoriteList = new ArrayList<Multi>();
+    /** An image cache. */
     private final HashMap<Image, Multi> cache = new HashMap<Image, Multi>();
 
     /** Whether the current search is for movies. */
@@ -164,8 +176,11 @@ public final class MainViewController {
     private HBox dbRating;
     @FXML
     private HBox userRating;
+    /** The ratings from the DB. */
     private Rating ratingDb;
+    /** The user's personal rating. */
     private Rating ratingUser;
+    /** The casting list. */
     @FXML
     private Text castingActors;
 
@@ -310,9 +325,9 @@ public final class MainViewController {
          * .observableArrayList(favoritesList);
          * favoritesListView.setItems(favoritesObservable);
          */
-        if (favoriteList.contains(selected) == false) {
+        if (!favoriteList.contains(selected)) {
             final boolean code = cl.addFavorite(selected);
-            if (code == true) {
+            if (code) {
                 favoriteList.clear();
                 favoriteList = cl.getFavorites();
                 if (favoriteList.contains(selectedMedia)) {
@@ -323,7 +338,7 @@ public final class MainViewController {
             }
         } else {
             final boolean code = cl.addFavorite(selected);
-            if (code == true) {
+            if (code) {
                 favoriteList.clear();
                 favoriteList = cl.getFavorites();
                 if (favoriteList.contains(selectedMedia)) {
@@ -483,12 +498,13 @@ public final class MainViewController {
         final KeyFrame kf1 = new KeyFrame(Duration.millis(100), kv1, kv2, kv3);
         timelineBounce.getKeyFrames().add(kf1);
 
-        final EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent event) {
-                timelineBounce.play();
-            }
-        };
+        final EventHandler<ActionEvent> handler =
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent event) {
+                        timelineBounce.play();
+                    }
+                };
         return handler;
     }
 
@@ -527,6 +543,9 @@ public final class MainViewController {
         }
     }
 
+    /**
+     * Produce the favorites view layout.
+     */
     public void favoriteLayout() {
         final int dWidth = 3;
         final int dHeight = 4;
@@ -547,17 +566,21 @@ public final class MainViewController {
                     favoritesGrid.add(box, j, i);
                     break;
                 case TV_SERIES:
-                    containt = containt;
                     final MediaObject ob1 = new MediaObject(tempImage,
                             ((TvSeries) containt).getName(), this);
                     final VBox box1 = ob1.getVBox();
                     favoritesGrid.add(box1, j, i);
+                    break;
+                default:
                     break;
                 }
             }
         }
     }
 
+    /**
+     * Produce the now playing view layout.
+     */
     public void nowPlayingLayout() {
         final int dWidth = 3;
         final int dHeight = 4;
@@ -578,6 +601,9 @@ public final class MainViewController {
         }
     }
 
+    /**
+     * Produce the upcoming view layout.
+     */
     public void upComingLaying() {
         final int dWidth = 3;
         final int dHeight = 4;
@@ -625,7 +651,10 @@ public final class MainViewController {
         return isMovies;
     }
 
-    public void getThrillerUrl() {
+    /**
+     * Get the url for a trailer.
+     */
+    public void getTrailerUrl() {
         final MovieDb mv = discoverList.get(0);
         final String url = cl.getVideo(mv);
         if (url != null) {
@@ -634,18 +663,12 @@ public final class MainViewController {
         }
     }
 
-    public boolean getURL(final Multi media) {
-        final String url = cl.getVideo(media);
-        if (url != null) {
-            return true;
-        }
-
-        return false;
-    }
-
+    /**
+     * Show the log in page.
+     */
     @FXML
     public void goToSignInPane() {
-        if (isAuthorized() == false) {
+        if (!isAuthorized()) {
             signInPane.toFront();
             signInPane.setVisible(true);
             appPane.toBack();
@@ -657,6 +680,9 @@ public final class MainViewController {
         }
     }
 
+    /**
+     * Go to the app pane.
+     */
     private void goToAppPane() {
         signInPane.toBack();
         signInPane.setVisible(false);
@@ -664,8 +690,11 @@ public final class MainViewController {
         appPane.setVisible(true);
     }
 
+    /**
+     * Execute the log-in actions using the entered data.
+     */
     @FXML
-    public void sinIn() {
+    public void signIn() {
         final String userName = userNameField.getText();
         final String password = passWordField.getText();
         try {
@@ -679,10 +708,21 @@ public final class MainViewController {
         }
     }
 
+    /**
+     * Get the selected media item.
+     *
+     * @return The selected item.
+     */
     private Multi getSelectedMedia() {
         return this.selectedMedia;
     }
 
+    /**
+     * Populate the pop-up pane.
+     *
+     * @param poster
+     *            The poster to use.
+     */
     private void populatePopUpPane(final Image poster) {
         final int maximumRating = 5;
         popUpDescription.setText(cl.getDescription(selectedMedia));
@@ -729,6 +769,9 @@ public final class MainViewController {
 
     }
 
+    /**
+     * Open the pop up pane.
+     */
     @FXML
     public void goToPopUpPane() {
         popUpPanel.toFront();
@@ -739,8 +782,13 @@ public final class MainViewController {
         signInPane.setVisible(false);
     }
 
-    // TODO: add all the auth stuff that need to be done here
+    /**
+     * Test if authentication has been performed.
+     *
+     * @return True if authentication is performed.
+     */
     private boolean isAuthorized() {
+        // TODO: add all the auth stuff that need to be done here
         if (cl.getSessionToken() == null) {
             popUpFavBtn.setDisable(true);
             addFavorites.setDisable(true);
