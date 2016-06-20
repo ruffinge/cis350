@@ -18,6 +18,7 @@ import info.movito.themoviedbapi.TmdbTV;
 import info.movito.themoviedbapi.TmdbTV.TvMethod;
 import info.movito.themoviedbapi.TvResultsPage;
 import info.movito.themoviedbapi.model.Artwork;
+import info.movito.themoviedbapi.model.Credits;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.Multi;
@@ -573,7 +574,10 @@ public final class MovieDBClient {
         switch (mediaType) {
         case MOVIE:
             final MovieDb mv = (MovieDb) query;
-            final List<PersonCast> cast = mv.getCast();
+            TmdbMovies movies = tmdbApi.getMovies();
+            Credits credits = movies.getCredits(mv.getId());
+            final List<PersonCast> cast = credits.getCast();
+            System.out.println(cast);
             return cast;
         default:
             return new ArrayList<PersonCast>();
