@@ -156,8 +156,8 @@
 								<RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 							<children>
-								<Label text="User Name:" GridPane.rowIndex="1" />
-								<Label text="Password" GridPane.rowIndex="2" />
+								<Label id="userNameFied" text="User Name:" GridPane.rowIndex="1" />
+								<Label id="passwordField" text="Password" GridPane.rowIndex="2" />
 								<PasswordField id="passWordField" fx:id="passWordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 								<TextField id="userNameField" fx:id="userNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 								<HBox alignment="TOP_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -174,7 +174,7 @@
 								<Insets bottom="12.0" left="25.0" right="25.0" top="25.0" />
 							</padding>
 							<stylesheets>
-
+								<URL value="@loginViewStyle.css" />
 							</stylesheets>
 
 						</GridPane>
