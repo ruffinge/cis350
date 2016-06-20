@@ -1,6 +1,5 @@
 package moviefinder;
 
-
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -33,10 +32,9 @@ public class MediaController {
 
     // TODO: Remove this hardcoded system. Use JavaFX functions instead.
     public final void inClick() {
-        int col, row, index;
+        int col, row;
         col = GridPane.getColumnIndex(movieBox);
         row = GridPane.getRowIndex(movieBox);
-        index = row * 3 + col;
         ImageView imageView = (ImageView) movieBox.getChildren().get(0);
         main.clickImageInDiscovery(imageView.getImage());
     }
@@ -47,8 +45,8 @@ public class MediaController {
     public final void growingShrinkingEffect() {
         movieBox.toFront();
 
-        ScaleTransition scale = new ScaleTransition(Duration.millis(120),
-                movieBox);
+        ScaleTransition scale =
+                new ScaleTransition(Duration.millis(120), movieBox);
         scale.setByX(.2);
         scale.setByY(.2);
         scale.setCycleCount(2);

@@ -104,7 +104,7 @@
                                                            <fx:include source="DiscoverView.fxml" />
                                                          </content>
                                                          </Tab>
-                                                      <Tab id="favoritesPlane" fx:id="favoritesTab" text="favorites">
+                                                      <Tab id="favoritesPlane" fx:id="favoritesTab" text="Favorites">
                                                       	<content>
                                                       	   <fx:include source="FavoritesView.fxml" />
                                                       	</content>
@@ -207,6 +207,7 @@
          </items></ToolBar>
    </top>
    <stylesheets>
+    <URL value="@mainViewStyle.css" />
   </stylesheets>
    
 </BorderPane>

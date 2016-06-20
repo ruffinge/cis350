@@ -26,6 +26,6 @@
       </GridPane>
    </content>
     <stylesheets>
-    
+    <URL value="@discoverViewStyle.css" />
   </stylesheets>
 </ScrollPane>

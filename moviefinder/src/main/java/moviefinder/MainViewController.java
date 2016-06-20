@@ -75,7 +75,7 @@ public final class MainViewController {
     @FXML
     private Text theDescription;
     /** Button for adding to favorites */
-    @FXML 
+    @FXML
     private Button addFavorites;
     private ObservableList<Multi> favoritesObservable;
     ArrayList<Multi> favoritesList = new ArrayList<Multi>();
@@ -113,11 +113,11 @@ public final class MainViewController {
     private Tab favoritesTab;
     @FXML
     private GridPane favoritesGrid;
-    @FXML 
+    @FXML
     private Tab nowPlayingTab;
     @FXML
     private GridPane nowPlayingGrid;
-    @FXML 
+    @FXML
     private Tab upComingTab;
     @FXML
     private GridPane upComingGrid;
@@ -125,17 +125,17 @@ public final class MainViewController {
     private TabPane tabPanel;
     @FXML
     private StackPane test;
-    @FXML 
+    @FXML
     private AnchorPane webViewPane;
     @FXML
     private WebView webView;
-    private  WebEngine engine;
-    
+    private WebEngine engine;
+
     @FXML
     private AnchorPane signInPane;
-    @FXML 
+    @FXML
     private AnchorPane appPane;
-    @FXML 
+    @FXML
     private Button mainSignInBtn;
     @FXML
     private TextField userNameField;
@@ -144,23 +144,21 @@ public final class MainViewController {
     @FXML
     private Button loginBtn;
     @FXML
-    private Text loginMessage; 
+    private Text loginMessage;
     @FXML
     private Button popUpFavBtn;
-    
+
     private Rectangle clipRect;
     private String userInput1;
     private double widthInitial = 206;
     private double heightInitial = 300;
     private Boolean leftRigth;
-    
-    
 
     private List<MovieDb> discoverList;
     private List<Image> discoverImageList = new ArrayList<Image>();
-    private Multi selectedMedia ; 
+    private Multi selectedMedia;
     private List<Multi> favoriteList = new ArrayList<Multi>();
-    private HashMap<Image,Multi> cache = new HashMap<Image,Multi>();
+    private HashMap<Image, Multi> cache = new HashMap<Image, Multi>();
 
     /** Whether the current search is for movies. */
     private boolean isMovies;
@@ -172,7 +170,7 @@ public final class MainViewController {
     private Rating ratingUser;
     @FXML
     private Text castingActors;
-  
+
     /**
      * Hide the popup panel.
      */
@@ -250,11 +248,12 @@ public final class MainViewController {
      * Display information for the selected search result.
      */
     public void getSelection() {
-    	if(selectedMedia != null)
-    		selectedMedia = null; 
-    	
-        selectedMedia = (Multi) resultsListView.getSelectionModel().getSelectedItem();
-         
+        if (selectedMedia != null)
+            selectedMedia = null;
+
+        selectedMedia =
+                (Multi) resultsListView.getSelectionModel().getSelectedItem();
+
         Image image = null;
         String title = null;
         String description = null;
@@ -266,7 +265,7 @@ public final class MainViewController {
             theDescription.setText(description);
         }
         if (image != null) {
-        	cache.put(image, selectedMedia); 
+            cache.put(image, selectedMedia);
             imageView.setImage(image);
             populatePopUpPane(image);
             clipRect.setWidth(growingPane.getWidth());
@@ -304,45 +303,37 @@ public final class MainViewController {
     /**
      * Add the current item to favorites.
      */
-	@FXML
-	public void addToFavorites() {
-		Multi selected = selectedMedia;
-		/*
-		 * favoritesList.add(selected); favoritesObservable = FXCollections
-		 * .observableArrayList(favoritesList);
-		 * favoritesListView.setItems(favoritesObservable);
-		 */
-        if(favoriteList.contains(selected) == false){
-        	boolean code = cl.addFavorite(selected);
-    		if(code == true)
-    		{
-    			favoriteList.clear();
-    			favoriteList = cl.getFavorites(); 
-    			if(favoriteList.contains(selectedMedia)){
-                 	popUpFavBtn.setStyle("-fx-background-color: red");
-                 }
-                 else
-                 	popUpFavBtn.setStyle("-fx-background-color: green");
-    			System.out.println(favoriteList);
-    		}
-        }
-        else
-        {
-        	boolean code = cl.addFavorite(selected);
-    		if(code == true)
-    		{
-    			favoriteList.clear();
-    			favoriteList = cl.getFavorites(); 
-    			if(favoriteList.contains(selectedMedia)){
-                 	popUpFavBtn.setStyle("-fx-background-color: red");
-                 }
-                 else
-                 	popUpFavBtn.setStyle("-fx-background-color: green");
-    			System.out.println(favoriteList);
-    		}
+    @FXML
+    public void addToFavorites() {
+        Multi selected = selectedMedia;
+        /*
+         * favoritesList.add(selected); favoritesObservable = FXCollections
+         * .observableArrayList(favoritesList);
+         * favoritesListView.setItems(favoritesObservable);
+         */
+        if (favoriteList.contains(selected) == false) {
+            boolean code = cl.addFavorite(selected);
+            if (code == true) {
+                favoriteList.clear();
+                favoriteList = cl.getFavorites();
+                if (favoriteList.contains(selectedMedia)) {
+                    popUpFavBtn.setStyle("-fx-background-color: red");
+                } else
+                    popUpFavBtn.setStyle("-fx-background-color: green");
+            }
+        } else {
+            boolean code = cl.addFavorite(selected);
+            if (code == true) {
+                favoriteList.clear();
+                favoriteList = cl.getFavorites();
+                if (favoriteList.contains(selectedMedia)) {
+                    popUpFavBtn.setStyle("-fx-background-color: red");
+                } else
+                    popUpFavBtn.setStyle("-fx-background-color: green");
+            }
         }
         favoriteLayout();
-	}
+    }
 
     /**
      * Rate an item.
@@ -512,8 +503,8 @@ public final class MainViewController {
         }
         discoverList = cl.discoverMovies();
         Iterator itr = discoverList.iterator();
-        while(itr.hasNext()){
-        	Multi media = (Multi) itr.next();
+        while (itr.hasNext()) {
+            Multi media = (Multi) itr.next();
             Image tempImage = cl.getImage(media);
         }
         ScrollPane temp = (ScrollPane) discoverTab.getContent();
@@ -524,7 +515,7 @@ public final class MainViewController {
                 MovieDb containt = discoverList.get(n);
                 Image tempImage = cl.getImage(containt);
                 discoverImageList.add(tempImage);
-                cache.put(tempImage, containt); 
+                cache.put(tempImage, containt);
                 MediaObject ob =
                         new MediaObject(tempImage, containt.getTitle(), this);
                 VBox box = ob.getVBox();
@@ -534,74 +525,77 @@ public final class MainViewController {
 
         }
     }
-    
-    public void favoriteLayout(){
+
+    public void favoriteLayout() {
         final int dWidth = 3;
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) favoritesTab.getContent();
         favoritesGrid = (GridPane) temp.getContent();
         favoritesGrid.getChildren().clear();
         Iterator<Multi> itr = favoriteList.iterator();
-		for (int i = 0; i < dHeight  ; i++) {
-			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
-				Multi containt = (Multi) itr.next();
-				Image tempImage = cl.getImage(containt);
-				 cache.put(tempImage, containt); 
-				switch (containt.getMediaType()) {
-				case MOVIE:
-					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
-					VBox box = ob.getVBox();
-					favoritesGrid.add(box, j, i);
-					break;
-				case TV_SERIES:
-					containt = (TvSeries) containt;
-					MediaObject ob1 = new MediaObject(tempImage, ((TvSeries) containt).getName(), this);
-					VBox box1 = ob1.getVBox();
-					favoritesGrid.add(box1, j, i);
-					break;
-				}
-			}
-		}
+        for (int i = 0; i < dHeight; i++) {
+            for (int j = 0; j < dWidth && itr.hasNext(); j++) {
+                Multi containt = (Multi) itr.next();
+                Image tempImage = cl.getImage(containt);
+                cache.put(tempImage, containt);
+                switch (containt.getMediaType()) {
+                case MOVIE:
+                    MediaObject ob = new MediaObject(tempImage,
+                            ((MovieDb) containt).getTitle(), this);
+                    VBox box = ob.getVBox();
+                    favoritesGrid.add(box, j, i);
+                    break;
+                case TV_SERIES:
+                    containt = (TvSeries) containt;
+                    MediaObject ob1 = new MediaObject(tempImage,
+                            ((TvSeries) containt).getName(), this);
+                    VBox box1 = ob1.getVBox();
+                    favoritesGrid.add(box1, j, i);
+                    break;
+                }
+            }
+        }
     }
-    
-    public void nowPlayingLayout(){
-    	final int dWidth = 3;
+
+    public void nowPlayingLayout() {
+        final int dWidth = 3;
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) nowPlayingTab.getContent();
         nowPlayingGrid = (GridPane) temp.getContent();
         nowPlayingGrid.getChildren().clear();
         Iterator<MovieDb> itr = cl.getNowPlaying().iterator();
-		for (int i = 0; i < dHeight  ; i++) {
-			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
-				Multi containt = (Multi) itr.next();
-				Image tempImage = cl.getImage(containt);
-				 cache.put(tempImage, containt); 
-					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
-					VBox box = ob.getVBox();
-					nowPlayingGrid.add(box, j, i);
-				}
-			}
-	}
-    
-    public void upComingLaying(){
-    	final int dWidth = 3;
+        for (int i = 0; i < dHeight; i++) {
+            for (int j = 0; j < dWidth && itr.hasNext(); j++) {
+                Multi containt = (Multi) itr.next();
+                Image tempImage = cl.getImage(containt);
+                cache.put(tempImage, containt);
+                MediaObject ob = new MediaObject(tempImage,
+                        ((MovieDb) containt).getTitle(), this);
+                VBox box = ob.getVBox();
+                nowPlayingGrid.add(box, j, i);
+            }
+        }
+    }
+
+    public void upComingLaying() {
+        final int dWidth = 3;
         final int dHeight = 4;
         ScrollPane temp = (ScrollPane) upComingTab.getContent();
         upComingGrid = (GridPane) temp.getContent();
         upComingGrid.getChildren().clear();
         Iterator<MovieDb> itr = cl.getUpComping().iterator();
-		for (int i = 0; i < dHeight  ; i++) {
-			for (int j = 0; j < dWidth && itr.hasNext() ; j++) {
-				Multi containt = (Multi) itr.next();
-				Image tempImage = cl.getImage(containt);
-				 cache.put(tempImage, containt); 
-					MediaObject ob = new MediaObject(tempImage, ((MovieDb) containt).getTitle(), this);
-					VBox box = ob.getVBox();
-					upComingGrid.add(box, j, i);
-				}
-			}
+        for (int i = 0; i < dHeight; i++) {
+            for (int j = 0; j < dWidth && itr.hasNext(); j++) {
+                Multi containt = (Multi) itr.next();
+                Image tempImage = cl.getImage(containt);
+                cache.put(tempImage, containt);
+                MediaObject ob = new MediaObject(tempImage,
+                        ((MovieDb) containt).getTitle(), this);
+                VBox box = ob.getVBox();
+                upComingGrid.add(box, j, i);
+            }
+        }
     }
-    	
 
     /**
      * Handler for a click in the discover area.
@@ -610,14 +604,14 @@ public final class MainViewController {
      *            The index of the item that was clicked.
      */
     public void clickImageInDiscovery(Image image) {
-    	if (selectedMedia != null)
-    		selectedMedia = null;
-    	Multi media = (Multi) cache.get(image);
-    	if(media != null){
-    		selectedMedia = media;
-    		populatePopUpPane(image);
-    		goToPopUpPane();
-    	}
+        if (selectedMedia != null)
+            selectedMedia = null;
+        Multi media = (Multi) cache.get(image);
+        if (media != null) {
+            selectedMedia = media;
+            populatePopUpPane(image);
+            goToPopUpPane();
+        }
     }
 
     /**
@@ -628,136 +622,132 @@ public final class MainViewController {
     public boolean isMovies() {
         return isMovies;
     }
-    
-    
-    public void getThrillerUrl(){
-      MovieDb mv = discoverList.get(0);
-      String url = cl.getVideo(mv);
-      if(url != null){
-    	  engine = webView.getEngine();
-    	  engine.load(url);
-      }
+
+    public void getThrillerUrl() {
+        MovieDb mv = discoverList.get(0);
+        String url = cl.getVideo(mv);
+        if (url != null) {
+            engine = webView.getEngine();
+            engine.load(url);
+        }
     }
-    
-    public boolean getURL(Multi media){
-    	String url = cl.getVideo(media);
-    	if(url != null)
-    		return true;
-    	
-    	return false;
+
+    public boolean getURL(Multi media) {
+        String url = cl.getVideo(media);
+        if (url != null)
+            return true;
+
+        return false;
     }
-    
+
     @FXML
-    public void goToSignInPane(){
-    	if(isAuthorized() == false){
-    		signInPane.toFront();
-        	signInPane.setVisible(true);
-        	appPane.toBack();
-        	appPane.setVisible(false);
-        	mainSignInBtn.setText("Sign Out");
-    	}
-    	else
-    	{
-    		cl.endSession();
-    		mainSignInBtn.setText("Sign In");
-    	}
+    public void goToSignInPane() {
+        if (isAuthorized() == false) {
+            signInPane.toFront();
+            signInPane.setVisible(true);
+            appPane.toBack();
+            appPane.setVisible(false);
+            mainSignInBtn.setText("Sign Out");
+        } else {
+            cl.endSession();
+            mainSignInBtn.setText("Sign In");
+        }
     }
-    
-    private void goToAppPane(){
-    	signInPane.toBack();
-    	signInPane.setVisible(false);
-    	appPane.toFront();
-    	appPane.setVisible(true);
+
+    private void goToAppPane() {
+        signInPane.toBack();
+        signInPane.setVisible(false);
+        appPane.toFront();
+        appPane.setVisible(true);
     }
-    
-	@FXML
-	public void sinIn() {
-		String userName = userNameField.getText();
-		String password = passWordField.getText();
-		try {
-			cl.startSession(userName, password);
-			favoriteList = cl.getFavorites();
-			System.out.println(favoriteList);
-			favoriteLayout();
-			goToAppPane();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private Multi getSelectedMedia(){
-		return this.selectedMedia;
-	}
-	
-	private void populatePopUpPane(Image poster){
-		int maximumRating = 5;
-		popUpDescription.setText(cl.getDescription(selectedMedia));
+
+    @FXML
+    public void sinIn() {
+        String userName = userNameField.getText();
+        String password = passWordField.getText();
+        try {
+            cl.startSession(userName, password);
+            favoriteList = cl.getFavorites();
+            System.out.println(favoriteList);
+            favoriteLayout();
+            goToAppPane();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Multi getSelectedMedia() {
+        return this.selectedMedia;
+    }
+
+    private void populatePopUpPane(Image poster) {
+        int maximumRating = 5;
+        popUpDescription.setText(cl.getDescription(selectedMedia));
         popUpTitle.setText(cl.getTitle(selectedMedia));
         cl.getCasting(selectedMedia);
         popUpImage.setImage(poster);
-		if (selectedMedia.getMediaType() == MediaType.MOVIE || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
-			ratingDb = new Rating(maximumRating);
-			ratingDb.setPartialRating(true);
-			ratingDb.setUpdateOnHover(false);
-			ratingDb.setRating(cl.getRating(selectedMedia));
-			dbRating.getChildren().clear();
-			dbRating.getChildren().add(ratingDb);
-		} else
-			dbRating.getChildren().clear();
-		
-		if (isAuthorized()) {
-			userRating.getChildren().clear();
-			userRating.setVisible(true);
-			ratingUser = new Rating(maximumRating);
-			ratingUser.setPartialRating(false);
-			ratingUser.setUpdateOnHover(false);
-			ratingUser.setRating(cl.getUserRating(selectedMedia));
-		    ratingUser.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        if (selectedMedia.getMediaType() == MediaType.MOVIE
+                || selectedMedia.getMediaType() == MediaType.TV_SERIES) {
+            ratingDb = new Rating(maximumRating);
+            ratingDb.setPartialRating(true);
+            ratingDb.setUpdateOnHover(false);
+            ratingDb.setRating(cl.getRating(selectedMedia));
+            dbRating.getChildren().clear();
+            dbRating.getChildren().add(ratingDb);
+        } else
+            dbRating.getChildren().clear();
 
-				@Override
-				public void handle(MouseEvent event) {
-                    cl.rateContaint(selectedMedia, ratingUser.getRating() * 2 );
-				}
-		    	
-		    });
-			userRating.getChildren().clear();
-			userRating.getChildren().add(ratingUser);
-			if (favoriteList.contains(selectedMedia)) {
-				popUpFavBtn.setStyle("-fx-background-color: red");
-			} 
-			else {
-				popUpFavBtn.setStyle("-fx-background-color: green");
-			}
-		}
-		else{
-			userRating.setVisible(false);
-		}
-			
-	}
-	
-	@FXML
-	public void goToPopUpPane() {
-		popUpPanel.toFront();
-		popUpPanel.setVisible(true);
-		appPane.toBack();
-		appPane.setVisible(false);
-		signInPane.toBack();
-		signInPane.setVisible(false);
-	}
-	
-	//@TODO add all the auth stuff that need to be done here 
-	private boolean isAuthorized() {
-		if (cl.getSessionToken() == null) {
-			popUpFavBtn.setDisable(true);
-			addFavorites.setDisable(true);
-			return false;
-		}
-		popUpFavBtn.setDisable(false);
-		addFavorites.setDisable(false);
+        if (isAuthorized()) {
+            userRating.getChildren().clear();
+            userRating.setVisible(true);
+            ratingUser = new Rating(maximumRating);
+            ratingUser.setPartialRating(false);
+            ratingUser.setUpdateOnHover(false);
+            ratingUser.setRating(cl.getUserRating(selectedMedia));
+            ratingUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    cl.rateContaint(selectedMedia, ratingUser.getRating() * 2);
+                }
+
+            });
+            userRating.getChildren().clear();
+            userRating.getChildren().add(ratingUser);
+            if (favoriteList.contains(selectedMedia)) {
+                popUpFavBtn.setStyle("-fx-background-color: red");
+            } else {
+                popUpFavBtn.setStyle("-fx-background-color: green");
+            }
+        } else {
+            userRating.setVisible(false);
+        }
+
+    }
+
+    @FXML
+    public void goToPopUpPane() {
+        popUpPanel.toFront();
+        popUpPanel.setVisible(true);
+        appPane.toBack();
+        appPane.setVisible(false);
+        signInPane.toBack();
+        signInPane.setVisible(false);
+    }
+
+    // TODO: add all the auth stuff that need to be done here
+    private boolean isAuthorized() {
+        if (cl.getSessionToken() == null) {
+            popUpFavBtn.setDisable(true);
+            addFavorites.setDisable(true);
+            return false;
+        }
+        popUpFavBtn.setDisable(false);
+        addFavorites.setDisable(false);
         return true;
-	}
-	
-	/**
+    }
+
+    /**
      * Initialize the controller. Called automatically by JavaFX internal code.
      */
     @FXML
@@ -777,10 +767,10 @@ public final class MainViewController {
         viewListPane.setVisible(false);
         signInPane.toBack();
         signInPane.setVisible(false);
-       // webViewPane.toBack();
+        // webViewPane.toBack();
         upComingLaying();
         nowPlayingLayout();
         discoverLayout();
-       
+
     }
 }
